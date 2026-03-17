@@ -291,6 +291,7 @@ namespace WebAppCellMapper.Services
         /// console.log( event.data);
         /// if (event.data.includes('[DONE]')) {
         /// eventSource.close()
+        /// }
         /// };
         /// eventSource.onerror = (error) => {
         ///     console.error('EventSource error:', error);
@@ -341,6 +342,7 @@ namespace WebAppCellMapper.Services
         /// console.log( event.data);
         /// if (event.data.includes('[DONE]')) {
         /// eventSource.close()
+        /// }
         /// };
         /// eventSource.onerror = (error) => {
         ///     console.error('EventSource error:', error);
@@ -394,6 +396,7 @@ namespace WebAppCellMapper.Services
         /// console.log( event.data);
         /// if (event.data.includes('[DONE]')) {
         /// eventSource.close()
+        /// }
         /// };
         /// eventSource.onerror = (error) => {
         ///     console.error('EventSource error:', error);

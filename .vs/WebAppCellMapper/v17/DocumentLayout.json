@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\proxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\proxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\data\\models\\station.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\data\\models\\station.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -67,14 +71,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProxyService.cs",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\ProxyService.cs",
-              "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\ProxyService.cs",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\ProxyService.cs",
-              "RelativeToolTip": "WebAppCellMapper\\Services\\ProxyService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAdAAAAAAAAAA==",
+              "Title": "StationsController.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\Controllers\\StationsController.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
+              "RelativeToolTip": "WebAppCellMapper\\Controllers\\StationsController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAhwFsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T06:40:36.335Z",
+              "WhenOpened": "2026-03-17T09:05:07.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Station.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Data\\Models\\Station.cs",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\Data\\Models\\Station.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Data\\Models\\Station.cs",
+              "RelativeToolTip": "WebAppCellMapper\\Data\\Models\\Station.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T07:41:51.427Z",
               "EditorCaption": ""
             }
           ]

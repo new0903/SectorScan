@@ -76,19 +76,20 @@ namespace WebAppCellMapper.Controllers
         public async Task SearchByOperator(NetworkStandard network, string operatorCode, [FromQuery]QueryParams queryParams, CancellationToken ct = default)
         {
             logger.LogInformation($"SearchByOperator start");
+            Response.Headers.Add("Content-Type", "text/event-stream");
+            Response.Headers.Add("Cashe-Control", "no-cashe");
+            Response.Headers.Add("Connections", "keep-alive");
             try
             {
-                if (!queryParams.latS.HasValue || !queryParams.latE.HasValue || !queryParams.lonS.HasValue || !queryParams.lonE.HasValue)
-                {
-                    Response.StatusCode = 400;
-                    return;
-                }
+               
                 logger.LogInformation($"SearchByOperator data valid");
-                Response.Headers.Add("Content-Type", "text/event-stream");
-                Response.Headers.Add("Cashe-Control", "no-cashe");
-                Response.Headers.Add("Connections", "keep-alive");
                 if (queryParams != null)
                 {
+                    if (!queryParams.latS.HasValue || !queryParams.latE.HasValue || !queryParams.lonS.HasValue || !queryParams.lonE.HasValue)
+                    {
+                        Response.StatusCode = 400;
+                        return;
+                    }
                     await foreach (var item in stationsService.ScanAreaAsync(operatorCode, network,
                         queryParams.latS.Value, queryParams.latE.Value,
                         queryParams.lonS.Value, queryParams.lonE.Value,
