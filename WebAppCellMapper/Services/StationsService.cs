@@ -102,9 +102,8 @@ namespace WebAppCellMapper.Services
 
 
 
-            while (coordinates.Count>0&& !ct.IsCancellationRequested)
+            while (coordinates.Count>0 || !ct.IsCancellationRequested)
             {
-                //  await WriteResponse("загрузка прокси");
 
                 {
                     QueryResult res = new QueryResult(op.Code, ns,  scannedStations, scannedSector, coordinates.Count, "загрузка прокси");
@@ -122,7 +121,7 @@ namespace WebAppCellMapper.Services
                         if (coordinates.TryDequeue(out var square))
                         {
                             //await WriteResponse($"отправляем запрос прокси {proxy.url}, сканируемый сектор lons={square.latStart} lone={square.latEnd} lons={square.lonStart} lone={square.lonEnd}");
-                            CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(20));
+                            CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(30));
                             var task = RequetsStations(proxy.url, op, ns, square, true, cancellationToken.Token);
                             requests.Add(task);
                         }

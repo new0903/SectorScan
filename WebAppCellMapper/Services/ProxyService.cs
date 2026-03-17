@@ -24,7 +24,7 @@ namespace WebAppCellMapper.Services
         //IEnumerable<ProxyElement> 
         public async Task<IReadOnlyCollection<ProxyElement>> GetProxies()
         {
-            if (LastUpdate+TimeSpan.FromMinutes(60)<DateTime.UtcNow|| ProxysList.Count<1)
+            if (LastUpdate+TimeSpan.FromMinutes(60)<DateTime.UtcNow|| ProxysList.Count<10)//минимум 10 проксей
             {
                 await GetProxiesRequestV1();//надо подумать про бд
                 //await GetProxiesRequest();// старые прокси может пригодятся
@@ -83,6 +83,7 @@ namespace WebAppCellMapper.Services
             using HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
             var res = await client.GetAsync($"https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/all/data.json");
+            //https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/all/data.json
             if (res.IsSuccessStatusCode)
             {
                 var json = await res.Content.ReadAsStringAsync();

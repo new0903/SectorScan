@@ -203,3 +203,4 @@ D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\runtimes\osx-x64\native\libgrpc_csharp_ext.x64.dylib
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\runtimes\win-x64\native\grpc_csharp_ext.x64.dll
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\runtimes\win-x86\native\grpc_csharp_ext.x86.dll
+D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\obj\Debug\net8.0\WebAppCellMapper.sourcelink.json

@@ -86,6 +86,8 @@ namespace WebAppCellMapper.Grpc
         {
             try
             {
+
+                //не вышел из цикла надо будет посмотреть в чем дело.
                 await foreach (var item in stationsService.ScanAreaAsync(request.OperatorCode, NSEnumerator.ToNetworkStandardEnum(request.Network),
                     request.Coordinates.LatS,
                     request.Coordinates.LatE, 

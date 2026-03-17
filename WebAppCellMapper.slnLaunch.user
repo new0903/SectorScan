@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Новый профиль",
+    "Projects": [
+      {
+        "Path": "docker-compose.dcproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\ConsoleAppGRPCTest\\ConsoleAppGRPCTest.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
