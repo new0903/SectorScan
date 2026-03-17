@@ -1,0 +1,17 @@
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\bin\Debug\net8.0\ConsoleAppProxys.exe
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\bin\Debug\net8.0\ConsoleAppProxys.deps.json
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\bin\Debug\net8.0\ConsoleAppProxys.runtimeconfig.json
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\bin\Debug\net8.0\ConsoleAppProxys.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\bin\Debug\net8.0\ConsoleAppProxys.pdb
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.AssemblyInfoInputs.cache
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.AssemblyInfo.cs
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.csproj.CoreCompileInputs.cache
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\refint\ConsoleAppProxys.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.pdb
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.genruntimeconfig.cache
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ref\ConsoleAppProxys.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\bin\Debug\net8.0\HtmlAgilityPack.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleAppProxys.csproj.AssemblyReference.cache
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppProxys\obj\Debug\net8.0\ConsoleA.C7493B0E.Up2Date

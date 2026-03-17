@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+    <title>Бесплатные прокси | ProxyMania.su</title>
+	<meta name="description" content="Актуальные и рабочие бесплатные прокси. HTTP, HTTPS, SOCKS4, SOCKS5. Автоматическая проверка каждые 5 минут. Фильтрация по странам, скорости и типам." />
+        <link rel="alternate" hreflang="ru" href="https://proxymania.su/free-proxy" />
+    <link rel="alternate" hreflang="en" href="https://proxymania.su/en/free-proxy" />
+    <link rel="alternate" hreflang="x-default" href="https://proxymania.su/free-proxy" />
+    <link rel="canonical" href="https://proxymania.su/free-proxy" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Бесплатные прокси | ProxyMania.su" />
+    <meta property="og:description" content="Актуальные и рабочие бесплатные прокси. HTTP, HTTPS, SOCKS4, SOCKS5. Автоматическая проверка каждые 5 минут. Фильтрация по странам, скорости и типам." />
+    <meta property="og:url" content="https://proxymania.su/free-proxy" />
+    <meta property="og:site_name" content="ProxyMania" />
+        <!-- Critical CSS for mobile -->
+    <style>
+        @media (max-width: 767px) {
+            html{overflow-x:hidden}
+            body{font-family:"Roboto",sans-serif;padding:0;position:relative;margin:0;width:100%;overflow-x:hidden;background:#050366}
+            main{contain:layout;min-height:100vh}
+            .container{max-width:100%;padding:0 20px;margin:0 auto}
+            .main{position:relative;margin-top:-165px;background:#0c1633;background-image:radial-gradient(ellipse 800px 600px at -200px 50%,rgba(108,99,255,0.15) 0%,transparent 50%),radial-gradient(ellipse 600px 800px at 50% 100%,rgba(64,193,254,0.08) 0%,transparent 60%);height:840px;width:100%;overflow:hidden;min-height:840px;contain:layout}
+            .main__container{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:165px;min-height:600px}
+            .main__content{width:100%;min-height:200px}
+            .main__content h1{font-size:32px;text-align:center;margin-bottom:0;color:#fff;font-family:"Wix Madefor Text",sans-serif;line-height:1.2;min-height:77px}
+            .main__content p{font-size:12px;text-align:center;color:rgba(255,255,255,0.8);margin-bottom:20px;line-height:1.5;min-height:54px}
+            .main__buy-btn{display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#6c63ff 0%,#5a52d5 100%);border-radius:8px;color:#fff;font-size:14px;font-weight:600;text-decoration:none;text-align:center;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(108,99,255,0.3);font-family:"Wix Madefor Text",sans-serif;line-height:1.4}
+            .desktop-only{display:none!important}
+            .mobile_show{display:block!important}
+            .header{position:relative;z-index:9;padding-bottom:20px}
+            .proxi__pagesection{padding:30px 0;background:#0c1633}
+            .page__title h1{font-size:24px;color:#fff;text-align:center;margin:20px 0;font-family:"Wix Madefor Text",sans-serif}
+            .tabs__list{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0 0 20px 0;list-style:none}
+            .tabs__btn{flex:1 1 45%;padding:12px;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.3);border-radius:8px;color:#fff;font-size:12px;cursor:pointer;font-family:"Wix Madefor Text",sans-serif}
+            .tabs__btn--active{background:linear-gradient(135deg,#6c63ff 0%,#5a52d5 100%);border-color:#6c63ff}
+            .tabs__content{display:none}
+            .tabs__content--active{display:block}
+            .proxi-info{padding:20px 0;background:#050366}
+            .plit__big-form{padding:25px;background:#050366;border-radius:12px;margin-bottom:8px;width:100%;box-sizing:border-box;position:relative;overflow:hidden;display:block}
+            .plit__big-form::after{content:"";position:absolute;background:url("/static/img/b-a.svg") no-repeat;background-size:cover;left:0;bottom:0;width:500px;height:500px}
+            .plit__big-form::before{content:"";position:absolute;background:url("/static/img/b-b.svg") no-repeat;background-size:cover;right:0;top:0;width:300px;height:300px}
+            .proxi-info,.blue,.review,.blogs{content-visibility:auto;contain-intrinsic-size:auto 600px}
+            .swiper-wrapper{will-change:transform}
+            .main__b-item{will-change:contents}
+        }
+    </style>
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <!-- Preload main.css with high priority for LCP -->
+    <link rel="preload" href="/static/css/main.css?v1.17" as="style" fetchpriority="high" />
+
+    <!-- Preload LCP background images for .plit__big-form -->
+    <link rel="preload" href="/static/img/b-a.svg" as="image" fetchpriority="high" />
+    <link rel="preload" href="/static/img/b-b.svg" as="image" fetchpriority="high" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Geologica:wght@100..900&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" fetchpriority="low" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Geologica:wght@100..900&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" /></noscript>
+
+    <link rel="preload" href="/static/libs/nouislider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/static/libs/nouislider.min.css" /></noscript>
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" /></noscript>
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" /></noscript>
+
+    <!-- Swiper CSS loaded synchronously to prevent CLS in sliders -->
+    <link rel="stylesheet" href="/static/libs/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="/static/css/main.css?v1.17" fetchpriority="high" />
+
+
+            <!-- Стили дополнительных страниц (blog, tools, pages) -->
+    <link rel="stylesheet" href="/static/css/pages.css?v1.07" />
+        <link rel="preload" href="/static/css/flags.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/static/css/flags.css" /></noscript>
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64x64.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+</head><body>
+<div class="backdrop"></div>
+<header class="header ">
+    <div class="header__container">
+    <div class="header__left">
+    <div class="header__logo">
+        <a href="/"><img src="/static/img/logo.svg" alt="alt" /></a>
+    </div>
+    <button class="btn_proxi" role="button">Купить прокси</button>
+    <div class="window__header">
+        <div class="window__container" id="header-proxy-counties">
+            <!-- Types tabs and countries will be loaded by ajax -->
+        </div>
+    </div>
+    <div class="top__menu">
+        <ul>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/partnership">Партнерская программа</a></li>
+            <li><a href="/contact">Контакты</a></li>
+        </ul>
+    </div>
+</div>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+            <div class="header__right">
+
+    <div class="header__auth">
+        <a data-fancybox data-src="#popup-auth" href="javascript:;"
+        >Войти</a
+        >
+    </div>
+
+    <div class="header__lang">
+        <button class="btn__lang" type="button" aria-label="Выбрать язык">
+            <img src="/static/img/rus.svg" alt="RU" class="lang-flag" />
+            <svg class="lang-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <div class="lang-dropdown">
+            <a href="#" class="lang-dropdown__item active">
+                <img src="/static/img/rus.svg" alt="RU" class="lang-flag" />
+                <span>Русский</span>
+            </a>
+            <a href="/en/free-proxy" class="lang-dropdown__item ">
+                <img src="/static/img/eng.svg" alt="EN" class="lang-flag" />
+                <span>English</span>
+            </a>
+        </div>
+    </div>
+    <button class="header__burger" aria-label="Открыть меню">
+        <svg
+            width="33"
+            height="32"
+            viewBox="0 0 33 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M5.58594 24C5.29705 24 5.05816 23.9056 4.86927 23.7167C4.68038 23.5278 4.58594 23.2889 4.58594 23C4.58594 22.7111 4.68038 22.4722 4.86927 22.2833C5.05816 22.0944 5.29705 22 5.58594 22H27.5859C27.8748 22 28.1137 22.0944 28.3026 22.2833C28.4915 22.4722 28.5859 22.7111 28.5859 23C28.5859 23.2889 28.4915 23.5278 28.3026 23.7167C28.1137 23.9056 27.8748 24 27.5859 24H5.58594ZM5.58594 17C5.29705 17 5.05816 16.9056 4.86927 16.7167C4.68038 16.5278 4.58594 16.2889 4.58594 16C4.58594 15.7111 4.68038 15.4722 4.86927 15.2833C5.05816 15.0944 5.29705 15 5.58594 15H27.5859C27.8748 15 28.1137 15.0944 28.3026 15.2833C28.4915 15.4722 28.5859 15.7111 28.5859 16C28.5859 16.2889 28.4915 16.5278 28.3026 16.7167C28.1137 16.9056 27.8748 17 27.5859 17H5.58594ZM5.58594 10C5.29705 10 5.05816 9.90556 4.86927 9.71667C4.68038 9.52778 4.58594 9.28889 4.58594 9C4.58594 8.71111 4.68038 8.47222 4.86927 8.28333C5.05816 8.09444 5.29705 8 5.58594 8H27.5859C27.8748 8 28.1137 8.09444 28.3026 8.28333C28.4915 8.47222 28.5859 8.71111 28.5859 9C28.5859 9.28889 28.4915 9.52778 28.3026 9.71667C28.1137 9.90556 27.8748 10 27.5859 10H5.58594Z"
+                fill="white"
+            />
+        </svg>
+    </button>
+</div>
+    </div>
+<div class="container">
+    <div class="header__menu">
+    <ul>
+        <li><a href="/proxy-checker">Прокси чекер</a></li>
+        <li><a href="/privacycheck">Анонимность</a></li>
+        <li><a href="/check-ipv6-support">Поддержка IPV6</a></li>
+        <li><a href="/scan-ports">Сканер портов</a></li>
+        <li><a href="/blacklist">Черный список</a></li>
+        <li><a href="/free-proxy">Бесплатные прокси</a></li>
+        <li><a href="/devapi">API</a></li>
+    </ul>
+</div>
+</div>
+<div class="header__mobile">
+        <div class="shadow_block_menu">
+    <img
+        src="/static/img/first_shadow_menu.webp"
+        alt=""
+        class="first_shadow_menu"
+        loading="lazy"
+    />
+    <!-- <img src="/static/img/second_shadow_menu.png" alt="" class="second_shadow_menu"> -->
+</div>
+<div class="header__mobile-top">
+    <div class="header__logo">
+        <a href="/"><img src="/static/img/logo.svg" alt="alt" /></a>
+    </div>
+    <div class="header__right">
+        <div class="header__lang">
+            <button class="btn__lang" type="button" aria-label="Выбрать язык">
+                <img src="/static/img/rus.svg" alt="RU" class="lang-flag" />
+                <svg class="lang-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="lang-dropdown">
+                <a href="#" class="lang-dropdown__item active">
+                    <img src="/static/img/rus.svg" alt="RU" class="lang-flag" />
+                    <span>Русский</span>
+                </a>
+                <a href="/en/free-proxy" class="lang-dropdown__item ">
+                    <img src="/static/img/eng.svg" alt="EN" class="lang-flag" />
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+        <button class="header__close" aria-label="Закрыть меню">
+            <svg
+                width="33"
+                height="32"
+                viewBox="0 0 33 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M7.71777 9L24.9538 23.4627"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                />
+                <path
+                    d="M7.58594 23.6938L24.8219 9.23113"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                />
+            </svg>
+        </button>
+    </div>
+</div>
+
+<div class="header__menu-mob">
+    <ul>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/partnership">Партнерская программа</a></li>
+        <li><a href="/contact">Контакты</a></li>
+    </ul>
+</div>
+
+    <div class="header__auth">
+        <a data-fancybox data-src="#popup-auth" href="javascript:;">Войти</a>
+    </div>
+    <div class="header__forget">
+        <a data-fancybox data-src="#popup-pass" href="javascript:;"
+        >Восстановление пароля</a
+        >
+    </div>
+
+<div class="header__mob-btns">
+    <button id="btn_proxi" class="btn_proxi-mob">Купить прокси</button>
+    <div class="city-mob">
+        <div class="city-mob__container">
+            <div class="window__container header-proxy-counties">
+                <!-- END tabs-nav -->
+            </div>
+        </div>
+    </div>
+    <button class="btn_inst">Инструменты</button>
+    <div class="mob_additional_menu_instrument">
+        <div class="header__mob-inst">
+            <ul>
+                <li><a href="/proxy-checker">Прокси чекер</a></li>
+                <li><a href="/privacycheck">Анонимность</a></li>
+                <li><a href="/check-ipv6-support">Поддержка IPV6</a></li>
+                <li><a href="/scan-ports">Сканер портов</a></li>
+                <li><a href="/blacklist">Черный список</a></li>
+                <li><a href="/free-proxy">Бесплатные прокси</a></li>
+                <li><a href="/devapi">API</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="header-mob__social">
+    <span>Социальные сети</span>
+    <ul>
+        <li>
+            <a href="https://t.me/proxymania_news" aria-label="Читать наш телеграм канал" target="_blank">
+                <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle cx="16" cy="16" r="15.5" stroke="white" />
+                    <path
+                        d="M7.91343 15.2148C7.90817 15.1797 7.91437 15.1437 7.93091 15.1132C7.94744 15.0827 7.97325 15.0597 8.00371 15.0483L19.6262 9.99372L11.8478 16.2141L8.0338 15.3647C8.00055 15.3606 7.96986 15.343 7.94763 15.3153C7.92541 15.2877 7.91323 15.2519 7.91343 15.2148Z"
+                        fill="white"
+                    />
+                    <path
+                        d="M19.2651 22.8675C19.26 22.8964 19.248 22.9232 19.2304 22.9453C19.2129 22.9674 19.1903 22.984 19.1651 22.9933C19.1398 23.0026 19.1128 23.0043 19.0868 22.9983C19.0608 22.9923 19.0366 22.9788 19.0169 22.9591L12.6753 16.7803L22.0786 9.26925L19.2651 22.8675Z"
+                        fill="white"
+                    />
+                    <path
+                        d="M12.6602 22.2846C12.6394 22.3088 12.6121 22.325 12.5824 22.331C12.5526 22.337 12.5219 22.3324 12.4947 22.3179C12.4683 22.3051 12.4457 22.2842 12.4297 22.2576C12.4137 22.231 12.4049 22.1999 12.4045 22.168V17.8462L14.6688 20.0612L12.6602 22.2846Z"
+                        fill="white"
+                    />
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a href="https://vk.com/maniaip" aria-label="Читать нашу ВК группу" target="_blank">
+                <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle cx="16" cy="16" r="15.5" stroke="white" />
+                    <path
+                        d="M23.6158 11.6757C23.4391 12.3068 23.1806 12.9056 22.8486 13.453L22.862 13.4294C22.5467 14.0168 22.1701 14.6955 21.7324 15.4655C21.357 16.0734 21.1583 16.3881 21.1362 16.4096C21.0359 16.5501 20.971 16.7179 20.9483 16.8959L20.9476 16.9014C20.9656 17.0617 21.0321 17.2102 21.1362 17.3223L21.4178 17.6732C22.9239 19.4035 23.7711 20.5962 23.9592 21.2514C23.9949 21.359 24.0064 21.4747 23.9926 21.5885C23.9789 21.7022 23.9403 21.8104 23.8804 21.9036L23.8818 21.9012C23.8109 21.9829 23.7246 22.0458 23.6291 22.0851C23.5336 22.1245 23.4314 22.1393 23.33 22.1286H23.3328H21.4776C21.2404 22.1286 21.0222 22.0358 20.8512 21.8816L20.8533 21.8831C20.6091 21.6593 20.385 21.4095 20.184 21.1373L20.1777 21.1278C19.8534 20.7182 19.5658 20.3733 19.3148 20.0932C18.4787 19.2047 17.8617 18.7605 17.4638 18.7605C17.3354 18.7476 17.2069 18.7852 17.1006 18.8667L17.1027 18.8651C17.057 18.9291 17.0235 19.0029 17.0041 19.0819C16.9848 19.1609 16.98 19.2435 16.9901 19.3246V19.3214C16.9628 19.6885 16.9538 20.057 16.9634 20.4253V20.4119V21.3237C16.9834 21.4327 16.9765 21.5456 16.9435 21.6505C16.9106 21.7554 16.8527 21.8483 16.7762 21.9193L16.7755 21.9201C16.4191 22.1001 16.0267 22.1725 15.6374 22.1302L15.6466 22.131C14.5811 22.1105 13.5409 21.7656 12.6378 21.1333L12.6624 21.1491C11.6211 20.4473 10.7285 19.501 10.0464 18.3757L10.0274 18.3427C9.36524 17.3557 8.78323 16.3046 8.28825 15.202L8.23899 15.0808C7.90915 14.3668 7.61933 13.6305 7.37119 12.8763L7.32896 12.7307C7.21392 12.3392 7.14068 11.9338 7.11078 11.5231L7.10938 11.5034C7.10938 11.1058 7.31864 10.907 7.73717 10.907H9.58818C9.77532 10.8907 9.96108 10.9539 10.1083 11.0841L10.1069 11.0825C10.2477 11.2548 10.3518 11.4664 10.4032 11.7025L10.4053 11.7119C10.7111 12.6909 11.0845 13.6418 11.5222 14.556L11.4751 14.4482C11.7914 15.1666 12.1743 15.8459 12.6174 16.4749L12.6012 16.4505C12.9765 16.9656 13.2693 17.2231 13.4795 17.2231L13.5021 17.2239C13.5515 17.224 13.6002 17.2095 13.643 17.1819C13.6859 17.1543 13.7215 17.1145 13.7463 17.0666L13.747 17.065C13.8144 16.8678 13.8411 16.6562 13.8251 16.4458V16.4505V13.3987C13.8119 13.0527 13.7353 12.7134 13.5999 12.4019L13.6055 12.4168C13.5234 12.2189 13.4168 12.0348 13.2888 11.87L13.2909 11.8732C13.1729 11.7415 13.0961 11.5706 13.072 11.3862L13.0713 11.3815C13.0713 11.2477 13.1262 11.1273 13.2121 11.0487L13.2128 11.0479C13.3011 10.9574 13.4167 10.9074 13.5365 10.9078H16.4602C16.5335 10.8982 16.6079 10.9092 16.6766 10.9397C16.7452 10.9702 16.8061 11.0192 16.8536 11.0825L16.8543 11.0833C16.9432 11.2669 16.9821 11.4756 16.9662 11.6836V11.6796V15.7495C16.955 15.9101 16.9884 16.0705 17.0619 16.209L17.0605 16.2059C17.0863 16.2489 17.1211 16.2842 17.162 16.3087C17.2029 16.3331 17.2485 16.3459 17.2949 16.3459H17.2956C17.4143 16.3373 17.5287 16.2933 17.6271 16.2185L17.625 16.22C17.8164 16.0729 17.9811 15.9053 18.124 15.7157L18.1268 15.7118C18.5616 15.1618 18.9514 14.5694 19.2916 13.9416L19.319 13.8865C19.5611 13.438 19.8229 12.8857 20.0601 12.3185L20.1038 12.2028L20.4177 11.501C20.4729 11.3196 20.5795 11.1632 20.7214 11.0554C20.8632 10.9477 21.0325 10.8945 21.2038 10.9039H21.2017H23.0534C23.5536 10.9039 23.7413 11.1612 23.6165 11.6757H23.6158Z"
+                        fill="white"
+                    />
+                </svg>
+            </a>
+        </li>
+    </ul>
+</div>
+</div>
+</header>
+<main>
+            
+<section class="section privacy-index">
+    <div class="container">
+        <h1 style="text-align: center;">Бесплатные прокси</h1>
+        <p>Здесь вы можете найти список <strong>проверенных и рабочих</strong> бесплатных прокси. Все прокси автоматически проверяются каждые 5 минут на работоспособность. Показываются только те прокси, которые прошли проверку и работают.</p>
+
+        <div class="free-proxies-info">
+            <p><strong>Важно:</strong> Бесплатные прокси не стабильны и медленнее приватных, они очень быстро перестают работать. Если вам нужен быстрый прокси для важных задач, рекомендуем использовать наши <a href="/kupit-proksi-ipv4">приватные прокси сервера</a>.</p></div>
+
+        <div class="proxychecker">
+            <div id="statistics-freeproxies" class="stats-container">
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <span class="stat-label">Рабочих в базе:</span>
+                        <span id="totalCount" class="stat-value">92</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">HTTPS:</span>
+                        <span id="httpsCount" class="stat-value">41</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">SOCKS4:</span>
+                        <span id="socks4Count" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">SOCKS5:</span>
+                        <span id="socks5Count" class="stat-value">51</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Быстрые < 100ms:</span>
+                        <span id="fastCount" class="stat-value">18</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="freeproxies-container">
+                <div id="results">
+                    <table class="table_proxychecker">
+                        <thead>
+                            <tr>
+                                <th data-label="Прокси" class="proxy-header">Прокси</th>
+                                <th data-label="Страна" class="country-header">Страна</th>
+                                <th data-label="Тип">Тип</th>
+                                <th data-label="Анонимность">Анонимность</th>
+                                <th data-label="Скорость">Скорость</th>
+                                <th data-label="Проверка">Проверка</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultTable">
+                                                                                                <tr>
+                                        <td class="proxy-cell">31.128.41.253:28080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            112 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398654">
+                                            <span class="relative-time">2 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">5.149.203.190:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            190 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398536">
+                                            <span class="relative-time">4 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">178.253.55.88:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            9 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">212.48.134.145:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            18 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">5.129.206.247:8888</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>HTTPS</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            21 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">194.87.43.49:8888</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>HTTPS</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            21 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">147.45.251.242:8888</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>HTTPS</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            22 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">85.198.96.242:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            22 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">46.146.220.247:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            41 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">185.13.134.202:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            50 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">195.19.49.8:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            80 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">195.19.50.44:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            105 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">178.236.245.17:3128</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>HTTPS</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            108 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">212.48.150.38:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            127 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td class="proxy-cell">195.190.121.154:1080</td>
+                                        <td class="country-cell">
+                                                                                                                                            <img src="/img/flags/ru.svg"
+                                                     alt="Russia"
+                                                     style="width: 20px; margin: -5px 5px 0 0;"/>
+                                                Russia                                                                                    </td>
+                                        <td>SOCKS5</td>
+                                        <td class="">
+                                            Высокая                                        </td>
+                                        <td class="speed-fast">
+                                            130 ms                                        </td>
+                                        <td class="last-checked" data-timestamp="1773398174">
+                                            <span class="relative-time">10 мин. назад</span>                                        </td>
+                                    </tr>
+                                                                                    </tbody>
+                    </table>
+
+                                        <div class="pagination-container">
+                        <div class="pagination-info">
+                            <p>Показано 15 из 20 рабочих прокси (Страница 1 из 2)</p>
+                        </div>
+                        <ul class="pagination justify-content-center"><li class="page-item active"><a class="page-link">1</a></li><li class="page-item"><a href="https://proxymania.su/free-proxy?country=RU&&amp;page=2" class="page-link" data-ci-pagination-page="2">2</a></li><li class="page-item"><a href="https://proxymania.su/free-proxy?country=RU&&amp;page=2" class="page-link" data-ci-pagination-page="2" rel="next">Далее</a></li></ul>                    </div>
+                                    </div>
+
+                <div class="filter-menu-freeproxies">
+                    <form method="GET" action="/free-proxy" id="filterForm">
+                        <div class="filter-group">
+                            <label><strong>Тип прокси:</strong></label>
+                            <select name="type" id="typeFilter" class="form-control">
+                                <option value="">Все типы</option>
+                                                                    <option value="SOCKS5"
+                                            >
+                                        SOCKS5 (51)
+                                    </option>
+                                                                    <option value="HTTPS"
+                                            >
+                                        HTTPS (41)
+                                    </option>
+                                                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label><strong>Страна:</strong></label>
+                            <select name="country" id="countryFilter" class="form-control">
+                                <option value="">Все страны</option>
+                                                                                                        <option value="RU"
+                                            selected>
+                                        Russia (20)
+                                    </option>
+                                                                                                        <option value="US"
+                                            >
+                                        United States (18)
+                                    </option>
+                                                                                                        <option value="DE"
+                                            >
+                                        Germany (8)
+                                    </option>
+                                                                                                        <option value="NL"
+                                            >
+                                        Netherlands (6)
+                                    </option>
+                                                                                                        <option value="CN"
+                                            >
+                                        China (4)
+                                    </option>
+                                                                                                        <option value="JP"
+                                            >
+                                        Japan (3)
+                                    </option>
+                                                                                                        <option value="SG"
+                                            >
+                                        Singapore (3)
+                                    </option>
+                                                                                                        <option value="KR"
+                                            >
+                                        South Korea (3)
+                                    </option>
+                                                                                                        <option value="ID"
+                                            >
+                                        Indonesia (2)
+                                    </option>
+                                                                                                        <option value="MX"
+                                            >
+                                        Mexico (2)
+                                    </option>
+                                                                                                        <option value="SE"
+                                            >
+                                        Sweden (2)
+                                    </option>
+                                                                                                        <option value="IT"
+                                            >
+                                        Italy (1)
+                                    </option>
+                                                                                                        <option value="CH"
+                                            >
+                                        Switzerland (1)
+                                    </option>
+                                                                                                        <option value="HK"
+                                            >
+                                        Hong Kong (1)
+                                    </option>
+                                                                                                        <option value="IN"
+                                            >
+                                        India (1)
+                                    </option>
+                                                                                                        <option value="SC"
+                                            >
+                                        Seychelles (1)
+                                    </option>
+                                                                                                        <option value="CZ"
+                                            >
+                                        Czech Republic (1)
+                                    </option>
+                                                                                                        <option value="ES"
+                                            >
+                                        Spain (1)
+                                    </option>
+                                                                                                        <option value="GB"
+                                            >
+                                        United Kingdom (1)
+                                    </option>
+                                                                                                        <option value="AM"
+                                            >
+                                        Armenia (1)
+                                    </option>
+                                                                                                        <option value="ZM"
+                                            >
+                                        Zambia (1)
+                                    </option>
+                                                                                                        <option value="CO"
+                                            >
+                                        Colombia (1)
+                                    </option>
+                                                                                                        <option value="FI"
+                                            >
+                                        Finland (1)
+                                    </option>
+                                                                                                        <option value="KZ"
+                                            >
+                                        Kazakhstan (1)
+                                    </option>
+                                                                                                        <option value="CA"
+                                            >
+                                        Canada (1)
+                                    </option>
+                                                                                                        <option value="FR"
+                                            >
+                                        France (1)
+                                    </option>
+                                                                                                        <option value="EC"
+                                            >
+                                        Ecuador (1)
+                                    </option>
+                                                                                                        <option value="KH"
+                                            >
+                                        Cambodia (1)
+                                    </option>
+                                                                                                        <option value="VN"
+                                            >
+                                        Vietnam (1)
+                                    </option>
+                                                                                                        <option value="PL"
+                                            >
+                                        Poland (1)
+                                    </option>
+                                                                                                        <option value="BR"
+                                            >
+                                        Brazil (1)
+                                    </option>
+                                                                                                        <option value="GE"
+                                            >
+                                        Georgia (1)
+                                    </option>
+                                                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label><strong>Скорость:</strong></label>
+                            <select name="speed" id="speedFilter" class="form-control">
+                                <option value="">Все</option>
+                                <option value="50" >Быстрее 50 ms</option>
+                                <option value="100" >Быстрее 100 ms</option>
+                                <option value="300" >Быстрее 300 ms</option>
+                                <option value="500" >Быстрее 500 ms</option>
+                                <option value="1000" >Быстрее 1000 ms</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Применить</button>
+                        <a href="/free-proxy" class="btn btn-secondary">Сбросить</a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="seo-block" style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 8px;">
+                <h2 style="margin-bottom: 20px; color: #333;">Бесплатные прокси серверы онлайн</h2>
+
+                <div style="line-height: 1.8; color: #555;">
+                    <p style="margin-bottom: 15px;">На этой странице вы найдете актуальный список бесплатных прокси, которые проходят автоматическую проверку каждые 5 минут. Мы показываем только рабочие прокси с информацией о скорости, стране и уровне анонимности.</p>
+
+                    <h3 style="margin-top: 25px; margin-bottom: 15px; color: #333;">Особенности нашего списка бесплатных прокси:</h3>
+
+                    <ul style="margin-bottom: 20px; padding-left: 20px;">
+                        <li style="margin-bottom: 10px;">
+                            <strong>Автоматическая проверка:</strong> все прокси в списке проверяются каждые 5 минут. Нерабочие прокси автоматически удаляются из списка, поэтому вы видите только рабочие прокси серверы.                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <strong>Разные типы протоколов:</strong> в нашей базе представлены прокси HTTPS, SOCKS4 и SOCKS5. Вы можете отфильтровать список по нужному типу протокола.                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <strong>Информация о скорости:</strong> для каждого прокси указано время отклика в миллисекундах. Используйте фильтр по скорости, чтобы найти самые быстрые прокси серверы.                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <strong>Геолокация:</strong> все прокси имеют информацию о стране расположения сервера. Фильтруйте по странам для обхода географических ограничений.                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <strong>Уровень анонимности:</strong> мы определяем степень анонимности каждого прокси — низкая, средняя или высокая.                        </li>
+                        <li style="margin-bottom: 10px;">
+                            <strong>Безопасность:</strong> мы проверяем не подделывает ли прокси SSL сертификат и не пытается ли он перехватить ваш трафик.                        </li>
+                    </ul>
+
+                    <h3 style="margin-top: 25px; margin-bottom: 15px; color: #333;">Ограничения бесплатных прокси:</h3>
+
+                    <p style="margin-bottom: 15px;">Бесплатные прокси имеют ряд существенных недостатков: низкая стабильность работы, медленная скорость соединения, высокая вероятность блокировки на популярных сайтах, а также риски безопасности при передаче конфиденциальных данных.</p>
+
+                    <p style="margin-top: 20px;">
+                        Для серьезных задач рекомендуем использовать наши                        <a href="/kupit-proksi-ipv4" style="color: #3b82f6;">приватные IPv4 прокси</a>
+                        или                        <a href="/kupit-proksi-ipv6" style="color: #3b82f6;">IPv6 прокси</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+<footer class="footer">
+    <div class="footer__container">
+    <div class="footer__logo">
+        <a href="/"><img src="/static/img/logo.svg" alt="alt" /></a>
+        <p>
+            Онлайн-сервис<br />
+            по покупке прокси        </p>
+    </div>
+    <div class="footer__menu">
+        <ul>
+            <li><a href="/blog/all">Блог</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/contact">Контакты</a></li>
+        </ul>
+    </div>
+    <div class="footer__menu">
+        <ul>
+            <li><a href="/devapi">API для разработчиков</a></li>
+            <li><a href="/partnership">Партнерская программа</a></li>
+        </ul>
+    </div>
+    <div class="footer__social">
+        <span>Социальные сети</span>
+        <ul>
+            <li>
+                <a href="https://t.me/proxymania_news" aria-label="Читать наш телеграм канал" target="_blank">
+                    <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <circle cx="16" cy="16" r="15.5" stroke="white" />
+                        <path
+                            d="M7.91343 15.2148C7.90817 15.1797 7.91437 15.1437 7.93091 15.1132C7.94744 15.0827 7.97325 15.0597 8.00371 15.0483L19.6262 9.99372L11.8478 16.2141L8.0338 15.3647C8.00055 15.3606 7.96986 15.343 7.94763 15.3153C7.92541 15.2877 7.91323 15.2519 7.91343 15.2148Z"
+                            fill="white"
+                        />
+                        <path
+                            d="M19.2651 22.8675C19.26 22.8964 19.248 22.9232 19.2304 22.9453C19.2129 22.9674 19.1903 22.984 19.1651 22.9933C19.1398 23.0026 19.1128 23.0043 19.0868 22.9983C19.0608 22.9923 19.0366 22.9788 19.0169 22.9591L12.6753 16.7803L22.0786 9.26925L19.2651 22.8675Z"
+                            fill="white"
+                        />
+                        <path
+                            d="M12.6602 22.2846C12.6394 22.3088 12.6121 22.325 12.5824 22.331C12.5526 22.337 12.5219 22.3324 12.4947 22.3179C12.4683 22.3051 12.4457 22.2842 12.4297 22.2576C12.4137 22.231 12.4049 22.1999 12.4045 22.168V17.8462L14.6688 20.0612L12.6602 22.2846Z"
+                            fill="white"
+                        />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="https://vk.com/maniaip" aria-label="Читать нашу ВК группу" target="_blank">
+                    <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <circle cx="16" cy="16" r="15.5" stroke="white" />
+                        <path
+                            d="M23.6158 11.6757C23.4391 12.3068 23.1806 12.9056 22.8486 13.453L22.862 13.4294C22.5467 14.0168 22.1701 14.6955 21.7324 15.4655C21.357 16.0734 21.1583 16.3881 21.1362 16.4096C21.0359 16.5501 20.971 16.7179 20.9483 16.8959L20.9476 16.9014C20.9656 17.0617 21.0321 17.2102 21.1362 17.3223L21.4178 17.6732C22.9239 19.4035 23.7711 20.5962 23.9592 21.2514C23.9949 21.359 24.0064 21.4747 23.9926 21.5885C23.9789 21.7022 23.9403 21.8104 23.8804 21.9036L23.8818 21.9012C23.8109 21.9829 23.7246 22.0458 23.6291 22.0851C23.5336 22.1245 23.4314 22.1393 23.33 22.1286H23.3328H21.4776C21.2404 22.1286 21.0222 22.0358 20.8512 21.8816L20.8533 21.8831C20.6091 21.6593 20.385 21.4095 20.184 21.1373L20.1777 21.1278C19.8534 20.7182 19.5658 20.3733 19.3148 20.0932C18.4787 19.2047 17.8617 18.7605 17.4638 18.7605C17.3354 18.7476 17.2069 18.7852 17.1006 18.8667L17.1027 18.8651C17.057 18.9291 17.0235 19.0029 17.0041 19.0819C16.9848 19.1609 16.98 19.2435 16.9901 19.3246V19.3214C16.9628 19.6885 16.9538 20.057 16.9634 20.4253V20.4119V21.3237C16.9834 21.4327 16.9765 21.5456 16.9435 21.6505C16.9106 21.7554 16.8527 21.8483 16.7762 21.9193L16.7755 21.9201C16.4191 22.1001 16.0267 22.1725 15.6374 22.1302L15.6466 22.131C14.5811 22.1105 13.5409 21.7656 12.6378 21.1333L12.6624 21.1491C11.6211 20.4473 10.7285 19.501 10.0464 18.3757L10.0274 18.3427C9.36524 17.3557 8.78323 16.3046 8.28825 15.202L8.23899 15.0808C7.90915 14.3668 7.61933 13.6305 7.37119 12.8763L7.32896 12.7307C7.21392 12.3392 7.14068 11.9338 7.11078 11.5231L7.10938 11.5034C7.10938 11.1058 7.31864 10.907 7.73717 10.907H9.58818C9.77532 10.8907 9.96108 10.9539 10.1083 11.0841L10.1069 11.0825C10.2477 11.2548 10.3518 11.4664 10.4032 11.7025L10.4053 11.7119C10.7111 12.6909 11.0845 13.6418 11.5222 14.556L11.4751 14.4482C11.7914 15.1666 12.1743 15.8459 12.6174 16.4749L12.6012 16.4505C12.9765 16.9656 13.2693 17.2231 13.4795 17.2231L13.5021 17.2239C13.5515 17.224 13.6002 17.2095 13.643 17.1819C13.6859 17.1543 13.7215 17.1145 13.7463 17.0666L13.747 17.065C13.8144 16.8678 13.8411 16.6562 13.8251 16.4458V16.4505V13.3987C13.8119 13.0527 13.7353 12.7134 13.5999 12.4019L13.6055 12.4168C13.5234 12.2189 13.4168 12.0348 13.2888 11.87L13.2909 11.8732C13.1729 11.7415 13.0961 11.5706 13.072 11.3862L13.0713 11.3815C13.0713 11.2477 13.1262 11.1273 13.2121 11.0487L13.2128 11.0479C13.3011 10.9574 13.4167 10.9074 13.5365 10.9078H16.4602C16.5335 10.8982 16.6079 10.9092 16.6766 10.9397C16.7452 10.9702 16.8061 11.0192 16.8536 11.0825L16.8543 11.0833C16.9432 11.2669 16.9821 11.4756 16.9662 11.6836V11.6796V15.7495C16.955 15.9101 16.9884 16.0705 17.0619 16.209L17.0605 16.2059C17.0863 16.2489 17.1211 16.2842 17.162 16.3087C17.2029 16.3331 17.2485 16.3459 17.2949 16.3459H17.2956C17.4143 16.3373 17.5287 16.2933 17.6271 16.2185L17.625 16.22C17.8164 16.0729 17.9811 15.9053 18.124 15.7157L18.1268 15.7118C18.5616 15.1618 18.9514 14.5694 19.2916 13.9416L19.319 13.8865C19.5611 13.438 19.8229 12.8857 20.0601 12.3185L20.1038 12.2028L20.4177 11.501C20.4729 11.3196 20.5795 11.1632 20.7214 11.0554C20.8632 10.9477 21.0325 10.8945 21.2038 10.9039H21.2017H23.0534C23.5536 10.9039 23.7413 11.1612 23.6165 11.6757H23.6158Z"
+                            fill="white"
+                        />
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+    <div class="container">
+    <div class="footer__bottom">
+        <div class="footer__bottom-item">
+            <p>© 2016-2026 «ProxyMania». Все права защищены</p>
+        </div>
+        <div class="footer__bottom-item">
+            <a href="/eula">Пользовательское соглашение</a>
+        </div>
+        <div class="footer__bottom-item">
+            <a href="/privacy">Политика конфиденциальности</a>
+        </div>
+        <div class="footer__bottom-item">
+            <a href="/offerta">Публичная оферта</a>
+        </div>
+    </div>
+</div>
+</footer>
+
+<!-- Logout popup -->
+<div class="hidden mygal">
+    <div class="popup-modal__del white-popup-block popup-info" id="popup-exit">
+        <div class="popup__title">Выходим из аккаунта</div>
+        <p>Вы уверены, что хотите выйти?</p>
+        <div class="modal__del-buttons">
+            <button
+                    type="submit"
+                    onclick="$.fancybox.close();"
+                    class="btn-prod__cancel"
+            >
+                Отмена            </button>
+            <button type="submit" class="btn-prof__del" onclick="window.location.href='/welcome/logout';">Выход</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Password recovery -->
+<div class="hidden mygal">
+    <div class="popup-modal white-popup-block popup-info" id="popup-pass">
+        <div class="popup__title">Восстановление пароля</div>
+        <div class="popup_forms">
+            <div class="form__group">
+                <input type="hidden" name="xsrf" value="8789dd000b6dd92f60518a18998d3bf3">
+                <input type="text" id="recovery_input" name="recovery_input" placeholder="Введите логин или почту" />
+            </div>
+            <div class="rec_step1">
+            <a href="#" class="btn-vk rec_step1"> Восстановить пароль </a>
+            </div>
+
+            <div class="rec4Labels" style="font-size:10pt; font-weight: bold; text-align: center;">
+
+			</div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden mygal">
+    <div class="popup-modal white-popup-block popup-info" id="popup-auth">
+        <div class="popup__title">Вход в личный кабинет</div>
+        <form id="login-form" class="popup_forms">
+            <div class="form__group">
+                <div class="auth-error" id="login-error" style="display: none;">
+                    <b id="login-error-text"></b>
+                </div>
+                <div class="auth-success" id="login-success" style="display: none;">
+                    <b id="login-success-text"></b>
+                </div>
+                <input type="hidden" name="xsrf" value="8789dd000b6dd92f60518a18998d3bf3">
+                <input type="text" name="login" id="login-email" placeholder="Логин или Email" required />
+            </div>
+            <div class="form__group">
+                <input type="password" name="pass" id="login-password" placeholder="Пароль" required />
+                <span
+                    toggle="#password-field"
+                    class="fa fa-fw fa-eye-login field-icon field-icon-pass toggle-password"
+                >
+							<svg
+                                width="22"
+                                height="16"
+                                viewBox="0 0 22 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+								<path
+                                    d="M11 5C10.2044 5 9.44129 5.31607 8.87868 5.87868C8.31607 6.44129 8 7.20435 8 8C8 8.79565 8.31607 9.55871 8.87868 10.1213C9.44129 10.6839 10.2044 11 11 11C11.7956 11 12.5587 10.6839 13.1213 10.1213C13.6839 9.55871 14 8.79565 14 8C14 7.20435 13.6839 6.44129 13.1213 5.87868C12.5587 5.31607 11.7956 5 11 5ZM11 13C9.67392 13 8.40215 12.4732 7.46447 11.5355C6.52678 10.5979 6 9.32608 6 8C6 6.67392 6.52678 5.40215 7.46447 4.46447C8.40215 3.52678 9.67392 3 11 3C12.3261 3 13.5979 3.52678 14.5355 4.46447C15.4732 5.40215 16 6.67392 16 8C16 9.32608 15.4732 10.5979 14.5355 11.5355C13.5979 12.4732 12.3261 13 11 13ZM11 0.5C6 0.5 1.73 3.61 0 8C1.73 12.39 6 15.5 11 15.5C16 15.5 20.27 12.39 22 8C20.27 3.61 16 0.5 11 0.5Z"
+                                    fill="#C5D2FF"
+                                />
+							</svg>
+						</span>
+            </div>
+            <div class="form__check-row">
+                <label class="form__checks">
+                    <input type="checkbox" checked="checked" />
+                    <span class="checkmark"></span>
+                    <p>Запомнить меня</p>
+                </label>
+                <a
+                    data-fancybox
+                    data-src="#popup-pass"
+                    href="javascript:;"
+                    class="btn-forget"
+                >Забыли пароль?</a
+                >
+            </div>
+            <!-- reCAPTCHA v2 challenge (hidden by default) -->
+            <div class="form__group" id="login-recaptcha-container" style="display: none; margin-bottom: 15px;">
+                <div id="login-recaptcha-widget"></div>
+            </div>
+            <div class="form__bottom">
+                <button type="submit" class="btn-reg" id="btn-login">Войти</button>
+                <a
+                    data-fancybox
+                    data-src="#popup-form"
+                    href="javascript:;"
+                    class="btn-auth"
+                >Зарегистрироваться</a
+                >
+            </div>
+            <div class="form__span">
+                <span class="span">или</span>
+            </div>
+            <a href="/vkontakte/" class="btn-vk">
+                <svg
+                    width="24"
+                    height="21"
+                    viewBox="0 0 24 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect width="24" height="20.8696" rx="8" fill="#E9EEFF" />
+                    <path
+                        d="M20.5923 5.93484C20.404 6.52081 20.1285 7.07675 19.7747 7.58494L19.789 7.56303C19.4529 8.10843 19.0516 8.73857 18.585 9.45345C18.4512 9.6422 18.3385 9.80051 18.2468 9.92837C18.053 10.1987 17.7976 10.4523 17.7494 10.7814C17.7489 10.7848 17.7489 10.7883 17.7493 10.7917C17.7694 10.9385 17.84 11.0745 17.9497 11.1773L18.2497 11.5031C19.855 13.1096 20.7579 14.217 20.9584 14.8252C20.9964 14.9251 21.0086 15.0326 20.994 15.1382C20.9793 15.2438 20.9383 15.3443 20.8744 15.4308C20.8745 15.4305 20.8742 15.4302 20.874 15.4305C20.7988 15.5054 20.7075 15.5631 20.6065 15.5993C20.5047 15.6359 20.3958 15.6497 20.2878 15.6397H20.2908H18.3135C18.0607 15.6397 17.8282 15.5535 17.6459 15.4103L17.6481 15.4118C17.3879 15.204 17.149 14.9721 16.9348 14.7193L16.928 14.7105C16.5825 14.3302 16.2759 14.01 16.0084 13.75C15.1173 12.9251 14.4597 12.5126 14.0356 12.5126C13.8988 12.5007 13.7619 12.5355 13.6486 12.6112C13.649 12.6109 13.6494 12.6115 13.6491 12.6118C13.6013 12.6708 13.5661 12.7385 13.5457 12.811C13.5254 12.8834 13.5202 12.9591 13.5304 13.0334C13.5304 13.0337 13.5308 13.0337 13.5308 13.0334C13.5016 13.3742 13.4921 13.7164 13.5023 14.0582V14.0458V14.5844C13.5023 14.7892 13.5507 15.0031 13.4811 15.1958C13.446 15.2932 13.3843 15.3795 13.3028 15.4454C13.3023 15.4459 13.3017 15.4462 13.3011 15.4465C12.9215 15.6133 12.5036 15.6804 12.0891 15.6411L12.0988 15.6419C10.9633 15.6229 9.85461 15.3027 8.89211 14.7156L8.91837 14.7303C7.8085 14.0787 6.85719 13.2001 6.13021 12.1554L6.10996 12.1247C5.40428 11.2084 4.78398 10.2325 4.25643 9.20874L4.20393 9.09625C3.8524 8.43332 3.5435 7.74976 3.27904 7.04952L3.23403 6.91438C3.11142 6.55086 3.03336 6.1745 3.0015 5.79314L3 5.77487C3 5.40575 3.22303 5.22119 3.6691 5.22119H5.64189C5.84133 5.20598 6.03932 5.26468 6.19622 5.38554L6.19472 5.38408C6.34474 5.54405 6.45576 5.74054 6.51051 5.95968L6.51277 5.96844C6.83868 6.87736 7.23669 7.76022 7.70319 8.60904L7.65293 8.50897C7.9901 9.17589 8.39814 9.80656 8.87036 10.3906L8.85311 10.368C9.25317 10.8462 9.56521 11.0853 9.78925 11.0853L9.81325 11.086C9.86599 11.0861 9.91782 11.0726 9.96352 11.047C10.0092 11.0213 10.0472 10.9844 10.0735 10.9399L10.0743 10.9385C10.1461 10.7554 10.1746 10.5589 10.1575 10.3636V10.368V7.53454C10.1435 7.21328 10.0618 6.89827 9.91751 6.60905L9.92351 6.62293C9.83601 6.43913 9.72238 6.26823 9.58597 6.11527C9.58617 6.11553 9.58581 6.11584 9.58558 6.11561C9.46129 5.99368 9.38043 5.8361 9.35493 5.66604C9.35443 5.66312 9.35417 5.66016 9.35421 5.6572C9.35559 5.5348 9.41379 5.42484 9.5042 5.35267L9.50495 5.35194C9.59913 5.26795 9.7223 5.22154 9.85 5.22192H12.966C13.0442 5.21303 13.1234 5.22319 13.1966 5.2515C13.2698 5.2798 13.3346 5.32536 13.3853 5.38408C13.3858 5.38456 13.3862 5.38512 13.3865 5.38573C13.4809 5.55597 13.5222 5.74936 13.5053 5.94215V5.9385V9.71714C13.4933 9.86618 13.529 10.0152 13.6073 10.1437L13.6058 10.1408C13.6333 10.1808 13.6704 10.2136 13.714 10.2362C13.7576 10.2589 13.8062 10.2708 13.8556 10.2708C13.9821 10.2628 14.1048 10.222 14.2096 10.1525L14.2074 10.154C14.4114 10.0174 14.5869 9.86177 14.7392 9.68573L14.7422 9.68208C15.2056 9.17147 15.6211 8.62143 15.9837 8.03855L16.0129 7.98742C16.2709 7.57106 16.55 7.05828 16.8028 6.53163L16.8493 6.42425L17.1838 5.77268C17.2427 5.60421 17.3564 5.459 17.5075 5.35897C17.6587 5.25895 17.8392 5.20956 18.0217 5.21827H18.0195H19.993C20.5261 5.21827 20.7253 5.45713 20.5923 5.93484Z"
+                        fill="#140B48"
+                    />
+                </svg>
+                Вход через VK ID            </a>
+        </form>
+    </div>
+</div>
+
+<!-- Register -->
+<div class="hidden mygal">
+    <div class="popup-modal white-popup-block popup-info" id="popup-form">
+        <div class="popup__title">Зарегистрируйтесь</div>
+        <form id="registration-form" class="popup_forms">
+            <div class="form__group">
+                <div class="error" id="registration-error" style="display: none;">
+                    <b id="registration-error-text"></b>
+                </div>
+                <div class="success" id="registration-success" style="display: none; color: green;">
+                    <b id="registration-success-text"></b>
+                </div>
+                <input type="hidden" name="xsrf" value="8789dd000b6dd92f60518a18998d3bf3">
+                <input type="hidden" id="recaptcha-site-key" value="6LcqgwksAAAAAIHKiPK0iloGwL4bdjcAQSmQqBgp">
+                <input type="email" name="email" id="reg-email" placeholder="E-mail" required />
+            </div>
+            <div class="form__group">
+                <input
+                    type="password"
+                    name="password"
+                    id="reg-password"
+                    placeholder="Придумайте пароль" required
+                />
+                <span
+                    toggle="#password-field"
+                    class="fa fa-fw fa-eye-reg field-icon field-icon-pass toggle-password"
+                >
+							<svg
+                                width="22"
+                                height="16"
+                                viewBox="0 0 22 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+								<path
+                                    d="M11 5C10.2044 5 9.44129 5.31607 8.87868 5.87868C8.31607 6.44129 8 7.20435 8 8C8 8.79565 8.31607 9.55871 8.87868 10.1213C9.44129 10.6839 10.2044 11 11 11C11.7956 11 12.5587 10.6839 13.1213 10.1213C13.6839 9.55871 14 8.79565 14 8C14 7.20435 13.6839 6.44129 13.1213 5.87868C12.5587 5.31607 11.7956 5 11 5ZM11 13C9.67392 13 8.40215 12.4732 7.46447 11.5355C6.52678 10.5979 6 9.32608 6 8C6 6.67392 6.52678 5.40215 7.46447 4.46447C8.40215 3.52678 9.67392 3 11 3C12.3261 3 13.5979 3.52678 14.5355 4.46447C15.4732 5.40215 16 6.67392 16 8C16 9.32608 15.4732 10.5979 14.5355 11.5355C13.5979 12.4732 12.3261 13 11 13ZM11 0.5C6 0.5 1.73 3.61 0 8C1.73 12.39 6 15.5 11 15.5C16 15.5 20.27 12.39 22 8C20.27 3.61 16 0.5 11 0.5Z"
+                                    fill="#C5D2FF"
+                                />
+							</svg>
+						</span>
+            </div>
+
+            <!-- CAPTCHA fallback (hidden by default) -->
+            <div class="form__group" id="captcha-container" style="display: none;">
+                <label style="color: #081c62; margin-bottom: 8px;">Введите код с картинки:</label>
+                <div style="margin-bottom: 10px;">
+                    <img id="captcha-image" src="" alt="CAPTCHA" style="border: 2px solid #40c1fe; border-radius: 8px; max-width: 100%;">
+                    <button type="button" id="refresh-captcha" style="background: transparent; border: none; cursor: pointer; color: #4e6aff; text-decoration: underline; padding: 5px 10px;">
+                        Обновить картинку                    </button>
+                </div>
+                <input type="text" name="captcha_code" id="captcha-code" placeholder="Введите код" style="border: 1px solid #40c1fe; background: #e9eeff; border-radius: 8px; padding: 0px 9px; width: 100%; height: 40px; color: #142974; font-size: 16px; font-weight: 500;">
+            </div>
+
+            <span class="politik"
+            >Регистрируясь на платформе, Вы соглашаетесь с						<a href="/welcome/privacy" target="_blank">Политикой обработки данных</a></span
+            >
+            <div class="form__bottom">
+                <button type="submit" class="btn-reg" id="btn-register">Зарегистрироваться</button>
+                <a
+                    data-fancybox
+                    data-src="#popup-auth"
+                    href="javascript:;"
+                    class="btn-auth"
+                >Войти</a
+                >
+            </div>
+            <div class="form__span">
+                <span class="span">или</span>
+            </div>
+            <a href="/vkontakte/" class="btn-vk">
+                <svg
+                    width="24"
+                    height="21"
+                    viewBox="0 0 24 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect width="24" height="20.8696" rx="8" fill="#E9EEFF" />
+                    <path
+                        d="M20.5923 5.93484C20.404 6.52081 20.1285 7.07675 19.7747 7.58494L19.789 7.56303C19.4529 8.10843 19.0516 8.73857 18.585 9.45345C18.4512 9.6422 18.3385 9.80051 18.2468 9.92837C18.053 10.1987 17.7976 10.4523 17.7494 10.7814C17.7489 10.7848 17.7489 10.7883 17.7493 10.7917C17.7694 10.9385 17.84 11.0745 17.9497 11.1773L18.2497 11.5031C19.855 13.1096 20.7579 14.217 20.9584 14.8252C20.9964 14.9251 21.0086 15.0326 20.994 15.1382C20.9793 15.2438 20.9383 15.3443 20.8744 15.4308C20.8745 15.4305 20.8742 15.4302 20.874 15.4305C20.7988 15.5054 20.7075 15.5631 20.6065 15.5993C20.5047 15.6359 20.3958 15.6497 20.2878 15.6397H20.2908H18.3135C18.0607 15.6397 17.8282 15.5535 17.6459 15.4103L17.6481 15.4118C17.3879 15.204 17.149 14.9721 16.9348 14.7193L16.928 14.7105C16.5825 14.3302 16.2759 14.01 16.0084 13.75C15.1173 12.9251 14.4597 12.5126 14.0356 12.5126C13.8988 12.5007 13.7619 12.5355 13.6486 12.6112C13.649 12.6109 13.6494 12.6115 13.6491 12.6118C13.6013 12.6708 13.5661 12.7385 13.5457 12.811C13.5254 12.8834 13.5202 12.9591 13.5304 13.0334C13.5304 13.0337 13.5308 13.0337 13.5308 13.0334C13.5016 13.3742 13.4921 13.7164 13.5023 14.0582V14.0458V14.5844C13.5023 14.7892 13.5507 15.0031 13.4811 15.1958C13.446 15.2932 13.3843 15.3795 13.3028 15.4454C13.3023 15.4459 13.3017 15.4462 13.3011 15.4465C12.9215 15.6133 12.5036 15.6804 12.0891 15.6411L12.0988 15.6419C10.9633 15.6229 9.85461 15.3027 8.89211 14.7156L8.91837 14.7303C7.8085 14.0787 6.85719 13.2001 6.13021 12.1554L6.10996 12.1247C5.40428 11.2084 4.78398 10.2325 4.25643 9.20874L4.20393 9.09625C3.8524 8.43332 3.5435 7.74976 3.27904 7.04952L3.23403 6.91438C3.11142 6.55086 3.03336 6.1745 3.0015 5.79314L3 5.77487C3 5.40575 3.22303 5.22119 3.6691 5.22119H5.64189C5.84133 5.20598 6.03932 5.26468 6.19622 5.38554L6.19472 5.38408C6.34474 5.54405 6.45576 5.74054 6.51051 5.95968L6.51277 5.96844C6.83868 6.87736 7.23669 7.76022 7.70319 8.60904L7.65293 8.50897C7.9901 9.17589 8.39814 9.80656 8.87036 10.3906L8.85311 10.368C9.25317 10.8462 9.56521 11.0853 9.78925 11.0853L9.81325 11.086C9.86599 11.0861 9.91782 11.0726 9.96352 11.047C10.0092 11.0213 10.0472 10.9844 10.0735 10.9399L10.0743 10.9385C10.1461 10.7554 10.1746 10.5589 10.1575 10.3636V10.368V7.53454C10.1435 7.21328 10.0618 6.89827 9.91751 6.60905L9.92351 6.62293C9.83601 6.43913 9.72238 6.26823 9.58597 6.11527C9.58617 6.11553 9.58581 6.11584 9.58558 6.11561C9.46129 5.99368 9.38043 5.8361 9.35493 5.66604C9.35443 5.66312 9.35417 5.66016 9.35421 5.6572C9.35559 5.5348 9.41379 5.42484 9.5042 5.35267L9.50495 5.35194C9.59913 5.26795 9.7223 5.22154 9.85 5.22192H12.966C13.0442 5.21303 13.1234 5.22319 13.1966 5.2515C13.2698 5.2798 13.3346 5.32536 13.3853 5.38408C13.3858 5.38456 13.3862 5.38512 13.3865 5.38573C13.4809 5.55597 13.5222 5.74936 13.5053 5.94215V5.9385V9.71714C13.4933 9.86618 13.529 10.0152 13.6073 10.1437L13.6058 10.1408C13.6333 10.1808 13.6704 10.2136 13.714 10.2362C13.7576 10.2589 13.8062 10.2708 13.8556 10.2708C13.9821 10.2628 14.1048 10.222 14.2096 10.1525L14.2074 10.154C14.4114 10.0174 14.5869 9.86177 14.7392 9.68573L14.7422 9.68208C15.2056 9.17147 15.6211 8.62143 15.9837 8.03855L16.0129 7.98742C16.2709 7.57106 16.55 7.05828 16.8028 6.53163L16.8493 6.42425L17.1838 5.77268C17.2427 5.60421 17.3564 5.459 17.5075 5.35897C17.6587 5.25895 17.8392 5.20956 18.0217 5.21827H18.0195H19.993C20.5261 5.21827 20.7253 5.45713 20.5923 5.93484Z"
+                        fill="#140B48"
+                    />
+                </svg>
+                Вход через VK ID            </a>
+        </form>
+    </div>
+</div>
+
+
+<!-- email confirmation -->
+<script>
+window.i18n = {"js_collapse":"Свернуть","js_expand":"Развернуть","js_off":"Выключить","js_on":"Включить","js_disabled":"Выключено","js_enabled":"Включено","js_error_prefix":"Ошибка: ","js_copied":"Скопировано","js_copied_clipboard":"Скопировано в буфер","js_in_development":"В разработке","js_select_category":"Выберите категорию","js_next":"Далее","js_working":"Работает","js_not_working":"Не работает","js_promo_applied":"Промокод применен","js_promo_ipv4_only":"Промокод дает скидку только для IPv4 прокси","js_promo_ipv6_only":"Промокод дает скидку только для IPv6 прокси","js_promo_not_found":"Промокод не найден","js_renew":"Продлить","js_change_type":"Изменить тип","js_export":"Экспорт","js_processing":"Обработка...","js_select_at_least_1":"Выберите хотя бы 1 прокси","js_tariff_usa_disabled":"Тариф USA отключен и более не доступен к продлению","js_proxy_not_exist":"Вы выбрали прокси №","js_proxy_not_exist_suffix":", которая больше не существует! Отмените выбор этой записи и повторите попытку.","js_proxy_expired_suffix":", который закончился и больше не работает! Обновите страницу.","js_proxy_other_protocol":", который имеет другой протокол","js_renew_error":"Ошибка, возможно прокси уже удален, обновите страницу","js_server_request_error":"Ошибка при отправке запроса на сервер.","js_renew_failed":"Ошибка! Не удалось продлить прокси.","js_total_price":" ₽","js_will_renew":"Будет обновлено","js_proxies_word":"прокси","js_pay":"Оплатить","js_pay_amount":"Оплатить","js_select_proxy_export":"Сначала выберите прокси для экспорта","js_select_export_format":"Выберите формат экспорта","js_enter_custom_format":"Введите пользовательский формат экспорта","js_format_min_ip_port":"Формат должен содержать минимум \"ip\" и \"port\"","js_format_allowed_chars":"Разрешены только буквы, разделители @ ; : и пробелы","js_ipv6_only":"только для IPv6 прокси ","js_something_wrong":"Ошибка! Что-то пошло не так.","js_proxy_no_ip_auth":" не поддерживает авторизацию по IP","js_error_proxy":"Ошибка! Выделенный прокси № ","js_error_proxy2":"Ошибка! Прокси № ","js_rotation_enabled":"Автоматическая ротация включена","js_rotation_disabled":"Автоматическая ротация выключена","js_rotation_set":"Таймер ротации установлен","js_rotation_off":"Ротация для IPv6 прокси выключена","js_add_comment":"Добавить комментарий","js_copy_rotation_link":"Копировать ссылку ротации","js_interval_range":"Интервал должен быть от 2 до 1440 минут","js_ip_timer_prefix":"Таймер смены IP: ","js_timer_off":"выкл","js_settings_saved":"Настройки сохранены","js_unknown_error":"Неизвестная ошибка","js_server_error":"Ошибка сервера","js_select_mobile_first":"Сначала выберите мобильные прокси, для которых необходимо сменить устройство.","js_old_mobile_unavailable":"Смена устройства для старых моб. прокси не доступна в ЛК.","js_select_operator":"Выберите оператора","js_select_city":"Выберите город","js_fastest":"Самый быстрый","js_equipment_changed":"Оборудование успешно изменено. Страница будет перезагружена.","js_data_load_error":"Ошибка загрузки данных","js_proxy_load_error":"Ошибка при загрузке прокси","js_error_invalid_data":"Ошибка! Возможно вы ввели некорректные данные.","js_register":"Зарегистрироваться","js_register_error":"Произошла ошибка при регистрации. Попробуйте позже.","js_checking":"Проверка...","js_captcha_required":"Пожалуйста, введите код с картинки для завершения регистрации","js_login_btn":"Войти","js_login_error":"Произошла ошибка. Попробуйте снова.","js_recaptcha_error":"Ошибка проверки. Обновите страницу и попробуйте снова.","js_recaptcha_load_error":"Ошибка загрузки reCAPTCHA. Обновите страницу.","js_accept_agreement":"Вы должны принять соглашение!","js_enter_amount":"Пожалуйста, введите сумму.","js_enter_email":"Укажите ваш email","js_sending":"Отправка...","js_change_btn":"Изменить","js_try_again":"Произошла ошибка. Попробуйте снова.","js_send_email":"Отправить письмо","js_check_email":"Проверьте почту и перейдите по ссылке для подтверждения.","js_error_try_later":"Ошибка. Попробуйте позже.","js_checker_enter_proxy":"Введите прокси прежде чем начать проверку.","js_checker_bad_format":"Не верный формат у введеных прокси","js_checker_some_bad":"Некоторые прокси имеют не верный формат:","js_checker_limit":"Превышен лимит прокси для одновременной проверки.","js_checker_entered":"Введено:","js_checker_max":"Максимум:","js_checker_reduce":"Пожалуйста, уменьшите количество прокси.","js_checker_checking":"Проверяем...","js_checker_checked":"Проверено:","js_checker_working":"Работают:","js_checker_not_working":"Не работают:","js_checker_btn":"Проверить прокси","js_checker_no_results":"Нет результатов для скачивания","js_checker_no_display":"Нет результатов для отображения","js_checker_csv_header":"Прокси;Страна;Тип;Анонимность;Скорость;Статус","js_checker_no_type":"Нет","js_checker_anon_low":"Низкая","js_checker_anon_high":"Высокая","js_checker_anon_medium":"Средняя","js_checker_anon_unknown":"Неизвестно","js_qty_exceeds":"Выбранное количество превышает доступное, сейчас в наличии:","js_qty_pcs":"шт.","js_any_city":"Любой город","js_available":"Доступно:","js_pay_btn":"Оплатить","js_error_generic":"Ошибка! Что то пошло не так.","js_select_proxy_qty":"Выберите количество прокси","js_chart_earnings_label":"Заработок по месяцам (руб.)","js_chart_earnings_title":"Заработок по месяцам","js_chart_earnings_suffix":" руб.","js_chart_referrals_label":"Количество рефералов","js_chart_referrals_title":"Количество новых рефералов","js_chart_referrals_suffix":" чел.","js_chart_load_error":"Не удалось загрузить данные для графиков","js_chart_fetch_error":"Ошибка при получении данных от сайта","js_ticket_close_confirm":"Вы уверены, что хотите закрыть тикет?","js_ticket_fill_fields":"Пожалуйста, заполните все обязательные поля: Тема и Сообщение.","js_ticket_create_error":"Произошла ошибка при создании тикета. Попробуйте еще раз.","js_ticket_enter_message":"Пожалуйста, введите сообщение.","js_ticket_reply_error":"Произошла ошибка при отправке ответа. Попробуйте еще раз.","js_cannot_get_ip":"Невозможно получить ваш IP. Попробуйте перезагрузить страницу","js_ipv6_enter_valid_site":"Введите корректный адрес сайта!","js_ipv6_checking":"Проверяем адрес:","js_ipv6_supports":"поддерживает IPv6 протокол!","js_ipv6_invalid_site":"Ошибка, указан не корректный сайт!","js_ipv6_not_supports":"не поддерживает IPv6 протокол!","js_ipv6_check_error":"Произошла ошибка при проверке. Попробуйте позже.","js_scan_enter_ip_port":"Введите IP и порт.","js_scan_invalid_ip":"Некорректный IP-адрес.","js_scan_invalid_port":"Некорректный номер порта.","js_scan_port_open":"Порт открыт","js_scan_port_closed":"Порт закрыт","js_scan_request_error":"Произошла ошибка при выполнении запроса","js_bl_checking_ip":"Проверка вашего ip адреса","js_bl_total_checked":"Всего проверено:","js_bl_found":"Найден:","js_bl_not_found":"Не найден:","js_bl_table_name":"Название","js_bl_table_status":"Статус","js_bl_found_status":"Найден","js_bl_not_found_status":"Не найден","js_priv_no":"Нет","js_priv_yes":"Да","js_priv_matches":"Совпадает","js_fp_just_now":"только что","js_fp_mins_ago":"мин. назад","js_fp_hours_ago":"ч. назад","js_fp_days_ago":"дн. назад","js_currency_symbol":"₽","js_recaptcha_lang":"ru"};
+window.siteLang = 'ru';
+window.currencySymbol = '₽';
+window.currencyRate = 80.0;
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script defer src="/static/libs/swiper-bundle.min.js"></script>
+<!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script> -->
+<script defer src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script defer src="/static/js/main.js?v1.23"></script>
+<script defer src="/static/js/slider-common.js"></script>
+<script defer src="/static/libs/nouislider.min.js"></script>
+
+
+
+<script defer src="/static/js/freeproxy.js?v1.01"></script><script defer src="/static/js/slider.js?v1.14"></script>
+<!-- Chatra {literal} -->
+<script>
+    (function(d, w, c) {
+        w.ChatraID = '9e2PuQWfWdAWyGkhe';
+        var s = d.createElement('script');
+        w[c] = w[c] || function() {
+            (w[c].q = w[c].q || []).push(arguments);
+        };
+        s.async = true;
+        s.src = 'https://call.chatra.io/chatra.js';
+        if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+</script>
+<!-- /Chatra {/literal} -->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(98986105, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/98986105" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<input id="hiddenToken" type="hidden" name="xsrf" value="8789dd000b6dd92f60518a18998d3bf3">
+<input type="hidden" id="hiddenData">
+</body>
+</html>

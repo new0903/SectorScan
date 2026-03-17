@@ -1,0 +1,41 @@
+{"OperatorCode":"250001","Network":1,"CountAdded":0,"CountSectorsScaned":0,"CountSectors":1023,"Message":"загрузка прокси","isDone":false,"Timestamp":"2026-03-17T06:24:07.8421102Z"}
+
+{"OperatorCode":"250001","Network":1,"CountAdded":44431,"CountSectorsScaned":1265,"CountSectors":0,"Message":"сканирование станций завершено","isDone":true,"Timestamp":"2026-03-17T06:38:11.6736681Z"}
+
+
+  'https://localhost:61302/api/Stations/location/2/250002?latS=38&latE=81&lonS=20&lonE=170&useProxy=false'
+
+10*10=40/
+
+
+lat 50 lon 80
+
+lat 60 lon 121
+
+var eventSource = new EventSource('https://localhost:7040/api/Stations/2/250001?latS=41&latE=46&lonS=36&lonE=48'); 
+eventSource.onmessage = (event) => {
+ console.log( event.data);
+};
+var eventSource = new EventSource('https://localhost:7040/api/Stations');
+eventSource.onmessage = (event) => {
+    console.log( event.data);
+};
+
+Получены данные: ждем ответ, 14:46:34
+Получены данные: ждем ответ, 14:46:54
+Получены данные: ждем ответ, 14:47:14
+
+lons=74,60000000000002 lone=76,00000000000003 lons=33,599999999999994 lone=34,99999999999999, 15:02:08
+
+
+
+SyncStationsAllAsync -- глобальный поиск (авто координаты, все операторы, все типы сетей)
+
+ -- глобальный поиск по оператору (авто координаты, указываем оператора, массив(типы искомых сетей))
+
+ -- поиск по оператору (Пользовательские координаты, указываем оператора, массив(типы искомых сетей))
+
+ -- сканировать координаты по сетке (Пользовательские координаты, указываем оператора, массив(типы искомых сетей))
+
+
+

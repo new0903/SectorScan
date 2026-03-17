@@ -1,0 +1,14 @@
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\bin\Debug\net8.0\ConsoleAppMapGrid.exe
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\bin\Debug\net8.0\ConsoleAppMapGrid.deps.json
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\bin\Debug\net8.0\ConsoleAppMapGrid.runtimeconfig.json
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\bin\Debug\net8.0\ConsoleAppMapGrid.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\bin\Debug\net8.0\ConsoleAppMapGrid.pdb
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ConsoleAppMapGrid.GeneratedMSBuildEditorConfig.editorconfig
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ConsoleAppMapGrid.AssemblyInfoInputs.cache
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ConsoleAppMapGrid.AssemblyInfo.cs
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ConsoleAppMapGrid.csproj.CoreCompileInputs.cache
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ConsoleAppMapGrid.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\refint\ConsoleAppMapGrid.dll
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ConsoleAppMapGrid.pdb
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ConsoleAppMapGrid.genruntimeconfig.cache
+D:\VS2010Test\техноком\WebAppCellMapper\ConsoleAppMapGrid\obj\Debug\net8.0\ref\ConsoleAppMapGrid.dll

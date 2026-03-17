@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "jWKqIHJMcxY=",
+  "success": true,
+  "projectFilePath": "D:\\VS2010Test\\техноком\\WebAppCellMapper\\ConsoleAppProxys\\ConsoleAppProxys.csproj",
+  "expectedPackageFiles": [
+    "C:\\NugetPackages\\htmlagilitypack\\1.12.4\\htmlagilitypack.1.12.4.nupkg.sha512"
+  ],
+  "logs": []
+}
