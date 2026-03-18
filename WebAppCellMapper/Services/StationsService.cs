@@ -102,7 +102,7 @@ namespace WebAppCellMapper.Services
 
 
 
-            while (coordinates.Count>0 || !ct.IsCancellationRequested)
+            while (coordinates.Count>0 && !ct.IsCancellationRequested)
             {
 
                 {

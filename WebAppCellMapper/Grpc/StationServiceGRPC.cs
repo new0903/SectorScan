@@ -32,6 +32,7 @@ namespace WebAppCellMapper.Grpc
                         Network = NSEnumerator.ToGrpcEnum(item.Network),
                         OperatorCode = item.OperatorCode,
                         Timestamp = item.Timestamp.ToString(),
+                        IsDone = item.isDone,
                     };
                     await responseStream.WriteAsync(response, context.CancellationToken);
                     if (item.isDone)
@@ -66,6 +67,7 @@ namespace WebAppCellMapper.Grpc
                         Network = NSEnumerator.ToGrpcEnum(item.Network),
                         OperatorCode = item.OperatorCode,
                         Timestamp = item.Timestamp.ToString(),
+                        IsDone = item.isDone,
                     };
                     await responseStream.WriteAsync(response, context.CancellationToken);
                     if (item.isDone)
@@ -106,10 +108,12 @@ namespace WebAppCellMapper.Grpc
                         Network = NSEnumerator.ToGrpcEnum(item.Network),
                         OperatorCode = item.OperatorCode,
                         Timestamp = item.Timestamp.ToString(),
+                        IsDone=item.isDone,
                     };
                     await responseStream.WriteAsync(response,context.CancellationToken);
                     if (item.isDone)
                     {
+                        logger.LogInformation("scanned over");
                         return;  // Выходим из цикла
                     }
                 }
@@ -138,6 +142,7 @@ namespace WebAppCellMapper.Grpc
                     Network = NSEnumerator.ToGrpcEnum(item.Network),
                     OperatorCode = item.OperatorCode,
                     Timestamp = item.Timestamp.ToString(),
+                    IsDone = item.isDone,
                 };
                 return response;
             }

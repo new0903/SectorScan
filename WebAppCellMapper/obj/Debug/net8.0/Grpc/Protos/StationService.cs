@@ -34,19 +34,20 @@ namespace WebAppCellMapper {
             "ZXAYBCABKAEiiQEKGFJlcXVlc3RQYXJhbXNGb3JMb2NhdGlvbhIlCgduZXR3",
             "b3JrGAEgASgOMhQuTmV0d29ya1N0YW5kYXJkR1JQQxIUCgxvcGVyYXRvckNv",
             "ZGUYAiABKAkSHgoLY29vcmRpbmF0ZXMYAyABKAsyCS5Mb2NhdGlvbhIQCgh1",
-            "c2VQcm94eRgEIAEoCCKzAQoPUmVxdWVzdFJlc3BvbnNlEhQKDG9wZXJhdG9y",
+            "c2VQcm94eRgEIAEoCCLDAQoPUmVxdWVzdFJlc3BvbnNlEhQKDG9wZXJhdG9y",
             "Q29kZRgBIAEoCRIlCgduZXR3b3JrGAIgASgOMhQuTmV0d29ya1N0YW5kYXJk",
             "R1JQQxISCgpjb3VudEFkZGVkGAMgASgFEhUKDXNjYW5uZWRTZWN0b3IYBCAB",
             "KAUSFAoMY291bnRTZWN0b3JzGAUgASgFEg8KB21lc3NhZ2UYBiABKAkSEQoJ",
-            "dGltZXN0YW1wGAcgASgJIgcKBUVtcHR5KjoKE05ldHdvcmtTdGFuZGFyZEdS",
-            "UEMSBwoDR3NtEAASCQoFV2NkbWEQARIHCgNMdGUQAhIGCgJOchADMpYCChJT",
-            "dGF0aW9uU2VydmljZUdycGMSMwoVU3luY1N0YXRpb25zQWxsU3RyZWFtEgYu",
-            "RW1wdHkaEC5SZXF1ZXN0UmVzcG9uc2UwARJHChZTZWFyY2hCeU9wZXJhdG9y",
-            "U3RyZWFtEhkuUmVxdWVzdFBhcmFtc0Zvck9wZXJhdG9yGhAuUmVxdWVzdFJl",
-            "c3BvbnNlMAESOwoOU2NhbkFyZWFTdHJlYW0SFS5SZXF1ZXN0UGFyYW1zRm9y",
-            "QXJlYRoQLlJlcXVlc3RSZXNwb25zZTABEkUKFlNlYXJjaEF0TG9jYXRpb25T",
-            "dHJlYW0SGS5SZXF1ZXN0UGFyYW1zRm9yTG9jYXRpb24aEC5SZXF1ZXN0UmVz",
-            "cG9uc2VCE6oCEFdlYkFwcENlbGxNYXBwZXJiBnByb3RvMw=="));
+            "dGltZXN0YW1wGAcgASgJEg4KBmlzRG9uZRgIIAEoCCIHCgVFbXB0eSo6ChNO",
+            "ZXR3b3JrU3RhbmRhcmRHUlBDEgcKA0dzbRAAEgkKBVdjZG1hEAESBwoDTHRl",
+            "EAISBgoCTnIQAzKWAgoSU3RhdGlvblNlcnZpY2VHcnBjEjMKFVN5bmNTdGF0",
+            "aW9uc0FsbFN0cmVhbRIGLkVtcHR5GhAuUmVxdWVzdFJlc3BvbnNlMAESRwoW",
+            "U2VhcmNoQnlPcGVyYXRvclN0cmVhbRIZLlJlcXVlc3RQYXJhbXNGb3JPcGVy",
+            "YXRvchoQLlJlcXVlc3RSZXNwb25zZTABEjsKDlNjYW5BcmVhU3RyZWFtEhUu",
+            "UmVxdWVzdFBhcmFtc0ZvckFyZWEaEC5SZXF1ZXN0UmVzcG9uc2UwARJFChZT",
+            "ZWFyY2hBdExvY2F0aW9uU3RyZWFtEhkuUmVxdWVzdFBhcmFtc0ZvckxvY2F0",
+            "aW9uGhAuUmVxdWVzdFJlc3BvbnNlQhOqAhBXZWJBcHBDZWxsTWFwcGVyYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::WebAppCellMapper.NetworkStandardGRPC), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -54,7 +55,7 @@ namespace WebAppCellMapper {
             new pbr::GeneratedClrTypeInfo(typeof(global::WebAppCellMapper.RequestParamsForOperator), global::WebAppCellMapper.RequestParamsForOperator.Parser, new[]{ "Network", "OperatorCode" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::WebAppCellMapper.RequestParamsForArea), global::WebAppCellMapper.RequestParamsForArea.Parser, new[]{ "Network", "OperatorCode", "Coordinates", "Step" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::WebAppCellMapper.RequestParamsForLocation), global::WebAppCellMapper.RequestParamsForLocation.Parser, new[]{ "Network", "OperatorCode", "Coordinates", "UseProxy" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::WebAppCellMapper.RequestResponse), global::WebAppCellMapper.RequestResponse.Parser, new[]{ "OperatorCode", "Network", "CountAdded", "ScannedSector", "CountSectors", "Message", "Timestamp" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::WebAppCellMapper.RequestResponse), global::WebAppCellMapper.RequestResponse.Parser, new[]{ "OperatorCode", "Network", "CountAdded", "ScannedSector", "CountSectors", "Message", "Timestamp", "IsDone" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::WebAppCellMapper.Empty), global::WebAppCellMapper.Empty.Parser, null, null, null, null, null)
           }));
     }
@@ -1306,6 +1307,7 @@ namespace WebAppCellMapper {
       countSectors_ = other.countSectors_;
       message_ = other.message_;
       timestamp_ = other.timestamp_;
+      isDone_ = other.isDone_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1399,6 +1401,18 @@ namespace WebAppCellMapper {
       }
     }
 
+    /// <summary>Field number for the "isDone" field.</summary>
+    public const int IsDoneFieldNumber = 8;
+    private bool isDone_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsDone {
+      get { return isDone_; }
+      set {
+        isDone_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1421,6 +1435,7 @@ namespace WebAppCellMapper {
       if (CountSectors != other.CountSectors) return false;
       if (Message != other.Message) return false;
       if (Timestamp != other.Timestamp) return false;
+      if (IsDone != other.IsDone) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1435,6 +1450,7 @@ namespace WebAppCellMapper {
       if (CountSectors != 0) hash ^= CountSectors.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (Timestamp.Length != 0) hash ^= Timestamp.GetHashCode();
+      if (IsDone != false) hash ^= IsDone.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1481,6 +1497,10 @@ namespace WebAppCellMapper {
         output.WriteRawTag(58);
         output.WriteString(Timestamp);
       }
+      if (IsDone != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(IsDone);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1519,6 +1539,10 @@ namespace WebAppCellMapper {
         output.WriteRawTag(58);
         output.WriteString(Timestamp);
       }
+      if (IsDone != false) {
+        output.WriteRawTag(64);
+        output.WriteBool(IsDone);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1549,6 +1573,9 @@ namespace WebAppCellMapper {
       }
       if (Timestamp.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Timestamp);
+      }
+      if (IsDone != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1582,6 +1609,9 @@ namespace WebAppCellMapper {
       }
       if (other.Timestamp.Length != 0) {
         Timestamp = other.Timestamp;
+      }
+      if (other.IsDone != false) {
+        IsDone = other.IsDone;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1630,6 +1660,10 @@ namespace WebAppCellMapper {
             Timestamp = input.ReadString();
             break;
           }
+          case 64: {
+            IsDone = input.ReadBool();
+            break;
+          }
         }
       }
     #endif
@@ -1675,6 +1709,10 @@ namespace WebAppCellMapper {
           }
           case 58: {
             Timestamp = input.ReadString();
+            break;
+          }
+          case 64: {
+            IsDone = input.ReadBool();
             break;
           }
         }
