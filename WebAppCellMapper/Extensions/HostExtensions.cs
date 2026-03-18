@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Google.Protobuf.WellKnownTypes;
+using Microsoft.EntityFrameworkCore;
 using WebAppCellMapper.Data;
+using WebAppCellMapper.Grpc;
 using WebAppCellMapper.Services;
 
 namespace WebAppCellMapper.Extensions
@@ -7,8 +9,15 @@ namespace WebAppCellMapper.Extensions
     public static class HostExtensions
     {
 
+        public static void AddGrpc(this WebApplication app)
+        {
 
-        public static void MigrateDB(this IHost host)
+            // Configure the HTTP request pipeline.
+            app.MapGrpcService<StationGRPCService>();
+            app.MapGrpcService<OperatorGrpcService>();
+        }
+
+        public static void MigrateDB(this WebApplication host)
         {
             using (var serviceScope = host.Services.GetService<IServiceScopeFactory>()?.CreateScope())
             {
@@ -24,7 +33,7 @@ namespace WebAppCellMapper.Extensions
                 }
             }
         }
-        public static void SeedData(this IHost host)
+        public static void SeedData(this WebApplication host)
         {
             using (var serviceScope = host.Services.GetService<IServiceScopeFactory>()?.CreateScope())
             {

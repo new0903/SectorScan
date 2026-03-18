@@ -14,7 +14,6 @@
           "Grpc.AspNetCore.Server": "2.76.0",
           "Grpc.Core": "2.46.6",
           "Grpc.Tools": "2.78.0",
-          "HtmlAgilityPack": "1.12.4",
           "Microsoft.EntityFrameworkCore": "8.0.25",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.25",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.22.1",
@@ -224,14 +223,6 @@
         }
       },
       "Grpc.Tools/2.78.0": {},
-      "HtmlAgilityPack/1.12.4": {
-        "runtime": {
-          "lib/net7.0/HtmlAgilityPack.dll": {
-            "assemblyVersion": "1.12.4.0",
-            "fileVersion": "1.12.4.0"
-          }
-        }
-      },
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -1463,13 +1454,6 @@
       "sha512": "sha512-6jPG2gHon+w2PczW8jjrCRnW/g9eEfCdd7aK6mDooptWtuPsV3ZxAwKKEx7LGEDVoT4c2SViRl8Yu3L1XiWIIg==",
       "path": "grpc.tools/2.78.0",
       "hashPath": "grpc.tools.2.78.0.nupkg.sha512"
-    },
-    "HtmlAgilityPack/1.12.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ljqvBabvFwKoLniuoQKO8b5bJfJweKLs4fUNS/V5dsvpo0A8MlJqxxn9XVmP2DaskbUXty6IYaWAi1SArGIMeQ==",
-      "path": "htmlagilitypack/1.12.4",
-      "hashPath": "htmlagilitypack.1.12.4.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",

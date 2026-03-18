@@ -78,10 +78,6 @@
               "target": "Package",
               "version": "[2.78.0, )"
             },
-            "HtmlAgilityPack": {
-              "target": "Package",
-              "version": "[1.12.4, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.25, )"

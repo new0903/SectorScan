@@ -8,7 +8,6 @@ D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\WebAppCellMapper.exe
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\WebAppCellMapper.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Google.Protobuf.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Grpc.Core.Api.dll
-D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\HtmlAgilityPack.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.Extensions.Options.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.EntityFrameworkCore.dll

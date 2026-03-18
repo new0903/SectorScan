@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Net;
 using System.Reflection;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Options;
@@ -20,10 +21,11 @@ namespace WebAppCellMapper.Extensions
 
             return services;
         }
-
+       
         public static IServiceCollection IncludeServices(this IServiceCollection services)
         {
 
+            //.ConfigurePrimaryHttpMessageHandler<HttpClientHandler>()
             services.AddSingleton<GeoBoundsService>();
             services.AddSingleton<ProxyService>();
             services.AddScoped<StationsService>();

@@ -40,14 +40,9 @@ namespace WebAppCellMapper {
             "KAUSFAoMY291bnRTZWN0b3JzGAUgASgFEg8KB21lc3NhZ2UYBiABKAkSEQoJ",
             "dGltZXN0YW1wGAcgASgJEg4KBmlzRG9uZRgIIAEoCCIHCgVFbXB0eSo6ChNO",
             "ZXR3b3JrU3RhbmRhcmRHUlBDEgcKA0dzbRAAEgkKBVdjZG1hEAESBwoDTHRl",
-            "EAISBgoCTnIQAzKWAgoSU3RhdGlvblNlcnZpY2VHcnBjEjMKFVN5bmNTdGF0",
-            "aW9uc0FsbFN0cmVhbRIGLkVtcHR5GhAuUmVxdWVzdFJlc3BvbnNlMAESRwoW",
-            "U2VhcmNoQnlPcGVyYXRvclN0cmVhbRIZLlJlcXVlc3RQYXJhbXNGb3JPcGVy",
-            "YXRvchoQLlJlcXVlc3RSZXNwb25zZTABEjsKDlNjYW5BcmVhU3RyZWFtEhUu",
-            "UmVxdWVzdFBhcmFtc0ZvckFyZWEaEC5SZXF1ZXN0UmVzcG9uc2UwARJFChZT",
-            "ZWFyY2hBdExvY2F0aW9uU3RyZWFtEhkuUmVxdWVzdFBhcmFtc0ZvckxvY2F0",
-            "aW9uGhAuUmVxdWVzdFJlc3BvbnNlQhOqAhBXZWJBcHBDZWxsTWFwcGVyYgZw",
-            "cm90bzM="));
+            "EAISBgoCTnIQAzJRChJTdGF0aW9uU2VydmljZUdycGMSOwoOU2NhbkFyZWFT",
+            "dHJlYW0SFS5SZXF1ZXN0UGFyYW1zRm9yQXJlYRoQLlJlcXVlc3RSZXNwb25z",
+            "ZTABQhOqAhBXZWJBcHBDZWxsTWFwcGVyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::WebAppCellMapper.NetworkStandardGRPC), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -1253,18 +1248,6 @@ namespace WebAppCellMapper {
 
   }
 
-  /// <summary>
-  ///
-  ///public record QueryResult(
-  ///string OperatorCode,
-  ///NetworkStandard Network,
-  ///int CountAdded,
-  ///int CountSectors,
-  ///string Message) 
-  ///{
-  ///public DateTime Timestamp { get; init; } = DateTime.UtcNow;
-  ///}
-  /// </summary>
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class RequestResponse : pb::IMessage<RequestResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE

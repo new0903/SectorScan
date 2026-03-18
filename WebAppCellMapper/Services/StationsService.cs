@@ -1,20 +1,10 @@
-﻿using Azure.Core;
+﻿
 using EFCore.BulkExtensions;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Services;
-using NetTopologySuite.Geometries;
-using Newtonsoft;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
@@ -32,20 +22,25 @@ namespace WebAppCellMapper.Services
     {
         private readonly AppDBContext context;
         private readonly GeoBoundsService boundsService;
-        private readonly ProxyService proxyService;
+       private readonly ProxyService proxyService;
+        private readonly IHttpClientFactory clientFactory;
         private readonly ILogger<StationsService> logger;
 
         //private ConcurrentDictionary<Guid, Task> requests = new ConcurrentDictionary<Guid, Task>();
 
         private int scannedStations=0;
         private int scannedSector = 0;
+
+
+
         private HashSet<long> idsStations;
         private List<Station> stationsList;
       //  private Stream? responseStream;// совершенно забыл про grpc 
         private ConcurrentQueue<SquareSearch>? coordinates;
 
-        public StationsService(AppDBContext context, GeoBoundsService boundsService,ProxyService proxyService, ILogger<StationsService> logger) 
+        public StationsService(AppDBContext context, GeoBoundsService boundsService, ProxyService proxyService, ILogger<StationsService> logger)
         {
+
             this.context = context;
             this.boundsService = boundsService;
             this.proxyService = proxyService;
@@ -54,32 +49,6 @@ namespace WebAppCellMapper.Services
             idsStations = new HashSet<long>();
 
         }
-
-
-
-
-        ///// <summary>
-        ///// Пишем ответ клиенту
-        ///// </summary>
-        ///// <remarks>
-        ///// Этот метод для эндпоинта SSE формата
-        ///// метод записывает в поток json, если поток существует
-        ///// </remarks>
-        //private async Task WriteResponse(string json)
-        //{
-        //    var message = $"data: {json}, {DateTime.Now:T}\n\n";
-        //    //    var bytes = Encoding.UTF8.GetBytes(message);
-
-        //    //    // Используем Response.Body.WriteAsync
-        //    //    await Response.Body.WriteAsync(bytes, 0, bytes.Length);
-        //    //    await Response.Body.FlushAsync(); // Важно: сбрасываем буфер
-        //    if (responseStream == null) return;
-
-        //    var bytes = Encoding.UTF8.GetBytes(message);
-        //    await responseStream.WriteAsync(bytes, 0, bytes.Length);
-        //    await responseStream.FlushAsync();
-        //}
-
 
         /// <summary>
         /// Поиск станций в секторах
@@ -102,7 +71,7 @@ namespace WebAppCellMapper.Services
 
 
 
-            while (coordinates.Count>0 && !ct.IsCancellationRequested)
+            while (!coordinates.IsEmpty && !ct.IsCancellationRequested)
             {
 
                 {
@@ -110,36 +79,30 @@ namespace WebAppCellMapper.Services
                    yield return res;
                    // await WriteResponse(JsonConvert.SerializeObject(res));
                 }
-                var proxies =await proxyService.GetProxies();
-
+                //var proxies =await proxyService.GetProxies();
                 var requests = new List<Task>();
 
-                foreach (var proxy in proxies)
+                using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(30)))
                 {
-                    if (requests.Count<150)//лимит
-                    {
-                        if (coordinates.TryDequeue(out var square))
-                        {
-                            //await WriteResponse($"отправляем запрос прокси {proxy.url}, сканируемый сектор lons={square.latStart} lone={square.latEnd} lons={square.lonStart} lone={square.lonEnd}");
-                            CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(30));
-                            var task = RequetsStations(proxy.url, op, ns, square, true, cancellationToken.Token);
-                            requests.Add(task);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
+                    int counter= coordinates.Count>100?100: coordinates.Count;
 
-                        break;
-                    }
+                       for (int i = 0; i < 100; i++)
+                       {
+                            if (coordinates.TryDequeue(out var square))
+                            {
+                                var task = RequestStations(op, ns, square, true, cancellationToken.Token);
+                                requests.Add(task);
+
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
                     
 
+                    await Task.WhenAll(requests);
                 }
-                await Task.WhenAll(requests);
-
                 {
                     QueryResult res = new QueryResult(op.Code, ns, scannedStations, scannedSector, coordinates.Count, "сохроняю в бд");
                   //  await WriteResponse(JsonConvert.SerializeObject(res));
@@ -162,35 +125,45 @@ namespace WebAppCellMapper.Services
 
         }
 
+
+
+
         /// <summary>
         /// Http Запрос 
         /// </summary>
         /// <remarks>
         /// Этот метод делает запросы, записывает результаты запроса в коллекции и если запрос не удачный возвращает сектор обратно в очередь
         /// </remarks>
-        private async Task<bool> RequetsStations( string proxyAddress, OperatorDTO op, NetworkStandard ns, SquareSearch sector,bool useP=true, CancellationToken ct=default)
+        private async Task<bool> RequestStations( OperatorDTO op, NetworkStandard ns, SquareSearch sector,bool useP=true, CancellationToken ct=default)
         {
+         
 
             try
             {
-                var handler = new HttpClientHandler();
-                if (useP)
+
+                var proxy=await proxyService.GetProxy();
+                if (proxy == null)
                 {
-                    var proxy = new WebProxy(proxyAddress);
-                    handler.Proxy=proxy;
-                    handler.UseProxy = useP;
+                    if (coordinates != null) coordinates.Enqueue(sector);
+                    return false;
                 }
+                using var handler = new HttpClientHandler()
+                {
+                    Proxy=new WebProxy(proxy.url),
+                    UseProxy= true
+                };
                 using HttpClient client = new HttpClient(handler);
-                // чтобы имитировать браузер 
+                client.BaseAddress =new Uri("https://4cells.ru:4444/");
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
 
 
                 string paramsUrl = $"latStart={sector.latStart.ToString().Replace(",",".")}&latEnd={sector.latEnd.ToString().Replace(",", ".")}&lonStart={sector.lonStart.ToString().Replace(",", ".")}&lonEnd={sector.lonEnd.ToString().Replace(",", ".")}";
 
-                //  var res = await client.GetAsync("https://4cells.ru:4444/api/map/enb/lte/250099?latStart=32.99023555965106&latEnd=75.6504309974655&lonStart=18.720703125000004&lonEnd=162.77343750000003", ct);
-                var res = await client.GetAsync($"https://4cells.ru:4444/api/map/enb/{ns.ToString().ToLower()}/{op.Code}?{paramsUrl}", ct);
+
+                var res = await client.GetAsync($"/api/map/enb/{ns.ToString().ToLower()}/{op.Code}?{paramsUrl}", ct);//https://4cells.ru:4444/
                 if (res.IsSuccessStatusCode)
                 {
+                    proxyService.ReleaseProxy(proxy);
                     string content = await res.Content.ReadAsStringAsync(ct);
                     var stations = JsonConvert.DeserializeObject<List<Station>>(content);
                     if (stations == null) return false;
@@ -200,11 +173,13 @@ namespace WebAppCellMapper.Services
                         if (idsStations.Add(item.Id))
                         {
                             stationsList.Add(item);
-                            scannedStations++;
+                            Interlocked.Increment(ref scannedStations);
+                            //scannedStations++;
                         }
 
                     }
-                    scannedSector++;
+                    Interlocked.Increment(ref scannedSector);
+                 //   scannedSector++;
                     /*детальное сканирование сектора если там выдало много станций
                      например сканируем город, там может быть очень много станций*/
                     if (stations.Count>=300&& coordinates!=null)
@@ -221,30 +196,31 @@ namespace WebAppCellMapper.Services
                 }
                 else
                 {
-                    proxyService.DeleteProxy(proxyAddress);
+                 //   proxyService.DeleteProxy(proxyAddress);
                     if (coordinates!=null) coordinates.Enqueue(sector);
 
                     logger.LogError("failed request");
-                    return false;
                 }
 
             }
             catch (OperationCanceledException)
             {
-                proxyService.DeleteProxy(proxyAddress);
+               // proxyService.DeleteProxy(proxyAddress);
                 if (coordinates != null) coordinates.Enqueue(sector);
                 logger.LogError("OperationCanceledException");
-                return false;
             }
             catch (Exception ex)
             {
-                proxyService.DeleteProxy(proxyAddress);
+             //   proxyService.DeleteProxy(proxyAddress);
                 if (coordinates != null) coordinates.Enqueue(sector);
                 logger.LogError($"Exception\nmessage error: {ex.Message}");
-                return false;
 
 
             }
+            
+
+            return false;
+          
         }
        
         /// <summary>
@@ -265,116 +241,13 @@ namespace WebAppCellMapper.Services
                 }
                 await context.BulkInsertOrUpdateAsync(stationsList);
                 logger.LogInformation($"добавлено станций {stationsList.Count}");
-                idsStations.Clear();
+              //  idsStations.Clear();
                 stationsList.Clear();
 
             }
         }
 
 
-
-
-
-        // old
-        // public async IAsyncEnumerable<QueryResult> SyncStationsAllAsync(Stream httpStream, [EnumeratorCancellation] CancellationToken ct = default)
-        /// <summary>
-        /// Поиск всех станций, по всем операторам и сетям
-        /// </summary>
-        /// <remarks>
-        /// Этот метод для эндпоинта SSE формата
-        /// метод выполняется очень долго, поэтому я решил что лучше будет использовать SSE 
-        /// что бы отслеживать прогресс загрузки станций в бд
-        /// для тестирования в консоль бразуера вставить вот это js код
-        /// var eventSource = new EventSource('https://localhost:7040/api/Stations');
-        /// eventSource.onmessage = (event) => {
-        /// console.log( event.data);
-        /// if (event.data.includes('[DONE]')) {
-        /// eventSource.close()
-        /// }
-        /// };
-        /// eventSource.onerror = (error) => {
-        ///     console.error('EventSource error:', error);
-        ///     eventSource.close()
-        /// };
-        /// можно и fetch использовать
-        /// </remarks>
-        public async IAsyncEnumerable<QueryResult> SyncStationsAllAsync( [EnumeratorCancellation] CancellationToken ct = default)
-        {
-            //responseStream = httpStream;
-           // await WriteResponse("получаем операторов из бд");
-            var operators = await context.operators.
-                AsNoTracking().
-                Select(o => new OperatorDTO(o.Id, o.InternalCode)).
-                ToListAsync();
-
-            foreach (var op in operators)//операторы
-            {
-                foreach (var network in NSEnumerator.GetNetwork)//тип сети
-                {
-                    //await WriteResponse($"сканируем сеть {network.ToString()}, оператор {op.Code}");
-                   // await RunSearch(op, network, ct);
-                    await foreach (var item in RunSearch(op, network, ct))
-                    {
-                        yield return item;
-                        if (item.isDone)
-                        {
-                            yield break;
-                        }
-                    }
-                }
-            }
-        }
-
-
-        //old
-        // public async IAsyncEnumerable<QueryResult> SearchByOperatorAsync(Stream httpStream,string operatorCode, NetworkStandard network, [EnumeratorCancellation] CancellationToken ct = default)
-        /// <summary>
-        /// Поиск всех станций, по оператору и выбраному типу сети
-        /// </summary>
-        /// <remarks>
-        /// Этот метод для эндпоинта SSE формата
-        /// метод выполняется долго(5-10 минут), поэтому я решил что лучше будет использовать SSE 
-        /// что бы отслеживать прогресс загрузки станций
-        /// для тестирования в консоль бразуера вставить вот это js код
-        /// var eventSource = new EventSource('https://localhost:7040/api/Stations/lte/250001');
-        /// eventSource.onmessage = (event) => {
-        /// console.log( event.data);
-        /// if (event.data.includes('[DONE]')) {
-        /// eventSource.close()
-        /// }
-        /// };
-        /// eventSource.onerror = (error) => {
-        ///     console.error('EventSource error:', error);
-        ///     eventSource.close()
-        /// };
-        /// </remarks>
-        public async IAsyncEnumerable<QueryResult> SearchByOperatorAsync(string operatorCode, NetworkStandard network, [EnumeratorCancellation] CancellationToken ct = default)
-        {
-
-            //logger.LogInformation($" SearchByOperatorAsync start");
-            // responseStream = httpStream;
-            var op = await context.operators.
-               AsNoTracking().
-               Where(o=>o.InternalCode== operatorCode)
-               .Select(o => new OperatorDTO(o.Id, o.InternalCode))
-               .FirstOrDefaultAsync();
-            if (op != null)
-            {
-                await foreach (var item in RunSearch(op, network, ct))
-                {
-                    yield return item;
-                    if (item.isDone)
-                    {
-                        logger.LogInformation($" SearchByOperatorAsync isDone");
-                        yield break;
-                    }
-                }
-            }
-            //logger.LogInformation($" over start");
-
-            //RunSearch(op, network, ct);
-
-        }
 
         //old
         // public async IAsyncEnumerable<QueryResult> ScanAreaAsync(Stream httpStream, string operatorCode, NetworkStandard network, double latS, double latE, double lonS, double lonE,double step = GeoBoundsService.EFFECTIVE_STEP, [EnumeratorCancellation] CancellationToken ct=default)
@@ -426,54 +299,11 @@ namespace WebAppCellMapper.Services
                         yield break;
                     }
                 }
+                idsStations.Clear();
             }
             //logger.LogInformation($" ScanAreaAsync over");
 
 
-        }
-
-        /// <summary>
-        /// Поиск всех станций, по оператору, выбраному типу сети и указной области
-        /// </summary>
-        /// <remarks>
-        /// Создается простой запрос, который получает координаты с целевого сайта. 
-        /// Можно использовать прокси, если получен временный бан(429) по ip
-        /// </remarks>
-        public async Task<QueryResult> SearchAtLocationAsync(double latS, double latE, double lonS, double lonE, string operatorCode, NetworkStandard network,bool useProxy=false,CancellationToken ct=default)
-        {
-            var op = await context.operators.
-               AsNoTracking().
-               Where(o => o.InternalCode == operatorCode)
-               .Select(o => new OperatorDTO(o.Id, o.InternalCode))
-               .FirstOrDefaultAsync();
-            if (op == null) return null;
-            var sector = new SquareSearch(latS, latE, lonS, lonE);
-         
-            if (useProxy)
-            {
-                var proxies = await proxyService.GetProxies();
-                bool resRequst = false;
-                while (!resRequst)
-                {
-                    var proxy = proxies.FirstOrDefault();
-                    if (proxy == null) continue;
-                     resRequst=await RequetsStations(proxy.url, op, network, sector, useProxy, ct);
-                    if (!resRequst) proxyService.DeleteProxy(proxy.url);
-
-                }
-            }
-            else
-            {
-                await RequetsStations(string.Empty, op, network, sector, useProxy, ct);
-
-            }
-
-
-
-            QueryResult res = new QueryResult(op.Code, network, scannedStations, scannedSector, coordinates==null?0:coordinates.Count, string.Empty);
-            await BulkSyncStationsAsync(op, network, ct);
-
-            return res;
         }
 
     }

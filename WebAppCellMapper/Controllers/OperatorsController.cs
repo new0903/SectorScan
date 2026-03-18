@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using WebAppCellMapper.Data;
 using WebAppCellMapper.Services;
 
 namespace WebAppCellMapper.Controllers

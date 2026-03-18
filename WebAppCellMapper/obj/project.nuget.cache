@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lp8V+l3i+LA=",
+  "dgSpecHash": "IIP71h/XsVk=",
   "success": true,
   "projectFilePath": "D:\\VS2010Test\\техноком\\WebAppCellMapper\\WebAppCellMapper\\WebAppCellMapper.csproj",
   "expectedPackageFiles": [
@@ -19,7 +19,6 @@
     "C:\\NugetPackages\\grpc.core.api\\2.76.0\\grpc.core.api.2.76.0.nupkg.sha512",
     "C:\\NugetPackages\\grpc.net.common\\2.76.0\\grpc.net.common.2.76.0.nupkg.sha512",
     "C:\\NugetPackages\\grpc.tools\\2.78.0\\grpc.tools.2.78.0.nupkg.sha512",
-    "C:\\NugetPackages\\htmlagilitypack\\1.12.4\\htmlagilitypack.1.12.4.nupkg.sha512",
     "C:\\NugetPackages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\NugetPackages\\medalliontopologicalsort\\1.0.0\\medalliontopologicalsort.1.0.0.nupkg.sha512",
     "C:\\NugetPackages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

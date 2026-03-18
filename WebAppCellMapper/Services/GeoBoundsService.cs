@@ -6,17 +6,17 @@ namespace WebAppCellMapper.Services
     public class GeoBoundsService
     {
         //широта север юг
-        public const double MIN_LAT = 41.0;
+        public const double MIN_LAT = 38.0;
         public const double MAX_LAT = 82.0;
 
         //долгота запад-восток
-        //const double MIN_LON = 19.0;
-        public const double MIN_LON = 28.0;
-        public const double MAX_LON = 75.0;// берем только западную часть
-        //   const double MAX_LON = 180.0;
+        const double MIN_LON = 19.0;
+      //  public const double MIN_LON = 28.0;
+       // public const double MAX_LON = 75.0;// берем только западную часть
+           const double MAX_LON = 180.0;
 
         // Размер квадрата 
-        public const double EFFECTIVE_STEP = 1.4;
+        public const double EFFECTIVE_STEP = 1.8;
 
 
         /*

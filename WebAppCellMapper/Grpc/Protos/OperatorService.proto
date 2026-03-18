@@ -1,0 +1,41 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "WebAppCellMapper";
+
+/*
+
+    public class Operator
+    {
+        [JsonIgnore]
+        public long Id { get; set; }
+        [JsonProperty("internalCode")]
+        public string InternalCode { get; set; }//в url вставлять
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("visibleCode")]
+        public string VisibleCode { get; set; }
+   
+    }
+*/
+
+
+message OperatorResponse{
+	int64 Id=1;
+	string InternalCode=2;
+	string Name=3;
+	string VisibleCode=4;
+
+}
+
+message OperatorsResponse{
+    repeated OperatorResponse data=1;
+}
+
+message EmptyRequest{}
+
+service OperatorServiceGrpc {
+  rpc GetOperators(EmptyRequest) returns (OperatorsResponse);
+}
+
+
+

@@ -12,6 +12,8 @@ namespace WebAppCellMapper
 
             // Add services to the container.
             builder.Services.AddGrpc();
+
+
             builder.Services.AddOptionsSetups()
                 .InitDBContext()
                 .IncludeServices();
@@ -37,9 +39,7 @@ namespace WebAppCellMapper
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-            // Configure the HTTP request pipeline.
-            app.MapGrpcService<StationServiceGRPC>();
-
+            app.AddGrpc();
             app.MapControllers();
             app.MigrateDB();
             app.SeedData();

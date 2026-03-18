@@ -18,16 +18,6 @@ message Location{
     double lonE=4;
 }
 
-/*
-message RequestParams {
-    NetworkStandardGRPC network=1;
-    string operatorCode = 2;
-    Location coordinates=3;
-    bool useProxy=4;
-}
-*/
-
-
 message RequestParamsForOperator {
     NetworkStandardGRPC network=1;
     string operatorCode = 2;
@@ -40,7 +30,6 @@ message RequestParamsForArea {
     double step=4;
 }
 
-
 message RequestParamsForLocation {
     NetworkStandardGRPC network=1;
     string operatorCode = 2;
@@ -48,19 +37,6 @@ message RequestParamsForLocation {
     bool useProxy=4;
 }
 
-
-
-/*
-    public record QueryResult(
-        string OperatorCode,
-        NetworkStandard Network,
-        int CountAdded,
-        int CountSectors,
-        string Message) 
-    {
-        public DateTime Timestamp { get; init; } = DateTime.UtcNow;
-    }
-*/
 message RequestResponse {
     string operatorCode = 1;
     NetworkStandardGRPC network=2;
@@ -73,11 +49,10 @@ message RequestResponse {
 }
 
 message Empty{}
+
 service StationServiceGrpc {
-  rpc SyncStationsAllStream(Empty) returns (stream RequestResponse);
-  rpc SearchByOperatorStream(RequestParamsForOperator) returns (stream RequestResponse);
   rpc ScanAreaStream(RequestParamsForArea) returns (stream RequestResponse);
-  rpc SearchAtLocationStream(RequestParamsForLocation) returns (RequestResponse);
 }
+
 
 

@@ -23,7 +23,6 @@ D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\EFCore.BulkExtensions.PostgreSql.dll
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\EFCore.BulkExtensions.Sqlite.dll
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\EFCore.BulkExtensions.SqlServer.dll
-D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\HtmlAgilityPack.dll
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\Humanizer.dll
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\MedallionTopologicalSort.dll
 D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
