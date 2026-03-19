@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "cJTAj8mLhWE=",
+  "success": true,
+  "projectFilePath": "D:\\VS2010Test\\техноком\\WebAppCellMapper\\ConsoleAppGRPCTest\\ConsoleAppGRPCTest.csproj",
+  "expectedPackageFiles": [
+    "C:\\NugetPackages\\google.protobuf\\3.34.0\\google.protobuf.3.34.0.nupkg.sha512",
+    "C:\\NugetPackages\\grpc.core.api\\2.76.0\\grpc.core.api.2.76.0.nupkg.sha512",
+    "C:\\NugetPackages\\grpc.net.client\\2.76.0\\grpc.net.client.2.76.0.nupkg.sha512",
+    "C:\\NugetPackages\\grpc.net.common\\2.76.0\\grpc.net.common.2.76.0.nupkg.sha512",
+    "C:\\NugetPackages\\grpc.tools\\2.78.0\\grpc.tools.2.78.0.nupkg.sha512",
+    "C:\\NugetPackages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\NugetPackages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

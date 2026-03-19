@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebAppCellMapper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+528977f6b902e0c2a9dd23c1cf745fd6267a7cc8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35f1839e5fc4f91f0b49105a497665e768e6c537")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebAppCellMapper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebAppCellMapper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

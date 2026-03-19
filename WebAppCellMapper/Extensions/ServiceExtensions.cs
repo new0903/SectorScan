@@ -24,7 +24,6 @@ namespace WebAppCellMapper.Extensions
        
         public static IServiceCollection IncludeServices(this IServiceCollection services)
         {
-
             //.ConfigurePrimaryHttpMessageHandler<HttpClientHandler>()
             services.AddSingleton<IGeoBoundsService,GeoBoundsService>();
             services.AddSingleton<IProxyService, ProxyService>();

@@ -83,7 +83,9 @@ namespace WebAppCellMapper.Services
                 //var proxies =await proxyService.GetProxies();
                 var requests = new List<Task>();
 
-                using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(30)))
+                using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(60)))
+                    //если ставит20 секунд или меньше прокси закончатся 
+                    // так хотя бы ячеек больше закрою
                 {
                     int counter= coordinates.Count>100?100: coordinates.Count;
 

@@ -3,11 +3,16 @@
   "WorkspaceRootPath": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FDEEC944-BAED-4FCA-A3CF-76A05C73BE3A}|..\\TestProject1\\TestProject1.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\testproject1\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6F84B464-D2A2-BADB-55FE-4525AFA1BDD6}|TestProject1\\TestProject1.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\testproject1\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F84B464-D2A2-BADB-55FE-4525AFA1BDD6}|TestProject1\\TestProject1.csproj|solutionrelative:testproject1\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\webappcellmapper.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\webappcellmapper.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -69,28 +74,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "StationsController.cs",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
-              "RelativeDocumentMoniker": "WebAppCellMapper\\Controllers\\StationsController.cs",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
-              "RelativeToolTip": "WebAppCellMapper\\Controllers\\StationsController.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAhwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\TestProject1\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "TestProject1\\UnitTest1.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\TestProject1\\UnitTest1.cs",
+              "RelativeToolTip": "TestProject1\\UnitTest1.cs",
+              "ViewState": "AgIAAC4BAAAAAAAAAAAAAEQBAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T08:27:31.636Z",
+              "WhenOpened": "2026-03-19T08:56:41.626Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UnitTest1.cs",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\TestProject1\\UnitTest1.cs",
-              "RelativeDocumentMoniker": "..\\TestProject1\\UnitTest1.cs",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\TestProject1\\UnitTest1.cs",
-              "RelativeToolTip": "..\\TestProject1\\UnitTest1.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAdwMIAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "WebAppCellMapper.http",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\WebAppCellMapper.http",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\WebAppCellMapper.http",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\WebAppCellMapper.http",
+              "RelativeToolTip": "WebAppCellMapper\\WebAppCellMapper.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-03-19T08:55:15.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StationsService.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\StationsService.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
+              "RelativeToolTip": "WebAppCellMapper\\Services\\StationsService.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAIApwFcAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T08:25:20.525Z",
+              "WhenOpened": "2026-03-19T08:41:52.341Z",
               "EditorCaption": ""
             }
           ]

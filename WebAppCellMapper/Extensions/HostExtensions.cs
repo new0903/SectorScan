@@ -39,7 +39,7 @@ namespace WebAppCellMapper.Extensions
             {
                 try
                 {
-                    var service= serviceScope?.ServiceProvider.GetRequiredService<OperatorsService>();
+                    var service= serviceScope?.ServiceProvider.GetRequiredService<IOperatorsService>();
                     if (service!=null)
                     {
                          service.SaveOperators();
