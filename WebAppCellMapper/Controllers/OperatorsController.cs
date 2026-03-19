@@ -8,9 +8,9 @@ namespace WebAppCellMapper.Controllers
     [ApiController]
     public class OperatorsController : ControllerBase
     {
-        private readonly OperatorsService operatorsService;
+        private readonly IOperatorsService operatorsService;
 
-        public OperatorsController(OperatorsService operatorsService) 
+        public OperatorsController(IOperatorsService operatorsService) 
         {
             this.operatorsService = operatorsService;
         }

@@ -1,5 +1,6 @@
 ﻿
 using EFCore.BulkExtensions;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
@@ -18,12 +19,12 @@ namespace WebAppCellMapper.Services
 
 
 
-    public class StationsService
+    public class StationsService : IStationsService
     {
         private readonly AppDBContext context;
-        private readonly GeoBoundsService boundsService;
-       private readonly ProxyService proxyService;
-        private readonly IHttpClientFactory clientFactory;
+        private readonly IGeoBoundsService boundsService;
+       private readonly IProxyService proxyService;
+        //private readonly IHttpClientFactory clientFactory;
         private readonly ILogger<StationsService> logger;
 
         //private ConcurrentDictionary<Guid, Task> requests = new ConcurrentDictionary<Guid, Task>();
@@ -38,7 +39,7 @@ namespace WebAppCellMapper.Services
       //  private Stream? responseStream;// совершенно забыл про grpc 
         private ConcurrentQueue<SquareSearch>? coordinates;
 
-        public StationsService(AppDBContext context, GeoBoundsService boundsService, ProxyService proxyService, ILogger<StationsService> logger)
+        public StationsService(AppDBContext context, IGeoBoundsService boundsService, IProxyService proxyService, ILogger<StationsService> logger)
         {
 
             this.context = context;
@@ -114,14 +115,7 @@ namespace WebAppCellMapper.Services
 
                 logger.LogInformation($"секторов осталось {coordinates.Count}");
             }
-            logger.LogInformation("сканирование завершено");
-
-            {
-
-                QueryResult res = new QueryResult(op.Code, ns, scannedStations, scannedSector, coordinates.Count, "сканирование станций завершено",true);
-                // await WriteResponse(JsonConvert.SerializeObject(res));
-                yield return res;
-            }
+           
 
         }
 
@@ -248,10 +242,67 @@ namespace WebAppCellMapper.Services
         }
 
 
+        /// <summary>
+        /// Поиск всех станций, по всем операторам и сетям
+        /// </summary>
+        /// <remarks>
+        /// Этот метод для эндпоинта SSE формата
+        /// метод выполняется очень долго, поэтому я решил что лучше будет использовать SSE 
+        /// что бы отслеживать прогресс загрузки станций в бд
+        /// для тестирования в консоль бразуера вставить вот это js код
+        /// var eventSource = new EventSource('https://localhost:7040/api/Stations');
+        /// eventSource.onmessage = (event) => {
+        /// console.log( event.data);
+        /// if (event.data.includes('[DONE]')) {
+        /// eventSource.close()
+        /// }
+        /// };
+        /// eventSource.onerror = (error) => {
+        ///     console.error('EventSource error:', error);
+        ///     eventSource.close()
+        /// };
+        /// можно и fetch использовать
+        /// </remarks>
+        public async IAsyncEnumerable<QueryResult> SyncStationsAllAsync([EnumeratorCancellation] CancellationToken ct = default)
+        {
+            //responseStream = httpStream;
+            // await WriteResponse("получаем операторов из бд");
+            var operators = await context.operators.
+                AsNoTracking().
+                Select(o => new OperatorDTO(o.Id, o.InternalCode)).
+                ToListAsync();
+
+            foreach (var op in operators)//операторы
+            {
+                foreach (var network in NSEnumerator.GetNetwork)//тип сети
+                {
+                    await foreach (var item in RunSearch(op, network, ct))
+                    {
+                        yield return item;
+                    }
+                    {
+
+                        QueryResult res = new QueryResult(op.Code, network, scannedStations, scannedSector, coordinates==null?0:coordinates.Count, "сканирование станций завершено", false);
+
+                        yield return res;
+                    }
+                    idsStations.Clear();
+                    coordinates = null;
+                }
+            }
+            {
+
+                QueryResult res = new QueryResult(string.Empty, NetworkStandard.Gsm, scannedStations, scannedSector, 0, "сканирование завершено", true);
+                // await WriteResponse(JsonConvert.SerializeObject(res));
+                yield return res;
+            }
+
+        }
+
 
         //old
         // public async IAsyncEnumerable<QueryResult> ScanAreaAsync(Stream httpStream, string operatorCode, NetworkStandard network, double latS, double latE, double lonS, double lonE,double step = GeoBoundsService.EFFECTIVE_STEP, [EnumeratorCancellation] CancellationToken ct=default)
-      
+
         /// <summary>
         /// Поиск всех станций, по оператору, выбраному типу сети и указной области
         /// </summary>
@@ -287,19 +338,23 @@ namespace WebAppCellMapper.Services
             if (op != null)
             {
 
-                //logger.LogInformation($" ScanAreaAsync getCoordinates");
+
                 coordinates = boundsService.GetCoordianates(latS, latE, lonS, lonE, step);
-                //await RunSearch(op, network, ct);
+
                 await foreach (var item in RunSearch(op, network, ct))
                 {
                     yield return item;
-                    if (item.isDone)
-                    {
-                      //  logger.LogInformation($" ScanAreaAsync isDone");
-                        yield break;
-                    }
+
                 }
+                logger.LogInformation("сканирование завершено");
+
                 idsStations.Clear();
+            }
+            {
+
+                QueryResult res = new QueryResult(operatorCode, network, scannedStations, scannedSector,0, "сканирование станций завершено", true);
+                // await WriteResponse(JsonConvert.SerializeObject(res));
+                yield return res;
             }
             //logger.LogInformation($" ScanAreaAsync over");
 

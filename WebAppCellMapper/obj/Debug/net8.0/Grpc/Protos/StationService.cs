@@ -40,9 +40,10 @@ namespace WebAppCellMapper {
             "KAUSFAoMY291bnRTZWN0b3JzGAUgASgFEg8KB21lc3NhZ2UYBiABKAkSEQoJ",
             "dGltZXN0YW1wGAcgASgJEg4KBmlzRG9uZRgIIAEoCCIHCgVFbXB0eSo6ChNO",
             "ZXR3b3JrU3RhbmRhcmRHUlBDEgcKA0dzbRAAEgkKBVdjZG1hEAESBwoDTHRl",
-            "EAISBgoCTnIQAzJRChJTdGF0aW9uU2VydmljZUdycGMSOwoOU2NhbkFyZWFT",
-            "dHJlYW0SFS5SZXF1ZXN0UGFyYW1zRm9yQXJlYRoQLlJlcXVlc3RSZXNwb25z",
-            "ZTABQhOqAhBXZWJBcHBDZWxsTWFwcGVyYgZwcm90bzM="));
+            "EAISBgoCTnIQAzKAAQoSU3RhdGlvblNlcnZpY2VHcnBjEi0KD1N5bmNTdGF0",
+            "aW9uc0FsbBIGLkVtcHR5GhAuUmVxdWVzdFJlc3BvbnNlMAESOwoOU2NhbkFy",
+            "ZWFTdHJlYW0SFS5SZXF1ZXN0UGFyYW1zRm9yQXJlYRoQLlJlcXVlc3RSZXNw",
+            "b25zZTABQhOqAhBXZWJBcHBDZWxsTWFwcGVyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::WebAppCellMapper.NetworkStandardGRPC), }, null, new pbr::GeneratedClrTypeInfo[] {

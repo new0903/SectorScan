@@ -31,7 +31,7 @@ namespace WebAppCellMapper.Services
     //}
 
     public record ProxyElement(string ip, string protocol,string url);
-    public class ProxyService
+    public class ProxyService : IProxyService
     {
         private readonly ILogger<ProxyService> logger;
 
@@ -110,7 +110,7 @@ namespace WebAppCellMapper.Services
         }
 
   
-        public async Task GetProxiesRequest()
+        private async Task GetProxiesRequest()
         {
             LastUpdate = DateTime.UtcNow;
             using HttpClient client = new HttpClient();

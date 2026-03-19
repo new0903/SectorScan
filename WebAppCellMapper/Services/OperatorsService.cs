@@ -6,7 +6,7 @@ using WebAppCellMapper.Data.Models;
 
 namespace WebAppCellMapper.Services
 {
-    public class OperatorsService
+    public class OperatorsService : IOperatorsService
     {
         private readonly IWebHostEnvironment env;
         private readonly AppDBContext context;

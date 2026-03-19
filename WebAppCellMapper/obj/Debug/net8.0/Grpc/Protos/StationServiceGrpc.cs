@@ -46,9 +46,19 @@ namespace WebAppCellMapper {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::WebAppCellMapper.RequestParamsForArea> __Marshaller_RequestParamsForArea = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WebAppCellMapper.RequestParamsForArea.Parser));
+    static readonly grpc::Marshaller<global::WebAppCellMapper.Empty> __Marshaller_Empty = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WebAppCellMapper.Empty.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::WebAppCellMapper.RequestResponse> __Marshaller_RequestResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WebAppCellMapper.RequestResponse.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::WebAppCellMapper.RequestParamsForArea> __Marshaller_RequestParamsForArea = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WebAppCellMapper.RequestParamsForArea.Parser));
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::WebAppCellMapper.Empty, global::WebAppCellMapper.RequestResponse> __Method_SyncStationsAll = new grpc::Method<global::WebAppCellMapper.Empty, global::WebAppCellMapper.RequestResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "SyncStationsAll",
+        __Marshaller_Empty,
+        __Marshaller_RequestResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::WebAppCellMapper.RequestParamsForArea, global::WebAppCellMapper.RequestResponse> __Method_ScanAreaStream = new grpc::Method<global::WebAppCellMapper.RequestParamsForArea, global::WebAppCellMapper.RequestResponse>(
@@ -69,6 +79,12 @@ namespace WebAppCellMapper {
     public abstract partial class StationServiceGrpcBase
     {
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task SyncStationsAll(global::WebAppCellMapper.Empty request, grpc::IServerStreamWriter<global::WebAppCellMapper.RequestResponse> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task ScanAreaStream(global::WebAppCellMapper.RequestParamsForArea request, grpc::IServerStreamWriter<global::WebAppCellMapper.RequestResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -82,6 +98,7 @@ namespace WebAppCellMapper {
     public static grpc::ServerServiceDefinition BindService(StationServiceGrpcBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
+          .AddMethod(__Method_SyncStationsAll, serviceImpl.SyncStationsAll)
           .AddMethod(__Method_ScanAreaStream, serviceImpl.ScanAreaStream).Build();
     }
 
@@ -92,6 +109,7 @@ namespace WebAppCellMapper {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     public static void BindService(grpc::ServiceBinderBase serviceBinder, StationServiceGrpcBase serviceImpl)
     {
+      serviceBinder.AddMethod(__Method_SyncStationsAll, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::WebAppCellMapper.Empty, global::WebAppCellMapper.RequestResponse>(serviceImpl.SyncStationsAll));
       serviceBinder.AddMethod(__Method_ScanAreaStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::WebAppCellMapper.RequestParamsForArea, global::WebAppCellMapper.RequestResponse>(serviceImpl.ScanAreaStream));
     }
 

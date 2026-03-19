@@ -3,20 +3,20 @@
 namespace WebAppCellMapper.Services
 {
     public record SquareSearch(double latStart, double latEnd, double lonStart, double lonEnd);
-    public class GeoBoundsService
+    public class GeoBoundsService :IGeoBoundsService
     {
         //широта север юг
         public const double MIN_LAT = 38.0;
         public const double MAX_LAT = 82.0;
 
         //долгота запад-восток
-        const double MIN_LON = 19.0;
-      //  public const double MIN_LON = 28.0;
-       // public const double MAX_LON = 75.0;// берем только западную часть
-           const double MAX_LON = 180.0;
+        public const double MIN_LON = 19.0;
+        //  public const double MIN_LON = 28.0;
+        // public const double MAX_LON = 75.0;// берем только западную часть
+        public const double MAX_LON = 180.0;
 
         // Размер квадрата 
-        public const double EFFECTIVE_STEP = 1.8;
+        public const double EFFECTIVE_STEP = 3.0;
 
 
         /*

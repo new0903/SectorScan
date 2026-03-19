@@ -3,8 +3,11 @@
   "WorkspaceRootPath": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FDEEC944-BAED-4FCA-A3CF-76A05C73BE3A}|..\\TestProject1\\TestProject1.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\testproject1\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +17,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,15 +69,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StationsService.cs",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
-              "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\StationsService.cs",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
-              "RelativeToolTip": "WebAppCellMapper\\Services\\StationsService.cs",
-              "ViewState": "AgIAAKcAAAAAAAAAAAARwFQAAAACAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "StationsController.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\Controllers\\StationsController.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
+              "RelativeToolTip": "WebAppCellMapper\\Controllers\\StationsController.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAhwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-18T08:24:02.947Z",
+              "WhenOpened": "2026-03-19T08:27:31.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\TestProject1\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "..\\TestProject1\\UnitTest1.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\TestProject1\\UnitTest1.cs",
+              "RelativeToolTip": "..\\TestProject1\\UnitTest1.cs",
+              "ViewState": "AgIAALEAAAAAAAAAAAAdwMIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T08:25:20.525Z",
               "EditorCaption": ""
             }
           ]

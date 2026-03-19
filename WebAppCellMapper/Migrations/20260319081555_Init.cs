@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -39,7 +40,8 @@ namespace WebAppCellMapper.Migrations
                     BsType = table.Column<int>(type: "integer", nullable: false),
                     Bands = table.Column<string>(type: "text", nullable: false),
                     OperatorId = table.Column<long>(type: "bigint", nullable: false),
-                    Standard = table.Column<string>(type: "text", nullable: false)
+                    Standard = table.Column<string>(type: "text", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,11 +58,6 @@ namespace WebAppCellMapper.Migrations
                 name: "IX_stations_OperatorId",
                 table: "stations",
                 column: "OperatorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_stations_Standard",
-                table: "stations",
-                column: "Standard");
         }
 
         /// <inheritdoc />

@@ -16,10 +16,10 @@ namespace WebAppCellMapper.Controllers
     [ApiController]
     public class StationsController : ControllerBase
     {
-        private readonly StationsService stationsService;
+        private readonly IStationsService stationsService;
         private readonly ILogger<StationsController> logger;
 
-        public StationsController(StationsService stationsService, ILogger<StationsController> logger) 
+        public StationsController(IStationsService stationsService, ILogger<StationsController> logger) 
         {
             this.stationsService = stationsService;
             this.logger = logger;
@@ -40,6 +40,37 @@ namespace WebAppCellMapper.Controllers
             await Response.Body.FlushAsync();
         }
 
+        [HttpGet]
+        [Produces("text/event-stream")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task SyncStationsAll(NetworkStandard network, string operatorCode, [FromQuery] QueryParams queryParams, CancellationToken ct = default)
+        {
+            logger.LogInformation($"SearchByOperator start");
+            Response.Headers.Add("Content-Type", "text/event-stream");
+            Response.Headers.Add("Cashe-Control", "no-cashe");
+            Response.Headers.Add("Connections", "keep-alive");
+            try
+            {
+
+
+                await foreach (var item in stationsService.SyncStationsAllAsync(ct))
+                {
+                    await WriteResponse(JsonConvert.SerializeObject(item));
+                    if (item.isDone)
+                    {
+                        await WriteResponse("[DONE]");
+                        return;  // Выходим из цикла
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogError(ex.Message);
+                throw;
+            }
+
+        }
         [HttpGet("{network}/{operatorCode}")]
         [Produces("text/event-stream")]
         [ProducesResponseType(StatusCodes.Status200OK)]

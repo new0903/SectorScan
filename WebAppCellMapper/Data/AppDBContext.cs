@@ -10,8 +10,8 @@ namespace WebAppCellMapper.Data
 
         }
 
-        public DbSet<Station> stations { get; set; }
-        public DbSet<Operator> operators { get; set; }
+        public virtual DbSet<Station> stations { get; set; }
+        public virtual DbSet<Operator> operators { get; set; }
         //public DbSet<Country> countries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace WebAppCellMapper.Data
             modelBuilder.Entity<Station>(p =>
             {
                 p.Property(p => p.Standard).HasConversion<string>();
-                p.HasIndex(p=>p.Standard);
+             //   p.HasIndex(p=>p.Standard);
             });
         }
     }

@@ -26,10 +26,10 @@ namespace WebAppCellMapper.Extensions
         {
 
             //.ConfigurePrimaryHttpMessageHandler<HttpClientHandler>()
-            services.AddSingleton<GeoBoundsService>();
-            services.AddSingleton<ProxyService>();
-            services.AddScoped<StationsService>();
-            services.AddScoped<OperatorsService>();
+            services.AddSingleton<IGeoBoundsService,GeoBoundsService>();
+            services.AddSingleton<IProxyService, ProxyService>();
+            services.AddScoped<IStationsService, StationsService>();
+            services.AddScoped<IOperatorsService ,OperatorsService>();
             return services;
 
         }

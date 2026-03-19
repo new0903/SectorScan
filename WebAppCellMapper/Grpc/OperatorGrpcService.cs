@@ -5,9 +5,9 @@ namespace WebAppCellMapper.Grpc
 {
     public class OperatorGrpcService : OperatorServiceGrpc.OperatorServiceGrpcBase
     {
-        private readonly OperatorsService service;
+        private readonly IOperatorsService service;
 
-        public OperatorGrpcService(OperatorsService service) 
+        public OperatorGrpcService(IOperatorsService service) 
         {
             this.service = service;
         }

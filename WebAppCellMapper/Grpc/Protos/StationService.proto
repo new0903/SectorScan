@@ -51,6 +51,7 @@ message RequestResponse {
 message Empty{}
 
 service StationServiceGrpc {
+  rpc SyncStationsAll(Empty) returns (stream RequestResponse);
   rpc ScanAreaStream(RequestParamsForArea) returns (stream RequestResponse);
 }
 

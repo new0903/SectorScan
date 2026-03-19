@@ -76,5 +76,8 @@ namespace WebAppCellMapper.Data.Models
         public Operator Operator { get; set; }
         [JsonIgnore]
         public NetworkStandard Standard { get; set; }
+
+        [JsonIgnore]
+        public DateTime UpdatedAt { get; set; }= DateTime.UtcNow;
     }
 }
