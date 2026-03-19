@@ -51,29 +51,28 @@ namespace WebAppCellMapper.Services
        
 
         //IEnumerable<ProxyElement> 
-        public async Task<IReadOnlyCollection<ProxyElement>> GetProxies()
+        public async Task GetProxies()
         {
             if (LastUpdate+TimeSpan.FromMinutes(60)<DateTime.UtcNow|| ProxysList.Count<10)//минимум 10 проксей
             {
                 await GetProxiesRequest();//надо подумать про бд
                 //await GetProxiesRequest();// старые прокси может пригодятся
             }
-            return ProxysList.Take(150).ToArray();//это дело надо обдумать
-            //разделить бы на занятые типа isBusy и не занятые и по категориям может потом разделить
+           
 
         }
 
 
 
-        public async Task< ProxyElement?> GetProxy()
+        public ProxyElement? GetProxy()
         {
             try
             { 
-                if (LastUpdate + TimeSpan.FromMinutes(60) < DateTime.UtcNow || ProxysList.Count < 10)//минимум 10 проксей
-                {
-                    await GetProxiesRequest();
-                    //requestUpdateProxy = true;
-                }
+                //if (LastUpdate + TimeSpan.FromMinutes(60) < DateTime.UtcNow || ProxysList.Count < 10)//минимум 10 проксей
+                //{
+                //    await GetProxiesRequest();
+                //    //requestUpdateProxy = true;
+                //}
                 if (ProxysList.TryPop(out var proxy))
                 {
                     return proxy;

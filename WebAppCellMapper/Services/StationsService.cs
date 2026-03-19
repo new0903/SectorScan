@@ -80,7 +80,7 @@ namespace WebAppCellMapper.Services
                    yield return res;
                    // await WriteResponse(JsonConvert.SerializeObject(res));
                 }
-                //var proxies =await proxyService.GetProxies();
+                await proxyService.GetProxies();
                 var requests = new List<Task>();
 
                 using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(60)))
@@ -137,7 +137,7 @@ namespace WebAppCellMapper.Services
             try
             {
 
-                var proxy=await proxyService.GetProxy();
+                var proxy= proxyService.GetProxy();
                 if (proxy == null)
                 {
                     if (coordinates != null) coordinates.Enqueue(sector);

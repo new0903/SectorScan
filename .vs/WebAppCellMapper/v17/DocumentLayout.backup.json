@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6F84B464-D2A2-BADB-55FE-4525AFA1BDD6}|TestProject1\\TestProject1.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\testproject1\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F84B464-D2A2-BADB-55FE-4525AFA1BDD6}|TestProject1\\TestProject1.csproj|solutionrelative:testproject1\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\webappcellmapper.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\webappcellmapper.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\operators.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\operators.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\proxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\proxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\iproxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\iproxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 15,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,40 +78,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UnitTest1.cs",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\TestProject1\\UnitTest1.cs",
-              "RelativeDocumentMoniker": "TestProject1\\UnitTest1.cs",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\TestProject1\\UnitTest1.cs",
-              "RelativeToolTip": "TestProject1\\UnitTest1.cs",
-              "ViewState": "AgIAAC4BAAAAAAAAAAAAAEQBAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T08:56:41.626Z",
+              "DocumentIndex": 1,
+              "Title": "operators.json",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\operators.json",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\operators.json",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\operators.json",
+              "RelativeToolTip": "WebAppCellMapper\\operators.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-19T13:42:20.776Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WebAppCellMapper.http",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\WebAppCellMapper.http",
-              "RelativeDocumentMoniker": "WebAppCellMapper\\WebAppCellMapper.http",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\WebAppCellMapper.http",
-              "RelativeToolTip": "WebAppCellMapper\\WebAppCellMapper.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2026-03-19T08:55:15.376Z"
+              "DocumentIndex": 3,
+              "Title": "IProxyService.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\IProxyService.cs",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\IProxyService.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\IProxyService.cs",
+              "RelativeToolTip": "WebAppCellMapper\\Services\\IProxyService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T13:38:39.455Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ProxyService.cs",
+              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\ProxyService.cs",
+              "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\ProxyService.cs",
+              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\ProxyService.cs",
+              "RelativeToolTip": "WebAppCellMapper\\Services\\ProxyService.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAIApwDcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T13:37:28.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "StationsService.cs",
               "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
               "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\StationsService.cs",
               "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
               "RelativeToolTip": "WebAppCellMapper\\Services\\StationsService.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAIApwFcAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAnwIsAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-19T08:41:52.341Z"
+              "WhenOpened": "2026-03-19T13:31:09.872Z",
+              "EditorCaption": ""
             }
           ]
         }

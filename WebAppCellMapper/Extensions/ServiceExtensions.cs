@@ -27,7 +27,7 @@ namespace WebAppCellMapper.Extensions
             //.ConfigurePrimaryHttpMessageHandler<HttpClientHandler>()
             services.AddSingleton<IGeoBoundsService,GeoBoundsService>();
             services.AddSingleton<IProxyService, ProxyService>();
-            services.AddScoped<IStationsService, StationsService>();
+            services.AddScoped<IStationsService, StationsService>();//AddScoped или AddTransient
             services.AddScoped<IOperatorsService ,OperatorsService>();
             return services;
 
