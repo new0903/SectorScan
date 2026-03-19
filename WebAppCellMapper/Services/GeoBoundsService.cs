@@ -16,16 +16,10 @@ namespace WebAppCellMapper.Services
         public const double MAX_LON = 180.0;
 
         // Размер квадрата 
-        public const double EFFECTIVE_STEP = 3.0;
+        public const double EFFECTIVE_STEP = 6.0;
 
 
-        /*
-         
-         координаты калининграда
-        lat 54-55 
-        lon 19-22
-         */
-
+     
 
         
         public ConcurrentQueue<SquareSearch> GetCoordianates(double latStart=MIN_LAT, double latBorder = MAX_LAT, double lonStart = MIN_LON, double lonBorder = MAX_LON, double step = EFFECTIVE_STEP)
