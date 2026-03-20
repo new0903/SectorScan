@@ -18,8 +18,9 @@ namespace WebAppCellMapper
             // Add services to the container.
             builder.Services.AddGrpc();
 
+            builder.Services.AddOptionsSetups();
 
-            builder.Services.AddOptionsSetups()
+            builder.Services
                 .InitDBContext()
                 .IncludeServices();
 

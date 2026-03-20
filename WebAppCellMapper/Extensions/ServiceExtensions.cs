@@ -16,7 +16,7 @@ namespace WebAppCellMapper.Extensions
             services.AddDbContext<AppDBContext>((sP,opt) =>
             {
                 var conn= sP.GetRequiredService<IOptions<DatabaseConnection>>();
-                opt.UseNpgsql(conn.Value.ToString());
+                opt.UseNpgsql(conn.Value.ToString());//conn.Value.ToString()
             });
 
             return services;

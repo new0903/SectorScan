@@ -7,7 +7,7 @@ services:
     environment:
       - PG__Host=db_postgres17
       - PG__Port=5432
-      - PG__Database=ConfigManager
+      - PG__Database=stations
       - PG__Username=root
       - PG__Password=root
   db_postgres17:
@@ -17,7 +17,7 @@ services:
     environment:
         POSTGRES_USER: root
         POSTGRES_PASSWORD: root
-        POSTGRES_DB: ConfigManager
+        POSTGRES_DB: stations
     ports:
         - "54321:5432"
     volumes:

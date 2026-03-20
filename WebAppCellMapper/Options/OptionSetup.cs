@@ -28,17 +28,13 @@ namespace WebAppCellMapper.Options
 
 
             Configuration.GetSection("PG").Bind(options);
+
+            Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", options.ToString());
             Environment.SetEnvironmentVariable("PG_USER", $"{options.Username}");
             Environment.SetEnvironmentVariable("PG_PASSWORD", $"{options.Password}");
             Environment.SetEnvironmentVariable("PG_SERVER", $"{options.Host}:{options.Port}");
             Environment.SetEnvironmentVariable("PG_DATABASE", $"{options.Database}");
-            /*
-        public override string? ToString()
-            => $"Host={Host};" +
-                $"Port={Port};" +
-                $"Database={Database};" +
-                $"Username={Username};" +
-                $"Password={Password}";*/
+
         }
 
     }
