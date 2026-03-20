@@ -20,11 +20,18 @@ namespace WebAppCellMapper.Options
         }
     }
 
-    public class DatabaseConnectionSetup(IConfiguration configuration) : OptionsSetup<DatabaseConnection>("Storage", configuration)
+    public class DatabaseConnectionSetup(IConfiguration configuration) : OptionsSetup<DatabaseConnection>("PG", configuration)
     {
         public override void Configure(DatabaseConnection options)
         {
-            Configuration.GetSection(SettingsPath).Bind(options);
+
+
+
+            Configuration.GetSection("PG").Bind(options);
+            Environment.SetEnvironmentVariable("PG_USER", $"{options.Username}");
+            Environment.SetEnvironmentVariable("PG_PASSWORD", $"{options.Password}");
+            Environment.SetEnvironmentVariable("PG_SERVER", $"{options.Host}:{options.Port}");
+            Environment.SetEnvironmentVariable("PG_DATABASE", $"{options.Database}");
             /*
         public override string? ToString()
             => $"Host={Host};" +
@@ -32,10 +39,6 @@ namespace WebAppCellMapper.Options
                 $"Database={Database};" +
                 $"Username={Username};" +
                 $"Password={Password}";*/
-            Environment.SetEnvironmentVariable("PG_USER", $"{options.Username}");
-            Environment.SetEnvironmentVariable("PG_PASSWORD", $"{options.Password}");
-            Environment.SetEnvironmentVariable("PG_SERVER", $"{options.Host}:{options.Port}");
-            Environment.SetEnvironmentVariable("PG_DATABASE", $"{options.Database}");
         }
 
     }
