@@ -4,6 +4,12 @@ services:
     build:
       context: .
       dockerfile: WebAppCellMapper/Dockerfile
+    environment:
+      - Storage__Host=db_postgres17
+      - Storage__Port=5432
+      - Storage__Database=stations
+      - Storage__Username=root
+      - Storage__Password=root
   db_postgres17:
     image: postgres:17-alpine
     container_name: postgres17

@@ -1,3 +1,4 @@
+D:\VS2010Test\техноком\WebAppCellMapper\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\WebAppCellMapper.deps.json
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\WebAppCellMapper.runtimeconfig.json
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\appsettings.Development.json
@@ -19,15 +20,14 @@ D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Swashbuckle.AspNetCore
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Swashbuckle.AspNetCore.Swagger.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\EFCore.BulkExtensions.Core.dll
+D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.Extensions.Logging.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Grpc.Net.Common.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Microsoft.OpenApi.dll
+D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Npgsql.dll
 D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\WebAppCellMapper.pdb
 D:\VS2010Test\техноком\WebAppCellMapper\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
-D:\VS2010Test\техноком\WebAppCellMapper\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 D:\VS2010Test\техноком\WebAppCellMapper\obj\Debug\docker-c.35A3FFBA.Up2Date
-D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Npgsql.EntityFrameworkCore.PostgreSQL.dll
-D:\VS2010Test\техноком\WebAppCellMapper\bin\Debug\Npgsql.dll
