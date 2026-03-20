@@ -2,6 +2,7 @@
 using EFCore.BulkExtensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Runtime.CompilerServices;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
+using WebAppCellMapper.Options;
 
 namespace WebAppCellMapper.Services
 {
@@ -24,6 +26,8 @@ namespace WebAppCellMapper.Services
         private readonly AppDBContext context;
         private readonly IGeoBoundsService boundsService;
        private readonly IProxyService proxyService;
+        private readonly IOptions<RequestSettings> options;
+
         //private readonly IHttpClientFactory clientFactory;
         private readonly ILogger<StationsService> logger;
 
@@ -39,12 +43,13 @@ namespace WebAppCellMapper.Services
       //  private Stream? responseStream;// совершенно забыл про grpc 
         private ConcurrentQueue<SquareSearch>? coordinates;
 
-        public StationsService(AppDBContext context, IGeoBoundsService boundsService, IProxyService proxyService, ILogger<StationsService> logger)
+        public StationsService(AppDBContext context, IGeoBoundsService boundsService, IProxyService proxyService, IOptions<RequestSettings> options, ILogger<StationsService> logger)
         {
 
             this.context = context;
             this.boundsService = boundsService;
             this.proxyService = proxyService;
+            this.options = options;
             this.logger = logger;
             stationsList = new List<Station>();
             idsStations = new HashSet<long>();
@@ -83,13 +88,13 @@ namespace WebAppCellMapper.Services
                 await proxyService.GetProxies();
                 var requests = new List<Task>();
 
-                using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(60)))
+                using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(options.Value.TimeoutSeconds)))
                     //если ставит20 секунд или меньше прокси закончатся 
                     // так хотя бы ячеек больше закрою
                 {
-                    int counter= coordinates.Count>100?100: coordinates.Count;
+                    int counter= coordinates.Count> options.Value.MaxConnectionsPerServer ? options.Value.MaxConnectionsPerServer : coordinates.Count;
 
-                       for (int i = 0; i < 100; i++)
+                       for (int i = 0; i < counter; i++)
                        {
                             if (coordinates.TryDequeue(out var square))
                             {
