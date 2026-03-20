@@ -1,6 +1,8 @@
 
+using Microsoft.Extensions.Configuration;
 using WebAppCellMapper.Extensions;
 using WebAppCellMapper.Grpc;
+using WebAppCellMapper.Options;
 
 namespace WebAppCellMapper
 {
@@ -11,14 +13,12 @@ namespace WebAppCellMapper
             var builder = WebApplication.CreateBuilder(args);
 
 
-            
 
+            builder.Services.AddOptionsSetups();
 
 
             // Add services to the container.
             builder.Services.AddGrpc();
-
-            builder.Services.AddOptionsSetups();
 
             builder.Services
                 .InitDBContext()

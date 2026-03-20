@@ -14,18 +14,13 @@ namespace WebAppCellMapper.Extensions
         private static Assembly currentAssembly => typeof(ServiceExtensions).Assembly;
         public static IServiceCollection InitDBContext(this IServiceCollection services)
         {
-            services.AddDbContext<AppDBContext>((sP,opt) =>
+            services.AddDbContext<AppDBContext>((sP, opt) =>
             {
-                var conn= sP.GetRequiredService<IOptions<DatabaseConnection>>();
+                var s= sP.GetRequiredService<IOptions<DatabaseConnection>>().Value;
 
+                var conn = Environment.GetEnvironmentVariable("PG_CONNECTION_STRING");
 
-                Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", conn.Value.ToString());
-                Environment.SetEnvironmentVariable("PG_USER", $"{conn.Value.Username}");
-                Environment.SetEnvironmentVariable("PG_PASSWORD", $"{conn.Value.Password}");
-                Environment.SetEnvironmentVariable("PG_SERVER", $"{conn.Value.Host}:{conn.Value.Port}");
-                Environment.SetEnvironmentVariable("PG_DATABASE", $"{conn.Value.Database}");
-
-                opt.UseNpgsql(conn.Value.ToString());
+                opt.UseNpgsql(conn);//conn.Value.ToString()
             });
 
             return services;
