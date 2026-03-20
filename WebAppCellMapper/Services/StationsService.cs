@@ -173,6 +173,8 @@ namespace WebAppCellMapper.Services
 
                         if (idsStations.Add(item.Id))
                         {
+                            item.OperatorId = op.Id;
+                            item.Standard = ns;
                             stationsList.Add(item);
                             Interlocked.Increment(ref scannedStations);
                             //scannedStations++;
@@ -235,11 +237,11 @@ namespace WebAppCellMapper.Services
 
            if (stationsList!=null&& stationsList.Count>0)
             {
-                foreach (var item in stationsList)
-                {
-                    item.OperatorId = o.Id;
-                    item.Standard = network;
-                }
+                //foreach (var item in stationsList)
+                //{
+                //    item.OperatorId = o.Id;
+                //    item.Standard = network;
+                //}
                 await context.BulkInsertOrUpdateAsync(stationsList);
                 logger.LogInformation($"добавлено станций {stationsList.Count}");
               //  idsStations.Clear();
@@ -342,6 +344,7 @@ namespace WebAppCellMapper.Services
                Where(o => o.InternalCode == operatorCode)
                .Select(o => new OperatorDTO(o.Id, o.InternalCode))
                .FirstOrDefaultAsync();
+
             if (op != null)
             {
 
