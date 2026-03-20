@@ -20,24 +20,7 @@ namespace WebAppCellMapper.Options
         }
     }
 
-    public class DatabaseConnectionSetup(IConfiguration configuration) : OptionsSetup<DatabaseConnection>("PG", configuration)
-    {
-        public override void Configure(DatabaseConnection options)
-        {
-
-
-
-            Configuration.GetSection("PG").Bind(options);
-
-            Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", options.ToString());
-            Environment.SetEnvironmentVariable("PG_USER", $"{options.Username}");
-            Environment.SetEnvironmentVariable("PG_PASSWORD", $"{options.Password}");
-            Environment.SetEnvironmentVariable("PG_SERVER", $"{options.Host}:{options.Port}");
-            Environment.SetEnvironmentVariable("PG_DATABASE", $"{options.Database}");
-
-        }
-
-    }
+    public class DatabaseConnectionSetup(IConfiguration configuration) : OptionsSetup<DatabaseConnection>("PG", configuration);
 
     public class RequestSettingsSetup(IConfiguration configuration) : OptionsSetup<RequestSettings>("RequestSettings", configuration);
 
