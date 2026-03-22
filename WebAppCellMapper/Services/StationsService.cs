@@ -26,16 +26,16 @@ namespace WebAppCellMapper.Services
         private readonly AppDBContext context;
         private readonly IGeoBoundsService boundsService;
        private readonly IProxyService proxyService;
-        private readonly IOptions<RequestSettings> options;
+        //private readonly IOptions<RequestSettings> options;
 
         //private readonly IHttpClientFactory clientFactory;
         private readonly ILogger<StationsService> logger;
+        private readonly RequestSettings requestSettings;
 
         //private ConcurrentDictionary<Guid, Task> requests = new ConcurrentDictionary<Guid, Task>();
 
         private int scannedStations=0;
         private int scannedSector = 0;
-
 
 
         private HashSet<long> idsStations;
@@ -49,8 +49,8 @@ namespace WebAppCellMapper.Services
             this.context = context;
             this.boundsService = boundsService;
             this.proxyService = proxyService;
-            this.options = options;
             this.logger = logger;
+            requestSettings = options.Value;
             stationsList = new List<Station>();
             idsStations = new HashSet<long>();
 
@@ -86,13 +86,13 @@ namespace WebAppCellMapper.Services
                    // await WriteResponse(JsonConvert.SerializeObject(res));
                 }
                 await proxyService.GetProxies();
-                var requests = new List<Task>();
 
-                using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(options.Value.TimeoutSeconds)))
-                    //если ставит20 секунд или меньше прокси закончатся 
-                    // так хотя бы ячеек больше закрою
+                using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(requestSettings.TimeoutSeconds)))
+                //если ставит20 секунд или меньше прокси закончатся 
+                // так хотя бы ячеек больше закрою
                 {
-                    int counter= coordinates.Count> options.Value.MaxConnectionsPerServer ? options.Value.MaxConnectionsPerServer : coordinates.Count;
+                    var requests = new List<Task>();
+                    int counter= coordinates.Count> requestSettings.MaxConnectionsPerServer ? requestSettings.MaxConnectionsPerServer : coordinates.Count;
 
                        for (int i = 0; i < counter; i++)
                        {
@@ -289,6 +289,7 @@ namespace WebAppCellMapper.Services
                     {
                         yield return item;
                     }
+                    scannedSector = 0;
                     {
 
                         QueryResult res = new QueryResult(op.Code, network, scannedStations, scannedSector, coordinates==null?0:coordinates.Count, "сканирование станций завершено", false);

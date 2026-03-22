@@ -36,7 +36,10 @@ namespace WebAppCellMapper.Options
         }
     }
 
-    public class RequestSettingsSetup(IConfiguration configuration) : OptionsSetup<RequestSettings>("RequestSettings", configuration);
+    public class RequestSettingsSetup(IConfiguration configuration) : OptionsSetup<RequestSettings>("RequestSettings", configuration) 
+    {
+    
+    }
     //public class DatabaseDefaultConnectionSetup(IConfiguration configuration) : OptionsSetup<DatabaseDefaultConnection>("ConnectionStrings", configuration);
 
 }
