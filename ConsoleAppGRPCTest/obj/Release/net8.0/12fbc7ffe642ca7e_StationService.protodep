@@ -1,0 +1,2 @@
+obj\Release\net8.0\Protos/StationService.cs \
+obj\Release\net8.0\Protos/StationServiceGrpc.cs: Protos/StationService.proto

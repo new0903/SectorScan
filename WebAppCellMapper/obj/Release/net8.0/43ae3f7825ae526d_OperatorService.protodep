@@ -1,0 +1,2 @@
+obj\Release\net8.0\Grpc\Protos/OperatorService.cs \
+obj\Release\net8.0\Grpc\Protos/OperatorServiceGrpc.cs: Grpc/Protos/OperatorService.proto

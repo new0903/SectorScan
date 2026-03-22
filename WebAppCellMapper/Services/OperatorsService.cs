@@ -9,37 +9,47 @@ namespace WebAppCellMapper.Services
     public class OperatorsService : IOperatorsService
     {
         private readonly IWebHostEnvironment env;
+        private readonly ILogger<OperatorsService> logger;
         private readonly AppDBContext context;
 
-        public OperatorsService(IWebHostEnvironment env, AppDBContext context)
+        public OperatorsService(IWebHostEnvironment env, ILogger<OperatorsService> logger, AppDBContext context)
         {
             this.env = env;
+            this.logger = logger;
             this.context = context;
         }
         public void SaveOperators()
         {
-            //проверяю есть ли вообще операторы
-            if (context.operators.Any()) return;
-            
-            var filePath = Path.Combine(env.ContentRootPath, "operators.json");//можно http запрос делать
-            var jsonContent =  File.ReadAllText(filePath);
-
-
-            var countryList=JsonConvert.DeserializeObject<List<Country>>(jsonContent);
-            //надо будет уточнить насчет других стран
-            if (countryList == null) return;
-            var operators= countryList.FirstOrDefault(c=>c.countryId==1);
-            if (operators == null) return;
-            var processedOperators = operators.operators.Select(op =>
+            try
             {
-                if (string.IsNullOrWhiteSpace(op.Name))
+                //проверяю есть ли вообще операторы
+                if (context.operators.Any()) return;
+
+                var filePath = Path.Combine(env.ContentRootPath, "operators.json");//можно http запрос делать
+                var jsonContent = File.ReadAllText(filePath);
+
+
+                var countryList = JsonConvert.DeserializeObject<List<Country>>(jsonContent);
+                //надо будет уточнить насчет других стран
+                if (countryList == null) return;
+                var operators = countryList.FirstOrDefault(c => c.countryId == 1);
+                if (operators == null) return;
+                var processedOperators = operators.operators.Select(op =>
                 {
-                    op.Name = $"Operator_{op.InternalCode}"; //эти падлы не везде name поставили 
-                }
-                return op;
-            }).ToList();
-            //сохраняем все в бд
-            context.BulkInsertOrUpdate(processedOperators);
+                    if (string.IsNullOrWhiteSpace(op.Name))
+                    {
+                        op.Name = $"Operator_{op.InternalCode}"; //эти падлы не везде name поставили 
+                    }
+                    return op;
+                }).ToList();
+                //сохраняем все в бд
+                context.BulkInsertOrUpdate(processedOperators);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
         }
 
         public async Task<List<Operator>> GetOperators()
