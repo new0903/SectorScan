@@ -1,9 +1,9 @@
-﻿using Google.Protobuf.WellKnownTypes;
+﻿
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
-using System.Net;
+using System.Configuration;
 using System.Reflection;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Options;
@@ -21,10 +21,11 @@ namespace WebAppCellMapper.Extensions
                 var s= sP.GetRequiredService<IOptions<DatabaseConnection>>().Value;
 
                 var conn = Environment.GetEnvironmentVariable("PG_CONNECTION_STRING");
-
                 opt.UseNpgsql(conn);//conn.Value.ToString()
             });
-
+            var conn = Environment.GetEnvironmentVariable("PG_CONNECTION_STRING");
+            services.AddNpgsqlDataSource(conn);
+            services.AddHealthChecks().AddNpgSql();
             return services;
         }
        
@@ -36,10 +37,12 @@ namespace WebAppCellMapper.Extensions
             services.AddScoped<IStationsService, StationsService>();//AddScoped или AddTransient
             services.AddScoped<IOperatorsService ,OperatorsService>();
             return services;
-
         }
-        public static IServiceCollection AddOptionsSetups(this IServiceCollection services)
+
+        public static IServiceCollection AddOptionsSetups(this IServiceCollection services, IConfiguration configuration)
         {
+
+
             var types = currentAssembly.GetTypes();
             var genericBaseType = typeof(OptionsSetup<>);
             var setups = types.Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == genericBaseType);
@@ -48,6 +51,17 @@ namespace WebAppCellMapper.Extensions
             {
                 services.ConfigureOptions(type);
             }
+
+            
+            var dbConnection = new DatabaseConnection();
+            configuration.GetSection("PG").Bind(dbConnection);
+
+            Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", dbConnection.ToString());
+            Environment.SetEnvironmentVariable("PG_USER", $"{dbConnection.Username}");
+            Environment.SetEnvironmentVariable("PG_PASSWORD", $"{dbConnection.Password}");
+            Environment.SetEnvironmentVariable("PG_SERVER", $"{dbConnection.Host}:{dbConnection.Port}");
+            Environment.SetEnvironmentVariable("PG_DATABASE", $"{dbConnection.Database}");
+            
 
             return services;
         }

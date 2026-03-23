@@ -32,7 +32,7 @@ namespace WebAppCellMapper
 
 
 
-            builder.Services.AddOptionsSetups();
+            builder.Services.AddOptionsSetups(builder.Configuration);
 
 
             // Add services to the container.
