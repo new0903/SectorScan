@@ -1,2 +1,0 @@
-obj\Release\net8.0\Grpc\Protos/StationService.cs \
-obj\Release\net8.0\Grpc\Protos/StationServiceGrpc.cs: Grpc/Protos/StationService.proto

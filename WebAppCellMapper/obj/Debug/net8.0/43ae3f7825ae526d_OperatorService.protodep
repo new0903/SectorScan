@@ -1,2 +1,0 @@
-obj\Debug\net8.0\Grpc\Protos/OperatorService.cs \
-obj\Debug\net8.0\Grpc\Protos/OperatorServiceGrpc.cs: Grpc/Protos/OperatorService.proto

@@ -1,2 +1,0 @@
-obj\Debug\net8.0\Protos/StationService.cs \
-obj\Debug\net8.0\Protos/StationServiceGrpc.cs: Protos/StationService.proto
