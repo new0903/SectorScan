@@ -44,12 +44,11 @@ services:
       context: D:\VS2010Test\техноком\WebAppCellMapper
       dockerfile: WebAppCellMapper/Dockerfile
       args:
-        BUILD_CONFIGURATION: Debug
+        BUILD_CONFIGURATION: Release
         LAUNCHING_FROM_VS: "true"
       labels:
         com.microsoft.created-by: visual-studio
         com.microsoft.visual-studio.project-name: WebAppCellMapper
-      target: base
     entrypoint:
       - dotnet
       - --roll-forward
@@ -60,12 +59,15 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: "8080"
       ASPNETCORE_HTTPS_PORTS: "8081"
-      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
-      DOTNET_USE_POLLING_FILE_WATCHER: "1"
-      NUGET_FALLBACK_PACKAGES: /.nuget/fallbackpackages;/.nuget/fallbackpackages2
-    image: webappcellmapper:dev
+      PG__Database: stations
+      PG__Host: db_postgres17
+      PG__Password: root
+      PG__Port: "5432"
+      PG__Username: root
+    image: webappcellmapper
     labels:
-      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages --additionalProbingPath /.nuget/fallbackpackages2  "/app/bin/Debug/net8.0/WebAppCellMapper.dll"'
+      com.microsoft.visual-studio.project-name: WebAppCellMapper
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages --additionalProbingPath /.nuget/fallbackpackages2  "/app/WebAppCellMapper.dll"'
       com.microsoft.visualstudio.debuggee.killprogram: dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet
       com.microsoft.visualstudio.debuggee.program: dotnet
       com.microsoft.visualstudio.debuggee.workingdirectory: /app
@@ -105,36 +107,8 @@ services:
         bind:
           create_host_path: true
       - type: bind
-        source: D:\VS2010Test\техноком\WebAppCellMapper\WebAppCellMapper
-        target: /app
-        bind:
-          create_host_path: true
-      - type: bind
-        source: D:\VS2010Test\техноком\WebAppCellMapper
-        target: /src
-        bind:
-          create_host_path: true
-      - type: bind
         source: C:\Users\Evgeny\vsdbg\vs2017u5
         target: /remote_debugger
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\NugetPackages
-        target: /.nuget/packages
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: C:\Program Files\dotnet\sdk\NuGetFallbackFolder
-        target: /.nuget/fallbackpackages
-        read_only: true
-        bind:
-          create_host_path: true
-      - type: bind
-        source: D:\VisualStudio2017\SDK\NuGetPackages
-        target: /.nuget/fallbackpackages2
-        read_only: true
         bind:
           create_host_path: true
       - type: bind

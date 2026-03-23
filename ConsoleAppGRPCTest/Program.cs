@@ -16,19 +16,19 @@ namespace ConsoleAppGRPCTest
 
         public static  async Task ReceiveServerStream()
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:62385");//63608:8081⁠
+            using var channel = GrpcChannel.ForAddress("http://localhost:6622");//63608:8081⁠
             var client = new StationServiceGrpc.StationServiceGrpcClient(channel);
             var request = new RequestParamsForArea
             {
                 Network=NetworkStandardGRPC.Gsm,
                 OperatorCode="250001",
-                Step=1.8,
+                Step=6.0,
                 Coordinates=new Location() 
                 {
-                    LatS= 53,//38
-                    LatE=54,//81
-                    LonS=50,//20
-                    LonE=52//70
+                    LatS= 38,//38
+                    LatE= 81,//81
+                    LonS= 20,//20
+                    LonE= 70//70
                 }
             };
 

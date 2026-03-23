@@ -3,7 +3,7 @@ services:
     build:
       args:
         LAUNCHING_FROM_VS: true
-        BUILD_CONFIGURATION: Release
+        BUILD_CONFIGURATION: Debug
       labels:
         com.microsoft.created-by: "visual-studio"
         com.microsoft.visual-studio.project-name: "WebAppCellMapper"

@@ -47,6 +47,11 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: "8080"
       ASPNETCORE_HTTPS_PORTS: "8081"
+      PG__Database: stations
+      PG__Host: db_postgres17
+      PG__Password: root
+      PG__Port: "5432"
+      PG__Username: root
     image: webappcellmapper
     networks:
       default: null

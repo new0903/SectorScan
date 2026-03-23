@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using WebAppCellMapper.Extensions;
 using WebAppCellMapper.Grpc;
@@ -11,6 +12,23 @@ namespace WebAppCellMapper
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+            //для прослушивания разных портов
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(8080, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http1;
+                });
+
+                options.ListenAnyIP(8081, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                });
+            });
+
+
 
 
 
