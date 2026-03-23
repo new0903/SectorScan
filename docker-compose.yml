@@ -3,13 +3,16 @@ services:
     image: ${DOCKER_REGISTRY-}webappcellmapper
     build:
       context: .
-      dockerfile: WebAppCellMapper/Dockerfile
+      dockerfile: Dockerfile
     environment:
       - PG__Host=db_postgres17
       - PG__Port=5432
       - PG__Database=stations
       - PG__Username=root
       - PG__Password=root
+    depends_on:
+      - db_postgres17
+    restart: on-failure  # Перезапускать при ошибке
   db_postgres17:
     image: postgres:17-alpine
     container_name: postgres17

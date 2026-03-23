@@ -1,0 +1,104 @@
+name: dockercompose9975546993587566448
+services:
+  db_postgres17:
+    container_name: postgres17
+    environment:
+      POSTGRES_DB: stations
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+    image: postgres:17-alpine
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "54321"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: db_postgres17
+        target: /var/lib/postgresql/data
+        volume: {}
+  pgadmin4:
+    container_name: pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    image: dpage/pgadmin4:latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "5050"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: pgadmin4
+        target: /var/lib/pgadmin
+        volume: {}
+  webappcellmapper:
+    build:
+      context: D:\VS2010Test\техноком\WebAppCellMapper
+      dockerfile: Dockerfile
+    depends_on:
+      db_postgres17:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_GRPC_PORTS: "8081"
+      ASPNETCORE_HTTP_PORTS: "8080"
+      PG__Database: stations
+      PG__Host: db_postgres17
+      PG__Password: root
+      PG__Port: "5432"
+      PG__Username: root
+    image: webappcellmapper
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "2345"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "6622"
+        protocol: tcp
+    restart: on-failure
+    volumes:
+      - type: bind
+        source: C:\Users\Evgeny\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\Evgeny\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\Evgeny\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\Evgeny\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose9975546993587566448_default
+volumes:
+  db_postgres17:
+    name: dockercompose9975546993587566448_db_postgres17
+  pgadmin4:
+    name: dockercompose9975546993587566448_pgadmin4
