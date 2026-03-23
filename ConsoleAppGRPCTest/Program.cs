@@ -28,7 +28,7 @@ namespace ConsoleAppGRPCTest
                     LatS= 38,//38
                     LatE= 81,//81
                     LonS= 20,//20
-                    LonE= 70//70
+                    LonE= 180//70
                 }
             };
 
