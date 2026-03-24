@@ -3,7 +3,7 @@ services:
     image: ${DOCKER_REGISTRY-}webappcellmapper
     build:
       context: .
-      dockerfile: WebAppCellMapper/Dockerfile # для vs2022 Dockerfile
+      dockerfile: Dockerfile # WebAppCellMapper/ для vs2022 Dockerfile
     environment:
       - PG_HOST=db_postgres17
       - PG_PORT=5432
