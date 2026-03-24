@@ -14,7 +14,6 @@ namespace WebAppCellMapper
             var builder = WebApplication.CreateBuilder(args);
 
 
-            //для прослушивания разных портов
             builder.WebHost.ConfigureKestrel(options =>
             {
                 options.ListenAnyIP(8080, listenOptions =>
@@ -34,13 +33,13 @@ namespace WebAppCellMapper
 
             builder.Services.AddOptionsSetups(builder.Configuration);
 
+            builder.Services
+                .InitDBContext()
+                .IncludeServices();
 
             // Add services to the container.
             builder.Services.AddGrpc();
 
-            builder.Services
-                .InitDBContext()
-                .IncludeServices();
 
 
             builder.Services.AddControllers();
