@@ -4,7 +4,7 @@ using WebAppCellMapper.Data.Models;
 
 namespace WebAppCellMapper.Data
 {
-    public class AppDBContext : DbContext, IHealthCheck
+    public class AppDBContext : DbContext
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
@@ -13,27 +13,6 @@ namespace WebAppCellMapper.Data
 
         public virtual DbSet<Station> stations { get; set; }
         public virtual DbSet<Operator> operators { get; set; }
-
-        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
-        {
-
-            try
-            {
-                var canConnect = await Database.CanConnectAsync(cancellationToken);
-
-                if (canConnect)
-                {
-                    return HealthCheckResult.Healthy("ok");
-                }
-                return HealthCheckResult.Unhealthy("error");
-
-            }
-            catch (Exception ex)
-            {
-                
-                return HealthCheckResult.Unhealthy(ex.Message,ex);
-            }
-        }
 
         //public DbSet<Country> countries { get; set; }
 
