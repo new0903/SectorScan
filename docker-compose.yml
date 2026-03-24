@@ -7,9 +7,10 @@ services:
     environment:
       - PG_Host=db_postgres17
       - PG_Port=5432
-      - PG_Database=stations
+      - PG_Database=ConfigManager
       - PG_Username=root
       - PG_Password=root
+      - PG_SERVER=db_postgres17:5432
     depends_on:
       - db_postgres17
    # restart: on-failure   Перезапускать при ошибке
@@ -22,7 +23,7 @@ services:
     environment:
         POSTGRES_USER: root
         POSTGRES_PASSWORD: root
-        POSTGRES_DB: stations
+        POSTGRES_DB: ConfigManager
     ports:
         - "54321:5432"
     volumes:
