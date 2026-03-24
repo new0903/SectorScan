@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Npgsql;
+using System.Net;
 using WebAppCellMapper.Data;
 
 namespace WebAppCellMapper.Controllers
@@ -32,7 +33,15 @@ namespace WebAppCellMapper.Controllers
 
             if (report.Status == HealthStatus.Healthy)
             {
-                return Ok("2xx");
+                return Ok(
+                    new
+                    {
+                        status = "2хх",
+                        timestamp = DateTime.UtcNow,
+                        checks = report.Entries.ToDictionary(
+                        x => x.Key,
+                        x => new { status = x.Value.Status.ToString(), description = x.Value.Description }
+                    )});
             }
 
             return StatusCode(503, new
@@ -54,9 +63,14 @@ namespace WebAppCellMapper.Controllers
 
         [Route("/alive")]
         [HttpGet]
-        public async Task<IActionResult> Alive()
+        public IActionResult Alive(CancellationToken cancellationToken = default)
         {
-            return Ok("2хх");
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return StatusCode(503);
+            }
+
+            return Ok("2xx");
         }
 
 

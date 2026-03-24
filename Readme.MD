@@ -6,14 +6,14 @@
 
 Для проверки работы сервера можно использовать код в браузере
 
-
-
-var eventSource = new EventSource('https://localhost:PORT/api/Stations/2/250001?latS=38&latE=81&lonS=20&lonE=180'); 
+eventSource = new EventSource('https://localhost:2345/api/Stations/1/250099?latS=38&latE=81&lonS=20&lonE=180'); 
 eventSource.onmessage = (event) => {
  console.log(event.data);     
  if (event.data.includes('[DONE]')) {eventSource.close()}
 };
 
+
+по этому url https://localhost:2345/api/Stations будет полное сканирование
 
 Есть GRPC запросы в проекте ConsoleAppGRPCTest можно посмотреть как это работает
 
