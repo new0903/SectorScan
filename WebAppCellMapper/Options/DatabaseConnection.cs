@@ -2,17 +2,17 @@
 {
     public class DatabaseConnection
     {
-        public string Host { get; set; }
-        public string Port { get; set; }
-        public string Database { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string HOST { get; set; }
+        public string PORT { get; set; }
+        public string DATABASE { get; set; }
+        public string USER { get; set; }
+        public string PASSWORD { get; set; }
 
         public override string? ToString()
-            => $"Host={Host};" +
-                $"Port={Port};" +
-                $"Database={Database};" +
-                $"Username={Username};" +
-                $"Password={Password}";
+            => $"Host={HOST};" +
+                $"Port={PORT};" +
+                $"Database={DATABASE};" +
+                $"Username={USER};" +
+                $"Password={PASSWORD}";
     }
 }

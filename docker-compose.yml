@@ -3,14 +3,14 @@ services:
     image: ${DOCKER_REGISTRY-}webappcellmapper
     build:
       context: .
-      dockerfile: Dockerfile #WebAppCellMapper/Dockerfile # для vs2022 Dockerfile
+      dockerfile: WebAppCellMapper/Dockerfile # для vs2022 Dockerfile
     environment:
-      - PG_Host=db_postgres17
-      - PG_Port=5432
-      - PG_Database=ConfigManager
-      - PG_Username=root
-      - PG_Password=root
-      - PG_SERVER=db_postgres17:5432
+      - PG__HOST=db_postgres17
+      - PG__PORT=5432
+      - PG__DATABASE=ConfigManager
+      - PG__USER=root
+      - PG__PASSWORD=root
+      - PG__SERVER=db_postgres17:5432
     depends_on:
       - db_postgres17
    # restart: on-failure   Перезапускать при ошибке
