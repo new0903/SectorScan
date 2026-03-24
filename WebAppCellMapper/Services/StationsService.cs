@@ -25,14 +25,14 @@ namespace WebAppCellMapper.Services
     {
         private readonly AppDBContext context;
         private readonly IGeoBoundsService boundsService;
-       private readonly IProxyService proxyService;
-        //private readonly IOptions<RequestSettings> options;
+        private readonly IProxyHandlerPoolService handlerPoolService;
+        private readonly IProxyService proxyService;
 
-        //private readonly IHttpClientFactory clientFactory;
+
+
         private readonly ILogger<StationsService> logger;
         private readonly RequestSettings requestSettings;
 
-        //private ConcurrentDictionary<Guid, Task> requests = new ConcurrentDictionary<Guid, Task>();
 
         private int scannedStations=0;
         private int scannedSector = 0;
@@ -43,11 +43,12 @@ namespace WebAppCellMapper.Services
       //  private Stream? responseStream;// совершенно забыл про grpc 
         private ConcurrentQueue<SquareSearch>? coordinates;
 
-        public StationsService(AppDBContext context, IGeoBoundsService boundsService, IProxyService proxyService, IOptions<RequestSettings> options, ILogger<StationsService> logger)
+        public StationsService(AppDBContext context, IGeoBoundsService boundsService, IProxyHandlerPoolService handlerPoolService, IProxyService proxyService, IOptions<RequestSettings> options, ILogger<StationsService> logger)
         {
 
             this.context = context;
             this.boundsService = boundsService;
+            this.handlerPoolService = handlerPoolService;
             this.proxyService = proxyService;
             this.logger = logger;
             requestSettings = options.Value;
@@ -127,7 +128,11 @@ namespace WebAppCellMapper.Services
         }
 
 
-
+        //using var handler = new HttpClientHandler()
+        //{
+        //    Proxy=new WebProxy(proxy.url),
+        //    UseProxy= true
+        //};
 
         /// <summary>
         /// Http Запрос 
@@ -137,23 +142,28 @@ namespace WebAppCellMapper.Services
         /// </remarks>
         private async Task<bool> RequestStations( OperatorDTO op, NetworkStandard ns, SquareSearch sector,bool useP=true, CancellationToken ct=default)
         {
-         
+
+          //  var proxy = proxyService.GetProxy();
+            var handler = handlerPoolService.GetClientHandler();
 
             try
             {
 
-                var proxy= proxyService.GetProxy();
-                if (proxy == null)
+                //if (proxy == null|| handler==null)
+                //{
+                //    if (coordinates != null) coordinates.Enqueue(sector);
+                //    return false;
+                //}
+                if ( handler == null)
                 {
+                    logger.LogError("no free proxy");
                     if (coordinates != null) coordinates.Enqueue(sector);
                     return false;
                 }
-                using var handler = new HttpClientHandler()
-                {
-                    Proxy=new WebProxy(proxy.url),
-                    UseProxy= true
-                };
-                using HttpClient client = new HttpClient(handler);
+
+                //handler.Proxy = new WebProxy(proxy.url);
+                //handler.UseProxy = useP;
+                using HttpClient client = new HttpClient(handler, disposeHandler: false);
                 client.BaseAddress =new Uri("https://4cells.ru:4444/");
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
 
@@ -164,7 +174,8 @@ namespace WebAppCellMapper.Services
                 var res = await client.GetAsync($"/api/map/enb/{ns.ToString().ToLower()}/{op.Code}?{paramsUrl}", ct);//https://4cells.ru:4444/
                 if (res.IsSuccessStatusCode)
                 {
-                    proxyService.ReleaseProxy(proxy);
+                    handlerPoolService.ReleaseHandler(handler);
+                    //proxyService.ReleaseProxy(proxy);
                     string content = await res.Content.ReadAsStringAsync(ct);
                     var stations = JsonConvert.DeserializeObject<List<Station>>(content);
                     if (stations == null) return false;
@@ -201,7 +212,7 @@ namespace WebAppCellMapper.Services
                 {
                  //   proxyService.DeleteProxy(proxyAddress);
                     if (coordinates!=null) coordinates.Enqueue(sector);
-
+                    handlerPoolService.RemoveProxy(handler);
                     logger.LogError("failed request");
                 }
 
@@ -210,16 +221,22 @@ namespace WebAppCellMapper.Services
             {
                // proxyService.DeleteProxy(proxyAddress);
                 if (coordinates != null) coordinates.Enqueue(sector);
+                if (handler != null) handlerPoolService.RemoveProxy(handler);
                 logger.LogError("OperationCanceledException");
             }
             catch (Exception ex)
             {
              //   proxyService.DeleteProxy(proxyAddress);
                 if (coordinates != null) coordinates.Enqueue(sector);
+                if (handler != null) handlerPoolService.RemoveProxy(handler);
                 logger.LogError($"Exception\nmessage error: {ex.Message}");
 
 
             }
+            //finally
+            //{
+            //    if (handler!=null) handlerPoolService.ReleaseHandler(handler);
+            //}
             
 
             return false;

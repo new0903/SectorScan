@@ -34,6 +34,7 @@ namespace WebAppCellMapper.Extensions
             //.ConfigurePrimaryHttpMessageHandler<HttpClientHandler>()
             services.AddSingleton<IGeoBoundsService,GeoBoundsService>();
             services.AddSingleton<IProxyService, ProxyService>();
+            services.AddSingleton<IProxyHandlerPoolService, ProxyHandlerPoolService>();
             services.AddScoped<IStationsService, StationsService>();//AddScoped или AddTransient
             services.AddScoped<IOperatorsService ,OperatorsService>();
             return services;
@@ -55,7 +56,7 @@ namespace WebAppCellMapper.Extensions
             
             var dbConnection = new DatabaseConnection();
             configuration.GetSection("PG").Bind(dbConnection);
-
+            Console.WriteLine(dbConnection.ToString());
             Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", dbConnection.ToString());
             Environment.SetEnvironmentVariable("PG_USER", $"{dbConnection.Username}");
             Environment.SetEnvironmentVariable("PG_PASSWORD", $"{dbConnection.Password}");
