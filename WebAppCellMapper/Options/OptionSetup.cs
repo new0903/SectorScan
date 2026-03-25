@@ -21,7 +21,7 @@ namespace WebAppCellMapper.Options
         }
     }
 
-    public class DatabaseConnectionSetup(IConfiguration configuration) : OptionsSetup<DatabaseConnection>("PG", configuration);
+    // public class DatabaseConnectionSetup(IConfiguration configuration) : OptionsSetup<DatabaseConnection>("PG", configuration);
 
     public class RequestSettingsSetup(IConfiguration configuration) : OptionsSetup<RequestSettings>("RequestSettings", configuration);
 

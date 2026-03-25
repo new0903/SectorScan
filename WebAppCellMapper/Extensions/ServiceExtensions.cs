@@ -2,6 +2,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System.Configuration;
 using System.Reflection;
@@ -54,14 +55,26 @@ namespace WebAppCellMapper.Extensions
             }
 
             
-            var dbConnection = new DatabaseConnection();
-            configuration.GetSection("PG").Bind(dbConnection);
-            Console.WriteLine(dbConnection.ToString());
-            Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", dbConnection.ToString());
-            Environment.SetEnvironmentVariable("PG_USER", $"{dbConnection.USER}");
-            Environment.SetEnvironmentVariable("PG_PASSWORD", $"{dbConnection.PASSWORD}");
-            Environment.SetEnvironmentVariable("PG_SERVER", $"{dbConnection.HOST}:{dbConnection.PORT}");
-            Environment.SetEnvironmentVariable("PG_DATABASE", $"{dbConnection.DATABASE}");
+            //var dbConnection = new DatabaseConnection();
+            //configuration.GetSection("PG").Bind(dbConnection);
+            //Console.WriteLine(dbConnection.ToString());
+
+            string host= Environment.GetEnvironmentVariable("PG_HOST");
+            string port = Environment.GetEnvironmentVariable("PG_PORT");
+            string database = Environment.GetEnvironmentVariable("PG_DATABASE");
+            string user = Environment.GetEnvironmentVariable("PG_USER");
+            string pass = Environment.GetEnvironmentVariable("PG_PASSWORD");
+            string connString= $"Host={host};" +
+                $"Port={port};" +
+                $"Database={database};" +
+                $"Username={user};" +
+                $"Password={pass}";
+
+            Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", connString);
+            //Environment.SetEnvironmentVariable("PG_USER", $"{dbConnection.USER}");
+            //Environment.SetEnvironmentVariable("PG_PASSWORD", $"{dbConnection.PASSWORD}");
+            //Environment.SetEnvironmentVariable("PG_SERVER", $"{dbConnection.HOST}:{dbConnection.PORT}");
+            //Environment.SetEnvironmentVariable("PG_DATABASE", $"{dbConnection.DATABASE}");
             
 
             return services;
