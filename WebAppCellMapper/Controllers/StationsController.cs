@@ -43,7 +43,7 @@ namespace WebAppCellMapper.Controllers
         [HttpGet]
         [Produces("text/event-stream")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task SyncStationsAll(NetworkStandard network, string operatorCode, [FromQuery] QueryParams queryParams, CancellationToken ct = default)
+        public async Task SyncStationsAll( CancellationToken ct = default)
         {
             logger.LogInformation($"SearchByOperator start");
             Response.Headers.Add("Content-Type", "text/event-stream");
