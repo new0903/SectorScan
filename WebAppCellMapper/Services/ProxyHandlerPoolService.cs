@@ -19,19 +19,20 @@ namespace WebAppCellMapper.Services
     public class ProxyHandlerPoolService: IProxyHandlerPoolService
     {
         private readonly ConcurrentStack<HttpClientHandler> handlers;
-        
+        private readonly List<HttpClientHandler> listHandlers;
+
 
         private readonly RequestSettings settings;
         private readonly IProxyService proxyService;
         private readonly ILogger<ProxyHandlerPoolService> logger;
 
-        public int countHandlers { get; private set; }
+        //public int countHandlers { get; private set; }
 
         public ProxyHandlerPoolService(IOptions<RequestSettings> options, IProxyService proxyService,ILogger<ProxyHandlerPoolService> logger)
         {
             handlers = new ConcurrentStack<HttpClientHandler>();
-            settings= options.Value;
-            countHandlers = 0;
+            listHandlers = new List<HttpClientHandler>();
+            settings = options.Value;
             this.proxyService = proxyService;
             this.logger = logger;
         }
@@ -42,14 +43,15 @@ namespace WebAppCellMapper.Services
             HttpClientHandler? handler = null;
             try
             {
-                if (countHandlers < settings.MaxConnectionsPerServer)
+                if (listHandlers.Count < settings.MaxConnectionsPerServer)
                 {
-                    countHandlers++;
+                    //countHandlers++;
                     var proxy=proxyService.GetProxy();
                     if (proxy == null) return null;
                     handler = new HttpClientHandler();
                     handler.Proxy = new WebProxy(proxy.url);
                     handler.UseProxy = true;
+                    listHandlers.Add(handler);
                   //  handlers.Enqueue(handler);
 
                 }
@@ -69,12 +71,19 @@ namespace WebAppCellMapper.Services
         Надо будет подумать. 
      
          */
-        public void RemoveProxy(HttpClientHandler handler)
+        public void RemoveUnusedProxy()
         {
             try
             {
-                handler.Dispose();
-                countHandlers--;
+                listHandlers.RemoveAll(item =>
+                {
+                    if (!handlers.Contains(item))
+                    {
+                        item.Dispose();
+                        return true;
+                    }
+                    return false;
+                });
             }
             catch (Exception ex)
             {

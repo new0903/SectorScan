@@ -111,6 +111,8 @@ namespace WebAppCellMapper.Services
                     
 
                     await Task.WhenAll(requests);
+
+                    handlerPoolService.RemoveUnusedProxy();
                 }
                 {
                     QueryResult res = new QueryResult(op.Code, ns, scannedStations, scannedSector, coordinates.Count, "сохроняю в бд");
@@ -212,7 +214,7 @@ namespace WebAppCellMapper.Services
                 {
                  //   proxyService.DeleteProxy(proxyAddress);
                     if (coordinates!=null) coordinates.Enqueue(sector);
-                    handlerPoolService.RemoveProxy(handler);
+                    //handlerPoolService.RemoveProxy(handler);
                     logger.LogError("failed request");
                 }
 
@@ -221,14 +223,14 @@ namespace WebAppCellMapper.Services
             {
                // proxyService.DeleteProxy(proxyAddress);
                 if (coordinates != null) coordinates.Enqueue(sector);
-                if (handler != null) handlerPoolService.RemoveProxy(handler);
+              //  if (handler != null) handlerPoolService.RemoveProxy(handler);
                 logger.LogError("OperationCanceledException");
             }
             catch (Exception ex)
             {
              //   proxyService.DeleteProxy(proxyAddress);
                 if (coordinates != null) coordinates.Enqueue(sector);
-                if (handler != null) handlerPoolService.RemoveProxy(handler);
+             //   if (handler != null) handlerPoolService.RemoveProxy(handler);
                 logger.LogError($"Exception\nmessage error: {ex.Message}");
 
 

@@ -4,7 +4,7 @@
     {
         HttpClientHandler? GetClientHandler();
         void ReleaseHandler(HttpClientHandler handler);
-        void RemoveProxy(HttpClientHandler handler);
+        void RemoveUnusedProxy();
     }
 
 }
