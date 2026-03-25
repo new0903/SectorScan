@@ -3,18 +3,6 @@
   "WorkspaceRootPath": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\controllers\\stationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\proxyhandlerpoolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\proxyhandlerpoolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|d:\\vs2010test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\webappcellmapper\\webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5CDC005C-226B-47F5-92B1-4CB008443ED3}|WebAppCellMapper\\WebAppCellMapper.csproj|solutionrelative:webappcellmapper\\services\\stationsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -79,52 +67,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StationsController.cs",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
-              "RelativeDocumentMoniker": "WebAppCellMapper\\Controllers\\StationsController.cs",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Controllers\\StationsController.cs",
-              "RelativeToolTip": "WebAppCellMapper\\Controllers\\StationsController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAARwC0AAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T04:36:51.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "StationsService.cs",
               "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
               "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\StationsService.cs",
               "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\StationsService.cs",
               "RelativeToolTip": "WebAppCellMapper\\Services\\StationsService.cs",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAHIAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAALcAAAAAAAAAAAAYwMgAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T03:51:51.28Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProxyHandlerPoolService.cs",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\ProxyHandlerPoolService.cs",
-              "RelativeDocumentMoniker": "WebAppCellMapper\\Services\\ProxyHandlerPoolService.cs",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\WebAppCellMapper\\Services\\ProxyHandlerPoolService.cs",
-              "RelativeToolTip": "WebAppCellMapper\\Services\\ProxyHandlerPoolService.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAXwEwAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T03:38:16.926Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "docker-compose.yml",
-              "DocumentMoniker": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\docker-compose.yml",
-              "RelativeDocumentMoniker": "docker-compose.yml",
-              "ToolTip": "D:\\VS2010Test\\\u0442\u0435\u0445\u043D\u043E\u043A\u043E\u043C\\WebAppCellMapper\\docker-compose.yml",
-              "RelativeToolTip": "docker-compose.yml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2026-03-25T03:33:02.234Z",
+              "WhenOpened": "2026-03-25T06:54:15.758Z",
               "EditorCaption": ""
             }
           ]

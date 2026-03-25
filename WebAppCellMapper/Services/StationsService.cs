@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
+using System.IO.Compression;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
@@ -166,10 +168,25 @@ namespace WebAppCellMapper.Services
                 //handler.Proxy = new WebProxy(proxy.url);
                 //handler.UseProxy = useP;
                 using HttpClient client = new HttpClient(handler, disposeHandler: false);
-                client.BaseAddress =new Uri("https://4cells.ru:4444/");
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
+                client.BaseAddress =new Uri("https://4cells.ru:4444");
 
 
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36");
+                // Добавляем заголовки для эмуляции AJAX/CORS запроса
+                client.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/plain, */*");
+                client.DefaultRequestHeaders.Add("Origin", "https://4cells.ru");
+                client.DefaultRequestHeaders.Add("Referer", "https://4cells.ru/");
+                client.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
+                client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br, zstd");
+                client.DefaultRequestHeaders.Add("Sec-Ch-Ua", "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"");
+                client.DefaultRequestHeaders.Add("Sec-Ch-Ua-Mobile", "?0");
+                client.DefaultRequestHeaders.Add("Sec-Ch-Ua-Platform", "\"Windows\"");
+                client.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
+                client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
+                client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-site");
+                client.DefaultRequestHeaders.Add("Priority", "u=1, i");
+
+                // https://4cells.ru:4444/api/map/enb/lte/250011?
                 string paramsUrl = $"latStart={sector.latStart.ToString().Replace(",",".")}&latEnd={sector.latEnd.ToString().Replace(",", ".")}&lonStart={sector.lonStart.ToString().Replace(",", ".")}&lonEnd={sector.lonEnd.ToString().Replace(",", ".")}";
 
 
@@ -177,10 +194,14 @@ namespace WebAppCellMapper.Services
                 if (res.IsSuccessStatusCode)
                 {
                     handlerPoolService.ReleaseHandler(handler);
+                    logger.LogInformation($"success request {res.StatusCode}");
                     //proxyService.ReleaseProxy(proxy);
+                    //var bytesResp =await res.Content.ReadAsByteArrayAsync();//попробую в ручную. Так хоть что то приходит
+                    //  var content=  DecompressGzip(bytesResp);
                     string content = await res.Content.ReadAsStringAsync(ct);
                     var stations = JsonConvert.DeserializeObject<List<Station>>(content);
                     if (stations == null) return false;
+                    logger.LogInformation($"success request {res.StatusCode} {stations.Count}");
                     foreach (var item in stations)
                     {
 
@@ -190,7 +211,6 @@ namespace WebAppCellMapper.Services
                             item.Standard = ns;
                             stationsList.Add(item);
                             Interlocked.Increment(ref scannedStations);
-                            //scannedStations++;
                         }
 
                     }
@@ -215,7 +235,7 @@ namespace WebAppCellMapper.Services
                  //   proxyService.DeleteProxy(proxyAddress);
                     if (coordinates!=null) coordinates.Enqueue(sector);
                     //handlerPoolService.RemoveProxy(handler);
-                    logger.LogError("failed request");
+                    logger.LogError($"failed request {res.StatusCode}");
                 }
 
             }
@@ -224,7 +244,7 @@ namespace WebAppCellMapper.Services
                // proxyService.DeleteProxy(proxyAddress);
                 if (coordinates != null) coordinates.Enqueue(sector);
               //  if (handler != null) handlerPoolService.RemoveProxy(handler);
-                logger.LogError("OperationCanceledException");
+               logger.LogError("OperationCanceledException");
             }
             catch (Exception ex)
             {
@@ -244,7 +264,17 @@ namespace WebAppCellMapper.Services
             return false;
           
         }
-       
+        string DecompressGzip(byte[] gzipData)
+        {
+            using (var compressedStream = new MemoryStream(gzipData))
+            using (var gzipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+            using (var resultStream = new MemoryStream())
+            {
+                gzipStream.CopyTo(resultStream);
+                byte[] decompressedBytes = resultStream.ToArray();
+                return Encoding.UTF8.GetString(decompressedBytes);
+            }
+        }
         /// <summary>
         /// Сохраняем результат в бд 
         /// </summary>

@@ -51,6 +51,9 @@ namespace WebAppCellMapper.Services
                     handler = new HttpClientHandler();
                     handler.Proxy = new WebProxy(proxy.url);
                     handler.UseProxy = true;
+                    handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli;
+                    // Если нужно игнорировать сертификаты (только для тестирования)
+                    handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
                     listHandlers.Add(handler);
                   //  handlers.Enqueue(handler);
 
@@ -69,7 +72,6 @@ namespace WebAppCellMapper.Services
         /*
          хотя такая реализация не очень хорошая так скажем. Т.к. надо 100% отслеживать каждый handler.
         Надо будет подумать. 
-     
          */
         public void RemoveUnusedProxy()
         {

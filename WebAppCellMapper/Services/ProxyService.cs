@@ -115,6 +115,7 @@ namespace WebAppCellMapper.Services
             using HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
             var res = await client.GetAsync($"https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/all/data.json");
+            //                                https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/all/data.json
             if (res.IsSuccessStatusCode)
             {
                 var json = await res.Content.ReadAsStringAsync();
@@ -123,8 +124,24 @@ namespace WebAppCellMapper.Services
                 {
                     ProxysList.Clear();//тут очень много прокси поэтому удаляю старые прокси
                      list.Reverse();
-
+                    //var protocols=list.GroupBy(p => p.protocol);
+                    // var anonymitys = list.GroupBy(p => p.anonymity);
                     list.ForEach(p => ProxysList.Push(new ProxyElement(p.ip, p.protocol, p.proxy)));
+              
+
+                    //foreach (var item in protocols)
+                    //{
+                    //    if (item.Key=="http")
+                    //    {
+                    //       var test= item.ToArray();
+                    //        foreach (var p in test)
+                    //        {
+                    //            ProxysList.Push(new ProxyElement(p.ip, p.protocol, p.proxy));
+                    //        }
+                    //        // .ForEach(p => ProxysList.Push(new ProxyElement(p.ip, p.protocol, p.proxy)));
+                    //    }
+
+                    //}
                 }
             }
         }

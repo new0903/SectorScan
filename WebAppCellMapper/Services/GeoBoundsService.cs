@@ -16,7 +16,7 @@ namespace WebAppCellMapper.Services
         public const double MAX_LON = 180.0;
 
         // Размер квадрата 
-        public const double EFFECTIVE_STEP = 6.0;
+        public const double EFFECTIVE_STEP = 6.2435223452345235243524325432534;
 
 
      
