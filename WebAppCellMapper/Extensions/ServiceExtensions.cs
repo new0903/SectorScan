@@ -54,10 +54,7 @@ namespace WebAppCellMapper.Extensions
                 services.ConfigureOptions(type);
             }
 
-            
-            //var dbConnection = new DatabaseConnection();
-            //configuration.GetSection("PG").Bind(dbConnection);
-            //Console.WriteLine(dbConnection.ToString());
+
 
             string host= Environment.GetEnvironmentVariable("PG_HOST");
             string port = Environment.GetEnvironmentVariable("PG_PORT");
@@ -71,10 +68,7 @@ namespace WebAppCellMapper.Extensions
                 $"Password={pass}";
 
             Environment.SetEnvironmentVariable("PG_CONNECTION_STRING", connString);
-            //Environment.SetEnvironmentVariable("PG_USER", $"{dbConnection.USER}");
-            //Environment.SetEnvironmentVariable("PG_PASSWORD", $"{dbConnection.PASSWORD}");
-            //Environment.SetEnvironmentVariable("PG_SERVER", $"{dbConnection.HOST}:{dbConnection.PORT}");
-            //Environment.SetEnvironmentVariable("PG_DATABASE", $"{dbConnection.DATABASE}");
+
             
 
             return services;
