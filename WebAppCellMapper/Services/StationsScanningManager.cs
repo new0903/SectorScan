@@ -75,11 +75,13 @@ namespace WebAppCellMapper.Services
             {
                 if (TokenSourceTask != null)
                 {
-                    if (TokenSourceTask.IsCancellationRequested)
+                    if (!TokenSourceTask.IsCancellationRequested)
                     {
                         TokenSourceTask.Cancel();
                     }
                     TokenSourceTask.Dispose();
+                    TokenSourceTask = null;
+                    task = null;
                 }
 
 
