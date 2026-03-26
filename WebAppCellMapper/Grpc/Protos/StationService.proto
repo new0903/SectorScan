@@ -54,8 +54,8 @@ message ResultResponse{
 }
 
 service StationServiceGrpc {
-  rpc SyncStationsAll(Empty) returns (stream RequestResponse);
-  rpc ScanAreaStream(RequestParamsForArea) returns (stream RequestResponse);
+ // rpc SyncStationsAll(Empty) returns (stream RequestResponse);
+ // rpc ScanAreaStream(RequestParamsForArea) returns (stream RequestResponse);
   rpc FullScan(Empty) returns ( ResultResponse);
   rpc Stats(Empty) returns ( RequestResponse);
   rpc StopProccess(Empty) returns (ResultResponse);

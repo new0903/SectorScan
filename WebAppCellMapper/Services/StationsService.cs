@@ -28,7 +28,7 @@ namespace WebAppCellMapper.Services
         private readonly AppDBContext context;
         private readonly IGeoBoundsService boundsService;
         private readonly IProxyHandlerPoolService handlerPoolService;
-        private readonly IProxyService proxyService;
+     //   private readonly IProxyService proxyService;
 
 
 
@@ -45,13 +45,15 @@ namespace WebAppCellMapper.Services
       //  private Stream? responseStream;// совершенно забыл про grpc 
         private ConcurrentQueue<SquareSearch>? coordinates;
 
-        public StationsService(AppDBContext context, IGeoBoundsService boundsService, IProxyHandlerPoolService handlerPoolService, IProxyService proxyService, IOptions<RequestSettings> options, ILogger<StationsService> logger)
+        public StationsService(AppDBContext context, IGeoBoundsService boundsService, IProxyHandlerPoolService handlerPoolService, 
+           // IProxyService proxyService,
+            IOptions<RequestSettings> options, ILogger<StationsService> logger)
         {
 
             this.context = context;
             this.boundsService = boundsService;
             this.handlerPoolService = handlerPoolService;
-            this.proxyService = proxyService;
+         //   this.proxyService = proxyService;
             this.logger = logger;
             requestSettings = options.Value;
             stationsList = new List<Station>();
@@ -88,7 +90,7 @@ namespace WebAppCellMapper.Services
                    yield return res;
                    // await WriteResponse(JsonConvert.SerializeObject(res));
                 }
-                await proxyService.GetProxies();
+                await handlerPoolService.InitProxies();//proxyService.GetProxies();
 
                 using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(requestSettings.TimeoutSeconds)))
                 //если ставит20 секунд или меньше прокси закончатся 

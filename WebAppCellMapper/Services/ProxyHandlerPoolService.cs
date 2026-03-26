@@ -36,7 +36,10 @@ namespace WebAppCellMapper.Services
             this.proxyService = proxyService;
             this.logger = logger;
         }
-
+        public async Task InitProxies()
+        {
+            await proxyService.GetProxies();
+        }
 
         public HttpClientHandler? GetClientHandler()
         {
@@ -46,6 +49,7 @@ namespace WebAppCellMapper.Services
                 //await proxyService.GetProxies();
                 if (listHandlers.Count < settings.MaxConnectionsPerServer)
                 {
+                    
                     //countHandlers++;
                     var proxy=proxyService.GetProxy();
                     if (proxy == null) return null;

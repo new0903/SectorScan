@@ -20,6 +20,7 @@ namespace TestProject1
     public class Tests
     {
         private Mock<IStationsService> _mockStationsService;
+        private Mock<IStationsScanningManager> _mockStationsManagerService;
         private Mock<ILogger<StationsController>> _mockLogger;
         private StationsController _controller;
         private DefaultHttpContext _httpContext;
@@ -29,10 +30,12 @@ namespace TestProject1
         public void Setup()
         {
             _mockStationsService = new Mock<IStationsService>();
+            _mockStationsManagerService = new Mock<IStationsScanningManager>();
             _mockLogger = new Mock<ILogger<StationsController>>();
 
             _controller = new StationsController(
                 _mockStationsService.Object,
+                _mockStationsManagerService.Object,
                 _mockLogger.Object
             );
 
@@ -252,7 +255,7 @@ namespace TestProject1
                 .Returns(testResults.ToAsyncEnumerable());
 
             // Act
-            await _controller.SyncStationsAll(network, operatorCode, queryParams, ct);
+            await _controller.SyncStationsAll( ct);
 
             // Assert
             var responseString = Encoding.UTF8.GetString(_responseStream.ToArray());
@@ -283,10 +286,7 @@ namespace TestProject1
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<Exception>(async () =>
-                await _controller.SyncStationsAll(
-                    NetworkStandard.Lte,
-                    "250001",
-                    new QueryParams(null,null,null,null)));
+                await _controller.SyncStationsAll());
 
             Assert.That(ex.Message, Is.EqualTo("Sync error"));
         }
