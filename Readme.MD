@@ -4,6 +4,14 @@
 
 ### Тестовый клиент на JavaScript
 
+Запускает процесс сканирования 
+http://localhost:2345/api/Stations/fullscan
+Возвращает результат сканирования
+http://localhost:2345/api/Stations/stats
+Останавливает процесс
+http://localhost:2345/api/Stations/stop
+
+
 Для проверки работы сервера можно использовать код в браузере
 
 eventSource = new EventSource('http://localhost:2345/api/Stations/1/250099?latS=38&latE=81&lonS=20&lonE=180'); 
