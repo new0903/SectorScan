@@ -43,6 +43,7 @@ namespace WebAppCellMapper.Services
             HttpClientHandler? handler = null;
             try
             {
+                //await proxyService.GetProxies();
                 if (listHandlers.Count < settings.MaxConnectionsPerServer)
                 {
                     //countHandlers++;

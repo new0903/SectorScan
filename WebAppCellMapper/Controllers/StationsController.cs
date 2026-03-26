@@ -17,11 +17,13 @@ namespace WebAppCellMapper.Controllers
     public class StationsController : ControllerBase
     {
         private readonly IStationsService stationsService;
+        private readonly IStationsScanningManager scanningManager;
         private readonly ILogger<StationsController> logger;
 
-        public StationsController(IStationsService stationsService, ILogger<StationsController> logger) 
+        public StationsController(IStationsService stationsService,IStationsScanningManager scanningManager, ILogger<StationsController> logger) 
         {
             this.stationsService = stationsService;
+            this.scanningManager = scanningManager;
             this.logger = logger;
         }
 
@@ -115,8 +117,54 @@ namespace WebAppCellMapper.Controllers
 
         }
 
-     
+        [HttpGet("fullscan")]     
+        public async Task<IActionResult> FullScan()
+        {
+            try
+            {
+                scanningManager.StartFullScan();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+               return BadRequest();
+            }
+
+        }
 
 
+        [HttpGet("stats")]
+        public async Task<IActionResult> Stats()
+        {
+            try
+            {
+                var res= scanningManager.GetCurrentProccess();
+                return Ok(JsonConvert.SerializeObject(res));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+
+        }
+
+
+        [HttpGet("stop")]
+        public async Task<IActionResult> StopProccess()
+        {
+            try
+            {
+                await scanningManager.StopCurrentProccess();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+
+        }
     }
 }

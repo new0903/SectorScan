@@ -49,10 +49,16 @@ message RequestResponse {
 }
 
 message Empty{}
+message ResultResponse{
+    bool result=1;
+}
 
 service StationServiceGrpc {
   rpc SyncStationsAll(Empty) returns (stream RequestResponse);
   rpc ScanAreaStream(RequestParamsForArea) returns (stream RequestResponse);
+  rpc FullScan(Empty) returns ( ResultResponse);
+  rpc Stats(Empty) returns ( RequestResponse);
+  rpc StopProccess(Empty) returns (ResultResponse);
 }
 
 

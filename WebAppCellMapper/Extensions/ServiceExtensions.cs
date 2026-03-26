@@ -36,6 +36,7 @@ namespace WebAppCellMapper.Extensions
             services.AddSingleton<IGeoBoundsService,GeoBoundsService>();
             services.AddSingleton<IProxyService, ProxyService>();
             services.AddSingleton<IProxyHandlerPoolService, ProxyHandlerPoolService>();
+            services.AddSingleton<IStationsScanningManager, StationsScanningManager>();
             services.AddScoped<IStationsService, StationsService>();//AddScoped или AddTransient
             services.AddScoped<IOperatorsService ,OperatorsService>();
             return services;

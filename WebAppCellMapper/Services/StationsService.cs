@@ -338,7 +338,6 @@ namespace WebAppCellMapper.Services
                     {
                         yield return item;
                     }
-                    scannedSector = 0;
                     {
 
                         QueryResult res = new QueryResult(op.Code, network, scannedStations, scannedSector, coordinates==null?0:coordinates.Count, "сканирование станций завершено", false);
@@ -347,6 +346,9 @@ namespace WebAppCellMapper.Services
                     }
                     idsStations.Clear();
                     coordinates = null;
+                    scannedStations = 0;
+                    scannedSector = 0;
+
                 }
             }
             {
