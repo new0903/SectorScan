@@ -97,13 +97,17 @@ namespace WebAppCellMapper.Services
                 // так хотя бы ячеек больше закрою
                 {
                     var requests = new List<Task>();
-                    int counter= coordinates.Count> requestSettings.MaxConnectionsPerServer ? requestSettings.MaxConnectionsPerServer : coordinates.Count;
-
-                       for (int i = 0; i < counter; i++)
-                       {
+                    int counter =coordinates.Count;
+                    counter= counter > requestSettings.MaxConnectionsPerServer ? requestSettings.MaxConnectionsPerServer : counter;
+                    //уловие если меньше 50 то надо делать другой поиск
+                    //по дефолту такой стоит поиск
+                    if (counter>20)
+                    {
+                        for (int i = 0; i < counter; i++)
+                        {
                             if (coordinates.TryDequeue(out var square))
                             {
-                                var task = RequestStations(op, ns, square, true, cancellationToken.Token);
+                                var task = RequestStations(op, ns, square, cancellationToken.Token);
                                 requests.Add(task);
 
                             }
@@ -112,7 +116,32 @@ namespace WebAppCellMapper.Services
                                 break;
                             }
                         }
-                    
+                    }                  
+                    //надо сделать так что бы несколько прокси сканировали 1 и тот же сектор. 
+                    //что бы увеличить шанс сканирования.
+                    else
+                    {
+                        //надо сделать так что бы реализовать всю мощь 100 проксей
+                        //и сканировать не по 1 квадрату на 100 проксии а на сразу все
+                        //т.е. условно 7 квадратов = 7 прокси = Долгий поиск работающих прокси
+                        //100 прокси / 7 квадратов = 14 прокси = 1 квадрат шансы выше.
+
+                        int countPerProxy = requestSettings.MaxConnectionsPerServer / counter;
+                        
+                        while (coordinates.TryDequeue(out var square)) 
+                        {
+                            for (int i = 0; i < countPerProxy; i++)
+                            {
+
+                                var task = RequestStations(op, ns, square, cancellationToken.Token);
+                                requests.Add(task);
+                            }
+                        }
+                        
+                    }
+
+  
+
 
                     await Task.WhenAll(requests);
 
@@ -146,20 +175,14 @@ namespace WebAppCellMapper.Services
         /// <remarks>
         /// Этот метод делает запросы, записывает результаты запроса в коллекции и если запрос не удачный возвращает сектор обратно в очередь
         /// </remarks>
-        private async Task<bool> RequestStations( OperatorDTO op, NetworkStandard ns, SquareSearch sector,bool useP=true, CancellationToken ct=default)
+        private async Task<bool> RequestStations( OperatorDTO op, NetworkStandard ns, SquareSearch sector, CancellationToken ct=default)
         {
 
-          //  var proxy = proxyService.GetProxy();
             var handler = handlerPoolService.GetClientHandler();
 
             try
             {
 
-                //if (proxy == null|| handler==null)
-                //{
-                //    if (coordinates != null) coordinates.Enqueue(sector);
-                //    return false;
-                //}
                 if ( handler == null)
                 {
                     logger.LogError("no free proxy");
@@ -167,8 +190,6 @@ namespace WebAppCellMapper.Services
                     return false;
                 }
 
-                //handler.Proxy = new WebProxy(proxy.url);
-                //handler.UseProxy = useP;
                 using HttpClient client = new HttpClient(handler, disposeHandler: false);
                 client.BaseAddress =new Uri("https://4cells.ru:4444");
 
@@ -235,7 +256,7 @@ namespace WebAppCellMapper.Services
                 else
                 {
                  //   proxyService.DeleteProxy(proxyAddress);
-                    if (coordinates!=null) coordinates.Enqueue(sector);
+                    if (coordinates!=null && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                     //handlerPoolService.RemoveProxy(handler);
                     logger.LogError($"failed request {res.StatusCode}");
                 }
@@ -244,39 +265,38 @@ namespace WebAppCellMapper.Services
             catch (OperationCanceledException)
             {
                // proxyService.DeleteProxy(proxyAddress);
-                if (coordinates != null) coordinates.Enqueue(sector);
+                if (coordinates != null && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
               //  if (handler != null) handlerPoolService.RemoveProxy(handler);
                logger.LogError("OperationCanceledException");
             }
             catch (Exception ex)
             {
              //   proxyService.DeleteProxy(proxyAddress);
-                if (coordinates != null) coordinates.Enqueue(sector);
+                if (coordinates != null&& !coordinates.Contains(sector)) coordinates.Enqueue(sector);
              //   if (handler != null) handlerPoolService.RemoveProxy(handler);
                 logger.LogError($"Exception\nmessage error: {ex.Message}");
 
 
             }
-            //finally
-            //{
-            //    if (handler!=null) handlerPoolService.ReleaseHandler(handler);
-            //}
-            
+
 
             return false;
-          
         }
-        string DecompressGzip(byte[] gzipData)
-        {
-            using (var compressedStream = new MemoryStream(gzipData))
-            using (var gzipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
-            using (var resultStream = new MemoryStream())
-            {
-                gzipStream.CopyTo(resultStream);
-                byte[] decompressedBytes = resultStream.ToArray();
-                return Encoding.UTF8.GetString(decompressedBytes);
-            }
-        }
+
+
+        //string DecompressGzip(byte[] gzipData)
+        //{
+        //    using (var compressedStream = new MemoryStream(gzipData))
+        //    using (var gzipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+        //    using (var resultStream = new MemoryStream())
+        //    {
+        //        gzipStream.CopyTo(resultStream);
+        //        byte[] decompressedBytes = resultStream.ToArray();
+        //        return Encoding.UTF8.GetString(decompressedBytes);
+        //    }
+        //}
+
+
         /// <summary>
         /// Сохраняем результат в бд 
         /// </summary>

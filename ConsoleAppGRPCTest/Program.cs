@@ -8,9 +8,23 @@ namespace ConsoleAppGRPCTest
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
+            Console.WriteLine(28 % 14);
+            Console.WriteLine(14 % 14);
+            Console.WriteLine(42 % 14);
+            Console.WriteLine(56 % 14);
+
+            Console.WriteLine(0% 14);
+
+
+            Console.WriteLine(1 % 14);
+            Console.WriteLine(24 % 14);
+            Console.WriteLine(29 % 14);
+            Console.WriteLine(7 % 14);
             Console.ReadLine();
 
-           Task.Run(ReceiveFullServerStream);
+
+
+            //           Task.Run(ReceiveFullServerStream);
             Console.ReadLine();
         }
 

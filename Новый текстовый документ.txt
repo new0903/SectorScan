@@ -1,0 +1,4 @@
+
+https://api.cellmapper.net/v6/getTowers?MCC=250&MNC=1&RAT=LTE&boundsNELatitude=52.93448584893096&boundsNELongitude=36.02828866740195&boundsSWLatitude=52.912309632123055&boundsSWLongitude=35.98872596468821&filterFrequency=false&showOnlyMine=false&showUnverifiedOnly=false&showENDCOnly=false&cache=1774519897972
+
+требуются куки
