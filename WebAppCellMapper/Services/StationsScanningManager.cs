@@ -71,6 +71,19 @@ namespace WebAppCellMapper.Services
 
                 logger.LogError(ex.Message);
             }
+            finally
+            {
+                if (TokenSourceTask != null)
+                {
+                    if (TokenSourceTask.IsCancellationRequested)
+                    {
+                        TokenSourceTask.Cancel();
+                    }
+                    TokenSourceTask.Dispose();
+                }
+
+
+            }
 
         }
         private void UpdateResult(QueryResult newResult)
