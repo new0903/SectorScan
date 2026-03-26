@@ -130,6 +130,7 @@ namespace WebAppCellMapper.Services
                         
                         while (coordinates.TryDequeue(out var square)) 
                         {
+                            if (square.IsScanned) continue;
                             for (int i = 0; i < countPerProxy; i++)
                             {
 
@@ -186,7 +187,7 @@ namespace WebAppCellMapper.Services
                 if ( handler == null)
                 {
                     logger.LogError("no free proxy");
-                    if (coordinates != null) coordinates.Enqueue(sector);
+                    if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                     return false;
                 }
 
@@ -210,13 +211,15 @@ namespace WebAppCellMapper.Services
                 client.DefaultRequestHeaders.Add("Priority", "u=1, i");
 
                 // https://4cells.ru:4444/api/map/enb/lte/250011?
-                string paramsUrl = $"latStart={sector.latStart.ToString().Replace(",",".")}&latEnd={sector.latEnd.ToString().Replace(",", ".")}&lonStart={sector.lonStart.ToString().Replace(",", ".")}&lonEnd={sector.lonEnd.ToString().Replace(",", ".")}";
+                string paramsUrl = $"latStart={sector.LatStart.ToString().Replace(",",".")}&latEnd={sector.LatEnd.ToString().Replace(",", ".")}&lonStart={sector.LonStart.ToString().Replace(",", ".")}&lonEnd={sector.LonEnd.ToString().Replace(",", ".")}";
 
 
                 var res = await client.GetAsync($"/api/map/enb/{ns.ToString().ToLower()}/{op.Code}?{paramsUrl}", ct);//https://4cells.ru:4444/
                 if (res.IsSuccessStatusCode)
                 {
+
                     handlerPoolService.ReleaseHandler(handler);
+                    sector.IsScanned = true;
                     logger.LogInformation($"success request {res.StatusCode}");
                     //proxyService.ReleaseProxy(proxy);
                     //var bytesResp =await res.Content.ReadAsByteArrayAsync();//попробую в ручную. Так хоть что то приходит
@@ -244,7 +247,7 @@ namespace WebAppCellMapper.Services
                     if (stations.Count>=300&& coordinates!=null)
                     {
                         //добавим доп квадраты для более детального поиска
-                        var detailsCoord=boundsService.GetCoordianates(sector.latStart, sector.latEnd, sector.lonStart, sector.lonEnd, (sector.latEnd-sector.latStart)/2);
+                        var detailsCoord=boundsService.GetCoordianates(sector.LatStart, sector.LatEnd, sector.LonStart, sector.LonEnd, (sector.LatEnd-sector.LatStart)/2);
                         foreach (var item in detailsCoord)
                         {
                             coordinates.Enqueue(item);
@@ -265,14 +268,14 @@ namespace WebAppCellMapper.Services
             catch (OperationCanceledException)
             {
                // proxyService.DeleteProxy(proxyAddress);
-                if (coordinates != null && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
+                if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
               //  if (handler != null) handlerPoolService.RemoveProxy(handler);
                logger.LogError("OperationCanceledException");
             }
             catch (Exception ex)
             {
              //   proxyService.DeleteProxy(proxyAddress);
-                if (coordinates != null&& !coordinates.Contains(sector)) coordinates.Enqueue(sector);
+                if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
              //   if (handler != null) handlerPoolService.RemoveProxy(handler);
                 logger.LogError($"Exception\nmessage error: {ex.Message}");
 

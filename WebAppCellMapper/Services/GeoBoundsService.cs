@@ -2,7 +2,25 @@
 
 namespace WebAppCellMapper.Services
 {
-    public record SquareSearch(double latStart, double latEnd, double lonStart, double lonEnd);
+    //public record SquareSearch(double latStart, double latEnd, double lonStart, double lonEnd, bool isScanned);
+ 
+    public class SquareSearch
+    {
+        public double LatStart { get; init; }
+        public double LatEnd { get; init; }
+        public double LonStart { get; init; }
+        public double LonEnd { get; init; }
+        public bool IsScanned { get; set; }
+
+        public SquareSearch(double latStart, double latEnd, double lonStart, double lonEnd, bool isScanned=false)
+        {
+            this.LatStart = latStart;
+            this.LatEnd = latEnd;
+            this.LonStart = lonStart;
+            this.LonEnd = lonEnd;
+            this.IsScanned = isScanned;
+        }
+    }
     public class GeoBoundsService :IGeoBoundsService
     {
         //широта север юг
