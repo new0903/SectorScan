@@ -2,3 +2,44 @@
 https://api.cellmapper.net/v6/getTowers?MCC=250&MNC=1&RAT=LTE&boundsNELatitude=52.93448584893096&boundsNELongitude=36.02828866740195&boundsSWLatitude=52.912309632123055&boundsSWLongitude=35.98872596468821&filterFrequency=false&showOnlyMine=false&showUnverifiedOnly=false&showENDCOnly=false&cache=1774519897972
 
 требуются куки
+
+
+
+fetch("https://4cells.ru:4444/api/map/enb/gsm/250001?latStart=27.916766641249065&latEnd=74.1160468394894&lonStart=-1.3183593750000002&lonEnd=88.76953125", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "https://4cells.ru/",
+  "body": null,
+  "method": "OPTIONS",
+  "mode": "cors",
+  "credentials": "omit"
+});
+"bc2717c7fe0b158fd9ce3ee2381e9f6c5a89bb4f535b316bd8cf7eabde921788"
+fetch("https://4cells.ru:4444/api/map/enb/gsm/250001?latStart=27.916766641249065&latEnd=74.1160468394894&lonStart=-1.3183593750000002&lonEnd=88.76953125", {
+  "headers": {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Google Chrome\";v=\"146\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "x-request-id": "2d1c0ace1fb5c437e3becee5c085e8645c62a308200571f5d6dfe5e073c5c978"
+  },
+  "referrer": "https://4cells.ru/",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+});
+x-request-id
+c4489c9987f2ac2a1c6864b08f18be6c4f0047b43aac8c94fca27d4520a38746
+

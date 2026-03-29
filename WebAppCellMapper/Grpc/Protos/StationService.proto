@@ -59,6 +59,7 @@ service StationServiceGrpc {
   rpc FullScan(Empty) returns ( ResultResponse);
   rpc Stats(Empty) returns ( RequestResponse);
   rpc StopProccess(Empty) returns (ResultResponse);
+  rpc CanceledProccess(Empty) returns (ResultResponse);
 }
 
 

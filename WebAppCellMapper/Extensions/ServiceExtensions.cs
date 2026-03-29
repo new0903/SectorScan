@@ -4,10 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Npgsql;
 using System.Configuration;
 using System.Reflection;
 using WebAppCellMapper.Data;
+using WebAppCellMapper.Data.Repositories;
+using WebAppCellMapper.Helpers;
 using WebAppCellMapper.Options;
+using WebAppCellMapper.Proxy;
 using WebAppCellMapper.Services;
 
 namespace WebAppCellMapper.Extensions
@@ -18,15 +22,22 @@ namespace WebAppCellMapper.Extensions
         public static IServiceCollection InitDBContext(this IServiceCollection services)
         {
             var conn = Environment.GetEnvironmentVariable("PG_CONNECTION_STRING");
-            services.AddDbContext<AppDBContext>((opt) =>
-            {
-              //  var s= sP.GetRequiredService<IOptions<DatabaseConnection>>().Value;
 
-               
-                opt.UseNpgsql(conn);//conn.Value.ToString()
+            //conn = $"Host=127.0.0.1;" +
+            //$"Port=54321;" +
+            //$"Database=ConfigManager;" +
+            //$"Username=root;" +
+            //$"Password=root";
+            services.AddNpgsqlDataSource(conn, (ds) =>
+            {
+                ds.EnableDynamicJson();
             });
-            services.AddNpgsqlDataSource(conn);
             services.AddHealthChecks().AddNpgSql();
+            services.AddDbContext<AppDBContext>(( sp,opt) =>
+            {
+                var dataSource = sp.GetRequiredService<NpgsqlDataSource>();
+                opt.UseNpgsql(dataSource);//conn.Value.ToString()
+            });
             return services;
         }
        
@@ -37,8 +48,10 @@ namespace WebAppCellMapper.Extensions
             services.AddSingleton<IProxyService, ProxyService>();
             services.AddSingleton<IProxyHandlerPoolService, ProxyHandlerPoolService>();
             services.AddSingleton<IStationsScanningManager, StationsScanningManager>();
+            services.AddSingleton<IRequestIdGenerator, RequestIdGenerator>();
             services.AddScoped<IStationsService, StationsService>();//AddScoped или AddTransient
             services.AddScoped<IOperatorsService ,OperatorsService>();
+            services.AddScoped<IProgressRepository, ProgressRepository>();
             return services;
         }
 

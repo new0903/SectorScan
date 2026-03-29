@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Npgsql;
-using System.Net;
-using WebAppCellMapper.Data;
 
 namespace WebAppCellMapper.Controllers
 {
