@@ -54,12 +54,16 @@ namespace WebAppCellMapper.Proxy
             ProxyHandler? proxyHandler = null;
             try
             {
-                //await proxyService.GetProxies();
-                if (listHandlers.Count < settings.MaxConnectionsPerServer && proxyService.CountProxy>0)
+                if (handlers.TryPop(out proxyHandler))
                 {
-                   
+
+                    return proxyHandler;
+                }
+                else if (listHandlers.Count < settings.MaxConnectionsPerServer && proxyService.CountProxy > 0)
+                {
+
                     //countHandlers++;
-                    var proxy=proxyService.GetProxy();
+                    var proxy = proxyService.GetProxy();
                     if (proxy == null) return null;
                     //HttpClientHandler? httpHandler = null;
                     HttpClientHandler httpHandler = new HttpClientHandler();
@@ -67,18 +71,17 @@ namespace WebAppCellMapper.Proxy
                     httpHandler.Proxy = new WebProxy(proxy.url);
                     httpHandler.UseProxy = true;
 
-                    httpHandler.AutomaticDecompression =  DecompressionMethods.All;//DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli |
+                    httpHandler.AutomaticDecompression = DecompressionMethods.All;//DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli |
 
                     // Если нужно игнорировать сертификаты (только для тестирования)
                     //handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
                     listHandlers.Add(proxyHandler);
-                  //  handlers.Enqueue(handler);
+                    //  handlers.Enqueue(handler);
 
                 }
-                else
-                {
-                    handlers.TryPop(out proxyHandler);
-                }
+
+                
+               
             }
             catch (Exception ex)
             {

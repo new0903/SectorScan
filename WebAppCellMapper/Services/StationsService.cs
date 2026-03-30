@@ -214,7 +214,7 @@ namespace WebAppCellMapper.Services
                 //стартовый ID
                 if (string.IsNullOrEmpty(handler.LastRequestId))
                 {
-                    var resId= await requestIdGenerator.InitRequest(handler);
+                    var resId= await requestIdGenerator.InitRequest(handler,ct);
                     if (!resId)
                     {
                         logger.LogInformation($"failed get request id: {handler.LastRequestId}");
