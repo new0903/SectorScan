@@ -17,7 +17,7 @@ namespace WebAppCellMapper.Services
         private QueryResult result { get; set;}
         private Task? task=null;
         private CancellationTokenSource? TokenSourceTask = null;
-        private readonly object _lock=new object();//наверное избыточно
+        private readonly object _lock=new object();
 
         public StationsScanningManager(IServiceProvider serviceProvider,ILogger<StationsScanningManager> logger)
         {
@@ -69,57 +69,43 @@ namespace WebAppCellMapper.Services
             }
             catch (Exception ex)
             {
-
-                logger.LogError(ex.Message);
+                logger.LogError(ex, "Error during FullScan");
             }
             finally
             {
-                lock (_lock)
+                if (TokenSourceTask != null)
                 {
-                    if (TokenSourceTask != null)
-                    {
-                        if (!TokenSourceTask.IsCancellationRequested)
-                        {
-                            TokenSourceTask.Cancel();
-                        }
-                        TokenSourceTask.Dispose();
-                        TokenSourceTask = null;
-                        task = null;
-                    }
+                    TokenSourceTask.Dispose();
+                    TokenSourceTask = null;
                 }
+                task = null;
             }
 
         }
         private void UpdateResult(QueryResult newResult)
         {
-            lock (_lock)
-            {
-                result = newResult;
-            }
+            result = newResult;
         }
-        public QueryResult GetCurrentProccess()
+        public QueryResult GetCurrentProcess()
         {
-            lock (_lock)
-            {
-                return result;
-            }
+            return result;
+            
         }
         public async Task StopCurrentProccess()
         {
+            Task? locT=null; 
             lock (_lock)
             {
-
+                locT = task;
                 if (TokenSourceTask != null)
                 {
                     TokenSourceTask.Cancel();
 
                 }
             }
-            if (task != null)
+            if (locT != null)
             {
-                await task;
-                task = null;
-
+                await locT;
             }
         }
         public async Task<int> CanceledProccess()
@@ -141,8 +127,7 @@ namespace WebAppCellMapper.Services
             }
             catch (Exception ex)
             {
-
-                logger.LogError(ex.Message);
+                logger.LogError(ex, "Error CanceledProccess");
             }
             return 0;
         }

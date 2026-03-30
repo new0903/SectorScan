@@ -39,7 +39,7 @@ namespace WebAppCellMapper.Grpc
         }
         public override async Task<RequestResponse> Stats(Empty request, ServerCallContext context)
         {
-            var item = scanningManager.GetCurrentProccess();
+            var item = scanningManager.GetCurrentProcess();
             var response = new RequestResponse
             {
                 CountSectors = item.CountSectors,

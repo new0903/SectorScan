@@ -5,7 +5,7 @@ namespace WebAppCellMapper.Services
     public interface IStationsScanningManager
     {
         void StartFullScan();
-        QueryResult GetCurrentProccess();
+        QueryResult GetCurrentProcess();
         Task StopCurrentProccess();
         Task<int> CanceledProccess();
     }
