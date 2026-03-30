@@ -114,7 +114,7 @@ namespace WebAppCellMapper.Data.Repositories
         public async Task<int> DeleteCompletedProgress(CancellationToken ct = default)
         {
            return await context.progresses
-                .Where(p=>(p.Status==ProgressStatus.Completed || p.Status==ProgressStatus.Failed) && DateTime.UtcNow>p.CompletedAt+TimeSpan.FromDays(15))//наверное так лучше
+                .Where(p=>(p.Status==ProgressStatus.Completed || p.Status==ProgressStatus.Failed) && DateTime.UtcNow>p.UpdatedAt+TimeSpan.FromDays(15))//наверное так лучше
                 .ExecuteDeleteAsync(ct);
         }
 
@@ -122,7 +122,8 @@ namespace WebAppCellMapper.Data.Repositories
         {
             return await context.progresses
                 .Where(p => p.Status != ProgressStatus.Completed || p.Status != ProgressStatus.Failed)//наверное так лучше
-                .ExecuteUpdateAsync(s=>s.SetProperty(p=>p.Status, ProgressStatus.Failed),ct);
+                .ExecuteUpdateAsync(s=>s.SetProperty(p=>p.Status, ProgressStatus.Failed)
+                .SetProperty(p => p.UpdatedAt, DateTime.UtcNow), ct);
         }
 
 
