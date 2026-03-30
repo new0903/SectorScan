@@ -310,8 +310,13 @@ namespace WebAppCellMapper.Services
                 }
                 else
                 {
-                
-             //   proxyService.DeleteProxy(proxyAddress);    if (coordinates!=null && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
+                    if (handler != null)
+                    {
+
+                        handler.LastRequestId = string.Empty;
+                    }
+
+                    //   proxyService.DeleteProxy(proxyAddress);    if (coordinates!=null && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                     logger.LogError($"failed request {res.StatusCode}");
                 }
 
@@ -319,16 +324,29 @@ namespace WebAppCellMapper.Services
             catch (OperationCanceledException)
             {
                 if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
-               logger.LogError("OperationCanceledException");
+               logger.LogError("OperationCanceledException"); 
+                if (handler != null)
+                {
+
+                    handler.LastRequestId = string.Empty;
+                }
             }
             catch (Exception ex)
             {
                 if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                 logger.LogError($"Exception\nmessage error: {ex.Message}");
+                if (handler != null)
+                {
 
+                    handler.LastRequestId = string.Empty;
+                }
 
             }
+            if (handler!=null)
+            {
 
+                handler.LastRequestId = string.Empty;
+            }
 
             return false;
         }
