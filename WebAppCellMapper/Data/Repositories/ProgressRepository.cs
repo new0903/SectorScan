@@ -89,7 +89,7 @@ namespace WebAppCellMapper.Data.Repositories
             await DeleteCompletedProgress(ct);
             return await context.progresses
                 .AsNoTracking()
-                .Where(p => p.Status != ProgressStatus.Completed && p.Status!= ProgressStatus.Failed)
+                .Where(p => p.Status != ProgressStatus.Completed || p.Status!= ProgressStatus.Failed)
                 .OrderBy(p=>p.Id)
                 .Select(q =>
                     new OperatorDTO(
@@ -114,14 +114,14 @@ namespace WebAppCellMapper.Data.Repositories
         public async Task<int> DeleteCompletedProgress(CancellationToken ct = default)
         {
            return await context.progresses
-                .Where(p=>p.Status==ProgressStatus.Completed&& p.Status==ProgressStatus.Failed&& DateTime.UtcNow>p.CompletedAt+TimeSpan.FromDays(15))//наверное так лучше
+                .Where(p=>(p.Status==ProgressStatus.Completed || p.Status==ProgressStatus.Failed) && DateTime.UtcNow>p.CompletedAt+TimeSpan.FromDays(15))//наверное так лучше
                 .ExecuteDeleteAsync(ct);
         }
 
         public async Task<int> FailedProgress(CancellationToken ct = default)
         {
             return await context.progresses
-                .Where(p => p.Status != ProgressStatus.Completed && p.Status != ProgressStatus.Failed)//наверное так лучше
+                .Where(p => p.Status != ProgressStatus.Completed || p.Status != ProgressStatus.Failed)//наверное так лучше
                 .ExecuteUpdateAsync(s=>s.SetProperty(p=>p.Status, ProgressStatus.Failed),ct);
         }
 
