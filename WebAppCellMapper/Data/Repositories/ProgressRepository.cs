@@ -89,7 +89,7 @@ namespace WebAppCellMapper.Data.Repositories
             await DeleteCompletedProgress(ct);
             return await context.progresses
                 .AsNoTracking()
-                .Where(p => p.Status != ProgressStatus.Completed || p.Status!= ProgressStatus.Failed)
+                .Where(p => p.Status != ProgressStatus.Completed && p.Status!= ProgressStatus.Failed)
                 .OrderBy(p=>p.Id)
                 .Select(q =>
                     new OperatorDTO(
