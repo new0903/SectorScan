@@ -103,7 +103,7 @@ namespace WebAppCellMapper.Services
                         QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, coordinates.Count, "обновляю прокси");
                         yield return res;
                     }
-                    await handlerPoolService.InitProxies();
+                  //  await handlerPoolService.InitProxies();
 
                     {
                         QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, coordinates.Count, "Поиск станций");
@@ -114,27 +114,27 @@ namespace WebAppCellMapper.Services
                     {
                         var requests = new List<Task>();
                        
-                        int counter = coordinates.Count;
-                        counter = counter > requestSettings.MaxConnectionsPerServer ? Math.Min(requestSettings.MaxConnectionsPerServer,handlerPoolService.CountProxy) 
-                            : Math.Min(counter, handlerPoolService.CountProxy);
+                        //int counter = coordinates.Count;
+                        //counter = counter > requestSettings.MaxConnectionsPerServer ? Math.Min(requestSettings.MaxConnectionsPerServer,handlerPoolService.CountProxy) 
+                        //    : Math.Min(counter, handlerPoolService.CountProxy);
                         // если не жадничать все будет норм и администрация не заметит
                         //запрос с ip прокси
-                        {
-                            //запрос с ip прокси для ускорения
-                            for (int i = 0; i < counter; i++)
-                            {
-                                if (coordinates.TryDequeue(out var square))
-                                {
-                                    var task = RequestStations(square, ct: cancellationToken.Token);
-                                    requests.Add(task);
+                        //{
+                        //    //запрос с ip прокси для ускорения
+                        //    for (int i = 0; i < counter; i++)
+                        //    {
+                        //        if (coordinates.TryDequeue(out var square))
+                        //        {
+                        //            var task = RequestStations(square, ct: cancellationToken.Token);
+                        //            requests.Add(task);
 
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                        }
+                        //        }
+                        //        else
+                        //        {
+                        //            break;
+                        //        }
+                        //    }
+                        //}
                         {
                             //запрос с моего ip добавить в конец  await Task.Delay(TimeSpan.FromSeconds(5), ct); что бы не палится что парс идет. Не знаю какой интервал между запросами но поставил 5 секунд. 
                             if (coordinates.TryDequeue(out var square))
@@ -175,7 +175,7 @@ namespace WebAppCellMapper.Services
                     //    yield return res;
                     //}
                     logger.LogInformation($"секторов осталось {coordinates.Count}");
-                    await Task.Delay(TimeSpan.FromSeconds(20), ct);//накинем доп время Что бы не палиться
+                    await Task.Delay(TimeSpan.FromSeconds(3), ct);//накинем доп время Что бы не палиться
                 }
 
             }

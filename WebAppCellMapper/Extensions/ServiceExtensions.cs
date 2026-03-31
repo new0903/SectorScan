@@ -52,6 +52,7 @@ namespace WebAppCellMapper.Extensions
             services.AddScoped<IStationsService, StationsService>();//AddScoped или AddTransient
             services.AddScoped<IOperatorsService ,OperatorsService>();
             services.AddScoped<IProgressRepository, ProgressRepository>();
+           
             return services;
         }
 
