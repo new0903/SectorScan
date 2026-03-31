@@ -112,7 +112,7 @@ namespace WebAppCellMapper.Services
 
                     using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(requestSettings.TimeoutSeconds)))
                     {
-                        var requests = new List<Task>();
+                        //var requests = new List<Task>();
                        
                         //int counter = coordinates.Count;
                         //counter = counter > requestSettings.MaxConnectionsPerServer ? Math.Min(requestSettings.MaxConnectionsPerServer,handlerPoolService.CountProxy) 
@@ -139,15 +139,15 @@ namespace WebAppCellMapper.Services
                             //запрос с моего ip добавить в конец  await Task.Delay(TimeSpan.FromSeconds(5), ct); что бы не палится что парс идет. Не знаю какой интервал между запросами но поставил 5 секунд. 
                             if (coordinates.TryDequeue(out var square))
                             {
-                                var task = RequestStations(square, false, ct: cancellationToken.Token);
-                                requests.Add(task);
+                                var task =await RequestStations(square, false, ct: cancellationToken.Token);
+                              //  requests.Add(task);
                             }
                         }
                         //ждем завершения всех задач
-                        await Task.WhenAll(requests);
+                      //  await Task.WhenAll(requests);
 
                         //очищаем не эффективные прокси
-                        handlerPoolService.RemoveUnusedProxy();
+                    //  handlerPoolService.RemoveUnusedProxy();
                     }
 
                     {
@@ -198,7 +198,7 @@ namespace WebAppCellMapper.Services
         /// </remarks>
         private async Task<bool> RequestStations(  SquareSearch sector,bool useProxy=true, CancellationToken ct=default)//OperatorDTO op, NetworkStandard ns,
         {
-            await Task.Delay(TimeSpan.FromSeconds(Random.Shared.Next(requestSettings.RandomStartRequestSeconds)), ct);
+            //await Task.Delay(TimeSpan.FromSeconds(Random.Shared.Next(requestSettings.RandomStartRequestSeconds)), ct);
 
             var handler = useProxy ? handlerPoolService.GetClientHandler() : Myhandler;
 
