@@ -12,7 +12,6 @@ using WebAppCellMapper.Data.Repositories;
 using WebAppCellMapper.DTO;
 using WebAppCellMapper.Helpers;
 using WebAppCellMapper.Options;
-using WebAppCellMapper.Proxy;
 
 namespace WebAppCellMapper.Services
 {
@@ -23,7 +22,7 @@ namespace WebAppCellMapper.Services
         private readonly IRequestIdGenerator requestIdGenerator;
         private readonly AppDBContext context;
         private readonly IGeoBoundsService boundsService;
-        private readonly IProxyHandlerPoolService handlerPoolService;
+      //  private readonly IProxyHandlerPoolService handlerPoolService;
 
 
 
@@ -46,13 +45,13 @@ namespace WebAppCellMapper.Services
             AppDBContext context,
             IProgressRepository progressService,
             IGeoBoundsService boundsService,
-            IProxyHandlerPoolService handlerPoolService, 
+          //  IProxyHandlerPoolService handlerPoolService, 
             IOptions<RequestSettings> options,
             ILogger<StationsService> logger)
         {
             this.progressService = progressService;
             this.boundsService = boundsService;
-            this.handlerPoolService = handlerPoolService;
+          //  this.handlerPoolService = handlerPoolService;
             this.logger = logger;
             this.requestIdGenerator = requestIdGenerator;
             this.context = context;
@@ -200,7 +199,7 @@ namespace WebAppCellMapper.Services
         {
             //await Task.Delay(TimeSpan.FromSeconds(Random.Shared.Next(requestSettings.RandomStartRequestSeconds)), ct);
 
-            var handler = useProxy ? handlerPoolService.GetClientHandler() : Myhandler;
+            var handler = Myhandler;// useProxy ? handlerPoolService.GetClientHandler() : Myhandler;
 
             try
             {
@@ -260,11 +259,11 @@ namespace WebAppCellMapper.Services
                 if (res.IsSuccessStatusCode)
                 {
 
-                    if (useProxy)
-                    {
+                    //if (useProxy)
+                    //{
 
-                        handlerPoolService.ReleaseHandler(handler);
-                    }
+                    //    //handlerPoolService.ReleaseHandler(handler);
+                    //}
 
                     //if (res.Headers.TryGetValues("x-request-id", out var requestIdValues))
                     //{
