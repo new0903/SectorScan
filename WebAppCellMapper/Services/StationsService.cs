@@ -100,13 +100,13 @@ namespace WebAppCellMapper.Services
 
 
                     {
-                        QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, coordinates.Count, "обновляю прокси");
+                        QueryResult res = new QueryResult(progress.Code, progress.Standard, progress.AddedStationsCount, progress.ScannedCount, coordinates.Count, "обновляю прокси");
                         yield return res;
                     }
                     await handlerPoolService.InitProxies();
 
                     {
-                        QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, coordinates.Count, "Поиск станций");
+                        QueryResult res = new QueryResult(progress.Code, progress.Standard, progress.AddedStationsCount, progress.ScannedCount, coordinates.Count, "Поиск станций");
                         yield return res;
                     }
 
@@ -148,17 +148,7 @@ namespace WebAppCellMapper.Services
 
                         //очищаем не эффективные прокси
                         handlerPoolService.RemoveUnusedProxy();
-                    }
-
-                    {
-                        QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, progress.Coordinates.Count, "сохроняю в бд найденные станции");
-                        yield return res;
-                    }
-
-                    //Сохраняем результаты в бд
-                    await BulkSyncStationsAsync(ct);
-
-                    //обновляем прогрес
+                    }   //обновляем прогрес
                     if (!ct.IsCancellationRequested)
                     {
                         progress.Coordinates = coordinates.ToList();
@@ -166,9 +156,19 @@ namespace WebAppCellMapper.Services
                         progress.ScannedCount = scannedSector;
                         progress.TotalCount = progress.Coordinates.Count;
                     }
+
+                    {
+                        QueryResult res = new QueryResult(progress.Code, progress.Standard, progress.AddedStationsCount, progress.ScannedCount, progress.Coordinates.Count, "сохроняю в бд найденные станции");
+                        yield return res;
+                    }
+
+                    //Сохраняем результаты в бд
+                    await BulkSyncStationsAsync(ct);
+
+                 
  
                     {
-                        QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, progress.Coordinates.Count, "сохроняю в бд прогресс");
+                        QueryResult res = new QueryResult(progress.Code, progress.Standard, progress.AddedStationsCount, progress.ScannedCount, progress.Coordinates.Count, "сохроняю в бд прогресс");
                         yield return res;
                     }
                     await progressService.SaveProgress(progress,ct);
