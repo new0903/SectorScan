@@ -22,11 +22,13 @@ namespace WebAppCellMapper.Data.Repositories
             this.logger = logger;
         }
 
+
+       
+
         /*init progress*/
         public async Task InitProgress(CancellationToken ct = default)//OperatorDTO op, NetworkStandard ns,IEnumerable<SquareSearch>? squares,
         {
 
-    
 
 
             var operators = await context.operators.AsNoTracking().ToListAsync(ct);
@@ -46,7 +48,6 @@ namespace WebAppCellMapper.Data.Repositories
                         ScannedCount = 0,
                         TotalCount = 0,
                         Coordinates = new List<SquareSearch>()
-                        //  Data = new ProgressData { AddedStationsCount = 0, Coordinates = new List<SquareSearch>(), ScannedCount = 0, TotalCount = 0}
                     };
                     await context.progresses.AddAsync(progress);
                 }
@@ -55,7 +56,7 @@ namespace WebAppCellMapper.Data.Repositories
         }
 
         /*save progress*/
-        public async Task<int> SaveProgress(OperatorDTO entity, CancellationToken ct = default)//OperatorDTO op, NetworkStandard ns,IEnumerable<SquareSearch>? squares,
+        public async Task<int> SaveProgress(OperatorDTO entity, CancellationToken ct = default)
         {
             try
             {
@@ -84,7 +85,7 @@ namespace WebAppCellMapper.Data.Repositories
 
 
         /*load progress*/
-        public async Task<List<OperatorDTO>> LoadProgress( CancellationToken ct=default)//OperatorDTO op, NetworkStandard ns,IEnumerable<SquareSearch>? squares,
+        public async Task<List<OperatorDTO>> LoadProgress(CancellationToken ct=default)
         {
             await DeleteCompletedProgress(ct);
             return await context.progresses
@@ -117,7 +118,6 @@ namespace WebAppCellMapper.Data.Repositories
                 .Where(p=>(p.Status==ProgressStatus.Completed || p.Status==ProgressStatus.Failed) && DateTime.UtcNow>p.UpdatedAt+TimeSpan.FromDays(15))
                 .ExecuteDeleteAsync(ct);
         }
-
         public async Task<int> FailedProgress(CancellationToken ct = default)
         {
             return await context.progresses
@@ -125,6 +125,8 @@ namespace WebAppCellMapper.Data.Repositories
                 .ExecuteUpdateAsync(s=>s.SetProperty(p=>p.Status, ProgressStatus.Failed)
                 .SetProperty(p => p.UpdatedAt, DateTime.UtcNow), ct);
         }
+
+
 
 
 

@@ -12,6 +12,7 @@ using WebAppCellMapper.Data.Repositories;
 using WebAppCellMapper.DTO;
 using WebAppCellMapper.Helpers;
 using WebAppCellMapper.Options;
+using WebAppCellMapper.Proxy;
 
 namespace WebAppCellMapper.Services
 {
@@ -22,7 +23,7 @@ namespace WebAppCellMapper.Services
         private readonly IRequestIdGenerator requestIdGenerator;
         private readonly AppDBContext context;
         private readonly IGeoBoundsService boundsService;
-      //  private readonly IProxyHandlerPoolService handlerPoolService;
+        private readonly IProxyHandlerPoolService handlerPoolService;
 
 
 
@@ -45,13 +46,13 @@ namespace WebAppCellMapper.Services
             AppDBContext context,
             IProgressRepository progressService,
             IGeoBoundsService boundsService,
-          //  IProxyHandlerPoolService handlerPoolService, 
+            IProxyHandlerPoolService handlerPoolService, 
             IOptions<RequestSettings> options,
             ILogger<StationsService> logger)
         {
             this.progressService = progressService;
             this.boundsService = boundsService;
-          //  this.handlerPoolService = handlerPoolService;
+            this.handlerPoolService = handlerPoolService;
             this.logger = logger;
             this.requestIdGenerator = requestIdGenerator;
             this.context = context;
@@ -60,7 +61,7 @@ namespace WebAppCellMapper.Services
             idsStations = new HashSet<long>();
             var handler = new HttpClientHandler();
             handler.AutomaticDecompression = DecompressionMethods.All;
-            Myhandler = new ProxyHandler(handler, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
+            Myhandler = new ProxyHandler(handler, handlerPoolService.GetUserAgent());
 
         }
 
@@ -77,7 +78,7 @@ namespace WebAppCellMapper.Services
             if (progress==null)
             {
                 {
-                    QueryResult res = new QueryResult(string.Empty, NetworkStandard.Gsm, scannedStations, scannedSector, 0, "null");
+                    QueryResult res = new QueryResult(string.Empty, NetworkStandard.Gsm, scannedStations, scannedSector, 0, "progress null");
                     yield return res;
                 }
 
@@ -102,7 +103,7 @@ namespace WebAppCellMapper.Services
                         QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, coordinates.Count, "обновляю прокси");
                         yield return res;
                     }
-                  //  await handlerPoolService.InitProxies();
+                    await handlerPoolService.InitProxies();
 
                     {
                         QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, coordinates.Count, "Поиск станций");
@@ -111,42 +112,42 @@ namespace WebAppCellMapper.Services
 
                     using (CancellationTokenSource cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(requestSettings.TimeoutSeconds)))
                     {
-                        //var requests = new List<Task>();
-                       
-                        //int counter = coordinates.Count;
-                        //counter = counter > requestSettings.MaxConnectionsPerServer ? Math.Min(requestSettings.MaxConnectionsPerServer,handlerPoolService.CountProxy) 
-                        //    : Math.Min(counter, handlerPoolService.CountProxy);
+                        var requests = new List<Task>();
+
+                        int counter = coordinates.Count;
+                        counter = counter > requestSettings.MaxConnectionsPerServer ? Math.Min(requestSettings.MaxConnectionsPerServer,handlerPoolService.CountProxy) 
+                            : Math.Min(counter, handlerPoolService.CountProxy);
                         // если не жадничать все будет норм и администрация не заметит
                         //запрос с ip прокси
-                        //{
-                        //    //запрос с ip прокси для ускорения
-                        //    for (int i = 0; i < counter; i++)
-                        //    {
-                        //        if (coordinates.TryDequeue(out var square))
-                        //        {
-                        //            var task = RequestStations(square, ct: cancellationToken.Token);
-                        //            requests.Add(task);
+                        {
+                            //запрос с ip прокси для ускорения
+                            for (int i = 0; i < counter; i++)
+                            {
+                                if (coordinates.TryDequeue(out var square))
+                                {
+                                    var task = RequestStations(square, ct: cancellationToken.Token);
+                                    requests.Add(task);
 
-                        //        }
-                        //        else
-                        //        {
-                        //            break;
-                        //        }
-                        //    }
-                        //}
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                        }
                         {
                             //запрос с моего ip добавить в конец  await Task.Delay(TimeSpan.FromSeconds(5), ct); что бы не палится что парс идет. Не знаю какой интервал между запросами но поставил 5 секунд. 
                             if (coordinates.TryDequeue(out var square))
                             {
-                                var task =await RequestStations(square, false, ct: cancellationToken.Token);
-                              //  requests.Add(task);
+                                var task = RequestStations(square, false, ct: cancellationToken.Token);
+                                requests.Add(task);
                             }
                         }
                         //ждем завершения всех задач
-                      //  await Task.WhenAll(requests);
+                        await Task.WhenAll(requests);
 
                         //очищаем не эффективные прокси
-                    //  handlerPoolService.RemoveUnusedProxy();
+                        handlerPoolService.RemoveUnusedProxy();
                     }
 
                     {
@@ -158,10 +159,14 @@ namespace WebAppCellMapper.Services
                     await BulkSyncStationsAsync(ct);
 
                     //обновляем прогрес
-                    progress.Coordinates = coordinates.ToList();
-                    progress.AddedStationsCount = scannedStations;
-                    progress.ScannedCount = scannedSector;
-                    progress.TotalCount = progress.Coordinates.Count + scannedSector;
+                    if (!ct.IsCancellationRequested)
+                    {
+                        progress.Coordinates = coordinates.ToList();
+                        progress.AddedStationsCount = scannedStations;
+                        progress.ScannedCount = scannedSector;
+                        progress.TotalCount = progress.Coordinates.Count;
+                    }
+ 
                     {
                         QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, progress.Coordinates.Count, "сохроняю в бд прогресс");
                         yield return res;
@@ -174,7 +179,7 @@ namespace WebAppCellMapper.Services
                     //    yield return res;
                     //}
                     logger.LogInformation($"секторов осталось {coordinates.Count}");
-                    await Task.Delay(TimeSpan.FromSeconds(3), ct);//накинем доп время Что бы не палиться
+                    await Task.Delay(TimeSpan.FromSeconds(5), ct);//накинем доп время Что бы не палиться
                 }
 
             }
@@ -197,21 +202,26 @@ namespace WebAppCellMapper.Services
         /// </remarks>
         private async Task<bool> RequestStations(  SquareSearch sector,bool useProxy=true, CancellationToken ct=default)//OperatorDTO op, NetworkStandard ns,
         {
-            //await Task.Delay(TimeSpan.FromSeconds(Random.Shared.Next(requestSettings.RandomStartRequestSeconds)), ct);
+            await Task.Delay(TimeSpan.FromSeconds(Random.Shared.Next(requestSettings.RandomStartRequestSeconds)), ct);
 
-            var handler = Myhandler;// useProxy ? handlerPoolService.GetClientHandler() : Myhandler;
-
+            var handler = useProxy ? handlerPoolService.GetClientHandler() : Myhandler;
+           
             try
             {
 
-                if (handler == null)
+                if (handler == null|| handler.IsBan)//&&handler.LastUpdateRequestId+TimeSpan.FromHours(6)>DateTime.UtcNow
                 {
-                    logger.LogError("no free proxy");
+
+                    if (handler!=null)
+                    {
+                        handler.UserAgent = handlerPoolService.GetUserAgent();
+                    }
+                    logger.LogError("429 ban ip");
                     if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                     return false;
                 }
                 //стартовый ID
-                if (string.IsNullOrEmpty(handler.LastRequestId))
+                if (string.IsNullOrEmpty(handler.LastRequestId)|| handler.LastUpdateRequestId+TimeSpan.FromMinutes(25)<DateTime.UtcNow)
                 {
                     var resId= await requestIdGenerator.InitRequest(handler,ct);
                     if (!resId)
@@ -219,13 +229,11 @@ namespace WebAppCellMapper.Services
                         logger.LogInformation($"failed get request id: {handler.LastRequestId}");
                         if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                         return false;
-
                     }
                     logger.LogInformation($"Success get request id: {handler.LastRequestId}");
                 }
-
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
-                 using HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
+                using HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
               //  HttpClient client = httpClient; // попробую по правилам посмотрим что выйдет
                 client.BaseAddress =new Uri("https://4cells.ru:4444");
 
@@ -259,21 +267,14 @@ namespace WebAppCellMapper.Services
                 if (res.IsSuccessStatusCode)
                 {
 
-                    //if (useProxy)
-                    //{
+                    if (useProxy)
+                    {
 
-                    //    //handlerPoolService.ReleaseHandler(handler);
-                    //}
-
-                    //if (res.Headers.TryGetValues("x-request-id", out var requestIdValues))
-                    //{
-                    //    handler.LastRequestId = requestIdValues.FirstOrDefault() ?? string.Empty;
-                    //}
+                        handlerPoolService.ReleaseHandler(handler);
+                    }
                     sector.IsScanned = true;
                     logger.LogInformation($"success request {res.StatusCode}");
-                    //proxyService.ReleaseProxy(proxy);
-                    //var bytesResp =await res.Content.ReadAsByteArrayAsync();//попробую в ручную. Так хоть что то приходит
-                    //  var content=  DecompressGzip(bytesResp);
+
                     string content = await res.Content.ReadAsStringAsync(ct);
                     var stations = JsonConvert.DeserializeObject<List<Station>>(content);
                     if (stations == null) return false;
@@ -372,14 +373,21 @@ namespace WebAppCellMapper.Services
         /// </remarks>
         private async Task BulkSyncStationsAsync( CancellationToken ct=default)//Task<HttpResponseMessage> res,
         {
-
-           if (stationsList!=null&& stationsList.Count>0)
+            try
             {
-       
-                await context.BulkInsertOrUpdateAsync(stationsList,cancellationToken: ct);
-                logger.LogInformation($"добавлено станций {stationsList.Count}");
-                stationsList.Clear();
 
+                if (stationsList != null && stationsList.Count > 0)
+                {
+
+                    await context.BulkInsertOrUpdateAsync(stationsList, cancellationToken: ct);
+                    logger.LogInformation($"добавлено станций {stationsList.Count}");
+                    stationsList.Clear();
+
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                logger.LogInformation("Bulk sync was canceled");
             }
         }
 
@@ -407,6 +415,7 @@ namespace WebAppCellMapper.Services
         /// </remarks>
         public async IAsyncEnumerable<QueryResult> SyncStationsAllAsync([EnumeratorCancellation] CancellationToken ct = default)
         {
+
             //responseStream = httpStream;
             // await WriteResponse("получаем операторов из бд");
             //var operators = await context.operators.

@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Grpc.Core.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Writers;
@@ -26,41 +27,73 @@ namespace WebAppCellMapper.Services
             result = new QueryResult(string.Empty, Data.Models.NetworkStandard.Gsm, 0, 0, 0, "задачи нет", true);
         }
 
+        public bool IsWorking => task != null;
 
-        public void StartFullScan()
+        public QueryResult GetCurrentProcess => result;
+
+        public void StartFullScan(bool isAutoStart)
         {
-            if (task != null) return;
-            TokenSourceTask = new CancellationTokenSource();
-
-            task = Task.Run(async () =>
+            lock (_lock)
             {
-                await FullScan(TokenSourceTask.Token);
-            });
+                if (task != null) return;
+                TokenSourceTask = new CancellationTokenSource();
+
+                task = Task.Run(async () =>
+                {
+                    try
+                    {
+                        using var scope = sp.CreateScope();
+                        var runtime = scope.ServiceProvider.GetRequiredService<IRuntimeRepository>();
+
+                        if (await runtime.IsRunning()|| !isAutoStart)
+                        {
+                            var stationsService = scope.ServiceProvider.GetRequiredService<IStationsService>();
+                            await runtime.StartRuntime();
+                            await FullScan(stationsService, TokenSourceTask.Token);
+                            await runtime.CancelRuntime(TokenSourceTask.Token);
+                        }
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        logger.LogInformation("OperationCanceledException");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError( ex, ex.Message);
+                    }
+                    finally
+                    {
+                        if (TokenSourceTask != null)
+                        {
+                            TokenSourceTask.Dispose();
+                            TokenSourceTask = null;
+                        }
+                        task = null;
+                    }
+
+                });
+            }
         }
-        private async Task FullScan(CancellationToken ct = default)
+
+
+
+
+
+
+
+        private async Task FullScan(IStationsService stationsService, CancellationToken ct = default)
         {
+            logger.LogInformation($"FullScan start");
             try
             {
-                using var scope = sp.CreateScope();
-                var stationsService = scope.ServiceProvider.GetRequiredService<IStationsService>();
-                logger.LogInformation($"FullScan start");
-                try
+
+
+                await foreach (var item in stationsService.SyncStationsAllAsync(ct))
                 {
-
-
-                    await foreach (var item in stationsService.SyncStationsAllAsync(ct))
-                    {
-                        UpdateResult(item);
-                        logger.LogInformation($"OperatorCode={item.OperatorCode}, Network={item.Network}, CountAdded={item.CountAdded}, " +
-                            $"CountSectorsScaned={item.CountSectorsScaned}, CountSectors={item.CountSectors}, isDone={item.isDone}");
-                    }
+                    result = item;
+                    logger.LogInformation($"OperatorCode={item.OperatorCode}, Network={item.Network}, CountAdded={item.CountAdded}, " +
+                        $"CountSectorsScaned={item.CountSectorsScaned}, CountSectors={item.CountSectors}, isDone={item.isDone}");
                 }
-                catch (Exception ex)
-                {
-
-                    logger.LogError(ex.Message);
-                }
-
             }
             catch (OperationCanceledException)
             {
@@ -69,31 +102,18 @@ namespace WebAppCellMapper.Services
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Error during FullScan");
-            }
-            finally
-            {
-                if (TokenSourceTask != null)
-                {
-                    TokenSourceTask.Dispose();
-                    TokenSourceTask = null;
-                }
-                task = null;
+
+                logger.LogError(ex, ex.Message);
             }
 
-        }
-        private void UpdateResult(QueryResult newResult)
-        {
-            result = newResult;
-        }
-        public QueryResult GetCurrentProcess()
-        {
-            return result;
             
+
         }
+
+
         public async Task StopCurrentProccess()
         {
-            Task? locT=null; 
+            Task? locT=null;
             lock (_lock)
             {
                 locT = task;
@@ -107,6 +127,13 @@ namespace WebAppCellMapper.Services
             {
                 await locT;
             }
+            {
+                using var scope = sp.CreateScope();
+                var runtime = scope.ServiceProvider.GetRequiredService<IRuntimeRepository>();
+
+
+                await runtime.StopRuntime();
+            }
         }
         public async Task<int> CanceledProccess()
         {
@@ -115,7 +142,9 @@ namespace WebAppCellMapper.Services
             {
                 await StopCurrentProccess();
                 using var scope = sp.CreateScope();
+                var runtime = scope.ServiceProvider.GetRequiredService<IRuntimeRepository>();
                 var progress = scope.ServiceProvider.GetRequiredService<IProgressRepository>();
+                await runtime.CancelRuntime();
                 return await progress.FailedProgress();
 
 

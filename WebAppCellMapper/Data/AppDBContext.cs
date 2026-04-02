@@ -5,16 +5,12 @@ namespace WebAppCellMapper.Data
 {
     public class AppDBContext : DbContext
     {
-        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
-        {
-
-        }
+        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) {     }
 
         public virtual DbSet<Station> stations { get; set; }
         public virtual DbSet<Operator> operators { get; set; }
         public virtual DbSet<OperatorProgress> progresses { get; set; }
-
-        //public DbSet<Country> countries { get; set; }
+        public virtual DbSet<AppRuntimeState> runtime { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,12 +23,7 @@ namespace WebAppCellMapper.Data
             {
                 entity.Property(p => p.Standard).HasConversion<string>();
                 entity.Property(p => p.Status).HasConversion<string>();
-                //entity.OwnsMany(p => p.Coordinates, owned =>
-                //{
-                //    owned.ToJson();
-                //});
             });
-
         }
     }
 }

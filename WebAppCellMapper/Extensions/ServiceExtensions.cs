@@ -7,10 +7,12 @@ using Microsoft.Extensions.Options;
 using Npgsql;
 using System.Configuration;
 using System.Reflection;
+using WebAppCellMapper.BackgroundServices;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Repositories;
 using WebAppCellMapper.Helpers;
 using WebAppCellMapper.Options;
+using WebAppCellMapper.Proxy;
 using WebAppCellMapper.Services;
 
 namespace WebAppCellMapper.Extensions
@@ -44,14 +46,16 @@ namespace WebAppCellMapper.Extensions
         {
             //.ConfigurePrimaryHttpMessageHandler<HttpClientHandler>()
             services.AddSingleton<IGeoBoundsService,GeoBoundsService>();
-            //services.AddSingleton<IProxyService, ProxyService>();
-            //services.AddSingleton<IProxyHandlerPoolService, ProxyHandlerPoolService>();
+            services.AddSingleton<IProxyService, ProxyService>();
+            services.AddSingleton<IProxyHandlerPoolService, ProxyHandlerPoolService>();
             services.AddSingleton<IStationsScanningManager, StationsScanningManager>();
             services.AddSingleton<IRequestIdGenerator, RequestIdGenerator>();
             services.AddScoped<IStationsService, StationsService>();
             services.AddScoped<IOperatorsService ,OperatorsService>();
             services.AddScoped<IProgressRepository, ProgressRepository>();
-           
+            services.AddScoped<IRuntimeRepository, RuntimeRepository>();
+            services.AddHostedService<AppBackgroundService>();
+
             return services;
         }
 

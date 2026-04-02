@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
+using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Text;
 using WebAppCellMapper.Data.Models;
@@ -46,6 +48,12 @@ namespace WebAppCellMapper.Helpers
        
         public async Task<bool> InitRequest(ProxyHandler handler, CancellationToken ct=default)
         {
+            if (handler.CountTry>2)
+            {
+                handler.IsBan = true;
+                return false;
+            }
+            handler.CountTry++;
             try
             {
                 var id = GenerateRequestId("/api/Handbooks/countries?loadOperators=true");
@@ -74,17 +82,25 @@ namespace WebAppCellMapper.Helpers
                 if (res.IsSuccessStatusCode) {
 
                     var content =await res.Content.ReadAsStringAsync();
-                    if (res.Headers.TryGetValues("x-request-id", out var requestIdValues))
+                    var countryList = JsonConvert.DeserializeObject<List<Country>>(content);
+                    //429 когда пустой массив
+                    if (countryList!=null&&countryList.Count>0)
                     {
-                        handler.LastRequestId = requestIdValues.FirstOrDefault()??string.Empty;
-                      //  if (IsValidHash(handler.LastRequestId)) { logger.LogInformation("hash valid 2"); }
-                        if (string.IsNullOrEmpty(handler.LastRequestId))
+                        if (res.Headers.TryGetValues("x-request-id", out var requestIdValues))
                         {
+                            handler.LastRequestId = requestIdValues.FirstOrDefault() ?? string.Empty;
+                            handler.LastUpdateRequestId = DateTime.UtcNow;
+                            //  if (IsValidHash(handler.LastRequestId)) { logger.LogInformation("hash valid 2"); }
+                            if (string.IsNullOrEmpty(handler.LastRequestId))
+                            {
 
-                            return false;
+                                return false;
+                            }
+                            return true;
                         }
-                        return true;
+
                     }
+                    return false;
                 }
 
             }

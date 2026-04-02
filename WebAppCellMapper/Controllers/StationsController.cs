@@ -44,7 +44,7 @@ namespace WebAppCellMapper.Controllers
         {
             try
             {
-                var res= scanningManager.GetCurrentProcess();
+                var res= scanningManager.GetCurrentProcess;
                 return Ok(JsonConvert.SerializeObject(res));
             }
             catch (Exception ex)

@@ -1,11 +1,16 @@
-﻿using WebAppCellMapper.DTO;
+﻿using System.Threading.Tasks;
+using WebAppCellMapper.DTO;
 
 namespace WebAppCellMapper.Services
 {
     public interface IStationsScanningManager
     {
-        void StartFullScan();
-        QueryResult GetCurrentProcess();
+        void StartFullScan(bool isAutoStart=false);
+       // void StartFullScan();
+       // void AutoStartFullScan();
+        QueryResult GetCurrentProcess {  get; }
+        bool IsWorking { get; }
+       
         Task StopCurrentProccess();
         Task<int> CanceledProccess();
     }
