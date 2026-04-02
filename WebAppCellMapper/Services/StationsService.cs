@@ -179,7 +179,7 @@ namespace WebAppCellMapper.Services
                     //    yield return res;
                     //}
                     logger.LogInformation($"секторов осталось {coordinates.Count}");
-                    await Task.Delay(TimeSpan.FromSeconds(5), ct);//накинем доп время Что бы не палиться
+                    await Task.Delay(TimeSpan.FromSeconds(10), ct);//накинем доп время Что бы не палиться
                 }
 
             }
