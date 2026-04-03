@@ -40,15 +40,12 @@ namespace TestProjectWebCell
         [Fact]
         public async Task FullScan_ShouldReturnBadRequest_WhenExceptionThrown()
         {
-            // Arrange
             var errorMessage = "Scan failed";
             scanningManagerMock.Setup(x => x.StartFullScan(false))
                 .Throws(new Exception(errorMessage));
 
-            // Act
             var result = await controller.FullScan();
 
-            // Assert
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             Assert.Equal(errorMessage, badRequestResult.Value);
         }
@@ -56,7 +53,7 @@ namespace TestProjectWebCell
         [Fact]
         public async Task Stats_ShouldReturnSerializedStats()
         {
-            var expectedStats = new QueryResult("250001", NetworkStandard.Gsm, 0, 0, 0, "задачи нет", true);
+            var expectedStats = new QueryResult("250001", NetworkStandard.Gsm, 0, 0, 0, "progress", true);
             scanningManagerMock.Setup(x => x.GetCurrentProcess)
                 .Returns(expectedStats);
 

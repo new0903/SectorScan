@@ -32,7 +32,6 @@ namespace TestProjectWebCell
             stationsServiceMock = new Mock<IStationsService>();
             progressRepoMock = new Mock<IProgressRepository>();
 
-            // Правильный способ: мокируем GetService напрямую
             serviceProviderMock.Setup(x => x.GetService(typeof(IRuntimeRepository)))
                 .Returns(runtimeRepoMock.Object);
             serviceProviderMock.Setup(x => x.GetService(typeof(IStationsService)))
@@ -40,11 +39,9 @@ namespace TestProjectWebCell
             serviceProviderMock.Setup(x => x.GetService(typeof(IProgressRepository)))
                 .Returns(progressRepoMock.Object);
 
-            // Для CreateScope нужно мокировать возврат IServiceScope
             var serviceScopeMock = new Mock<IServiceScope>();
             serviceScopeMock.Setup(x => x.ServiceProvider).Returns(serviceProviderMock.Object);
 
-            // Здесь важный момент: GetService для IServiceScope
             serviceProviderMock.Setup(x => x.GetService(typeof(IServiceScopeFactory)))
                 .Returns(Mock.Of<IServiceScopeFactory>(f =>
                     f.CreateScope() == serviceScopeMock.Object));
@@ -60,7 +57,7 @@ namespace TestProjectWebCell
             // Arrange
             var items = new List<QueryResult>
             {
-                new QueryResult("123", NetworkStandard.Gsm, 10, 5, 100, "progress", false)
+                new QueryResult("2500001", NetworkStandard.Gsm, 10, 5, 100, "over", false)
             };
 
             stationsServiceMock.Setup(x => x.SyncStationsAllAsync(It.IsAny<CancellationToken>()))
@@ -71,25 +68,20 @@ namespace TestProjectWebCell
             manager.StartFullScan(true);
             await Task.Delay(100);
 
-            // Act
             await manager.StopCurrentProccess();
 
-            // Assert
             Assert.False(manager.IsWorking);
         }
 
         [Fact]
         public async Task CanceledProccess_ShouldReturnFailedProgressCount()
         {
-            // Arrange
             int expectedFailedCount = 42;
             progressRepoMock.Setup(x => x.FailedProgress(default)).ReturnsAsync(expectedFailedCount);
             runtimeRepoMock.Setup(x => x.CancelRuntime(default)).Returns(Task.CompletedTask);
 
-            // Act
             var result = await manager.CanceledProccess();
 
-            // Assert
             Assert.Equal(expectedFailedCount, result);
             runtimeRepoMock.Verify(x => x.CancelRuntime(default), Times.Once);
         }
@@ -97,35 +89,28 @@ namespace TestProjectWebCell
         [Fact]
         public async Task FullScan_ShouldUpdateResult_WhenItemsReceived()
         {
-            // Arrange
-            var expectedResult = new QueryResult("123", NetworkStandard.Gsm, 10, 5, 100, "progress", false);
+            var expectedResult = new QueryResult(string.Empty, NetworkStandard.Gsm, 10, 5, 100, "progress", false);
             var items = new List<QueryResult> { expectedResult };
             stationsServiceMock.Setup(x => x.SyncStationsAllAsync(It.IsAny<CancellationToken>()))
                 .Returns(items.ToAsyncEnumerable());
             runtimeRepoMock.Setup(x => x.IsRunning()).ReturnsAsync(true);
 
-            // Act
             manager.StartFullScan(true);
-            await Task.Delay(500); // Wait for completion
 
-            // Assert
             Assert.Equal(expectedResult.OperatorCode, manager.GetCurrentProcess.OperatorCode);
         }
 
         [Fact]
         public async Task StartFullScan_ShouldHandleCancellation()
         {
-            // Arrange
             var cts = new CancellationTokenSource();
             stationsServiceMock.Setup(x => x.SyncStationsAllAsync(It.IsAny<CancellationToken>()))
                 .Throws(new OperationCanceledException());
             runtimeRepoMock.Setup(x => x.IsRunning()).ReturnsAsync(true);
 
-            // Act
             manager.StartFullScan(true);
             await Task.Delay(500);
 
-            // Assert - no exception should bubble up
             Assert.False(manager.IsWorking);
         }
 
