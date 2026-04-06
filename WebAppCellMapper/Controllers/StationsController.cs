@@ -90,5 +90,23 @@ namespace WebAppCellMapper.Controllers
             }
 
         }
+
+        [HttpGet("count")]
+        public async Task<IActionResult> AllCountStations()
+        {
+            try
+            {
+                var res = await scanningManager.GetStats();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
     }
 }

@@ -13,5 +13,6 @@ namespace WebAppCellMapper.Services
        
         Task StopCurrentProccess();
         Task<int> CanceledProccess();
+        Task<List<QueryResult>> GetStats();
     }
 }

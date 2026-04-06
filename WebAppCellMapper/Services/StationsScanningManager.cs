@@ -1,10 +1,12 @@
 ﻿using Azure;
 using Grpc.Core.Logging;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Writers;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Repositories;
 using WebAppCellMapper.DTO;
 
@@ -160,5 +162,21 @@ namespace WebAppCellMapper.Services
             }
             return 0;
         }
+
+
+        public async Task<List<QueryResult>> GetStats()
+        {
+
+            using var scope = sp.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<AppDBContext>();
+           var res=await context.stations.AsNoTracking().GroupBy(s=>new { s.Standard, s.Operator.VisibleCode, s.Operator.Name }).Select(s=>
+                new QueryResult(s.Key.VisibleCode,s.Key.Standard, s.Count(),0,0,$"группировка станций по оператору {s.Key.Name}, типу сети {s.Key.Standard.ToString()}",false)
+            ).ToListAsync();
+            return res;
+        }
+
+
+
+
     }
 }

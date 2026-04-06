@@ -27,7 +27,7 @@ namespace WebAppCellMapper.Helpers
             this.logger = logger;
         }
 
-        public string GenerateRequestId(string path, string sessionId = "", string userAgent = null)
+        public string GenerateRequestId(string path, string sessionId = "", string? userAgent = null)
         {
           //  if (IsValidHash(sessionId)) { logger.LogInformation("hash valid 1"); }
             if (string.IsNullOrEmpty(userAgent))
@@ -60,7 +60,7 @@ namespace WebAppCellMapper.Helpers
             handler.CountTry++;
             try
             {
-                var id = GenerateRequestId("/api/Handbooks/countries?loadOperators=true");
+                var id = GenerateRequestId("/api/Handbooks/countries?loadOperators=true",userAgent:handler.UserAgent);
                 logger.LogInformation(id);
                 using HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
                 //  HttpClient client = httpClient; // попробую по правилам посмотрим что выйдет
@@ -78,8 +78,6 @@ namespace WebAppCellMapper.Helpers
                 client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-site");
                 client.DefaultRequestHeaders.Add("x-request-id", id);
                 client.DefaultRequestHeaders.Add("Referer", "https://4cells.ru/");
-                //https://4cells.ru:4444/api/Handbooks/countries?loadOperators=true
-
 
 
                 var res = await client.GetAsync($"/api/Handbooks/countries?loadOperators=true", ct);
@@ -110,6 +108,7 @@ namespace WebAppCellMapper.Helpers
             }
             catch (OperationCanceledException)
             {
+                logger.LogError("OperationCanceledException InitRequest");
             }
             catch (Exception ex)
             {

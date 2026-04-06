@@ -20,6 +20,12 @@ http://localhost:2345/api/Stations/stop
 
 http://localhost:2345/api/Stations/canceled
 
+статистика по станциям 
+
+http://localhost:2345/api/Stations/count
+
+
+
 Есть GRPC запросы. 
 
 ##  ВАЖНО !!

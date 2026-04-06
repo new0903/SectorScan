@@ -385,13 +385,11 @@ namespace WebAppCellMapper.Services
 
                     yield return res;
                 }
-
-                
             }
   
             {
 
-                QueryResult res = new QueryResult(string.Empty, NetworkStandard.Gsm, scannedStations, scannedSector, 0, "сканирование завершено", true);
+                QueryResult res = new QueryResult(string.Empty, NetworkStandard.Gsm, 0, 0, 0, "сканирование завершено", true);
                 yield return res;
             }
 
