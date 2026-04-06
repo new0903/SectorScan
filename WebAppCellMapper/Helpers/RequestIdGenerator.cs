@@ -10,7 +10,6 @@ using WebAppCellMapper.Services;
 
 namespace WebAppCellMapper.Helpers
 {
-    //ЖАДНОСТЬ ФРАЕРА СГУБИЛА АААААААААААААААААААААААА теперь всякую хрень для проверок писать нужно
     public class RequestIdGenerator : IRequestIdGenerator
     {
         
