@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Data.Repositories;
@@ -33,11 +34,11 @@ namespace WebAppCellMapper.Services
         //   private readonly HttpClientHandler Myhandler;
         private readonly ProxyHandler Myhandler;
 
+
         private int scannedStations=0;
         private int scannedSector = 0;
 
         private OperatorDTO? progress { get; set; } = null;
-        private HashSet<long> idsStations;
         private List<Station> stationsList;
         private ConcurrentQueue<SquareSearch>? coordinates;
 
@@ -58,19 +59,12 @@ namespace WebAppCellMapper.Services
             this.context = context;
             requestSettings = options.Value;
             stationsList = new List<Station>();
-            idsStations = new HashSet<long>();
             var handler = new HttpClientHandler();
             handler.AutomaticDecompression = DecompressionMethods.All;
             Myhandler = new ProxyHandler(handler, handlerPoolService.GetUserAgent());
 
         }
 
-        /// <summary>
-        /// Поиск станций в секторах
-        /// </summary>
-        /// <remarks>
-        /// Этот метод делает запросы, получает сектора если не указано и записывает найденные станции в бд
-        /// </remarks>
         private async IAsyncEnumerable<QueryResult> RunSearch( [EnumeratorCancellation] CancellationToken ct =default)//OperatorDTO op, NetworkStandard ns,
         {
 
@@ -117,10 +111,7 @@ namespace WebAppCellMapper.Services
                         int counter = coordinates.Count;
                         counter = counter > requestSettings.MaxConnectionsPerServer ? Math.Min(requestSettings.MaxConnectionsPerServer,handlerPoolService.CountProxy) 
                             : Math.Min(counter, handlerPoolService.CountProxy);
-                        // если не жадничать все будет норм и администрация не заметит
-                        //запрос с ip прокси
                         {
-                            //запрос с ip прокси для ускорения
                             for (int i = 0; i < counter; i++)
                             {
                                 if (coordinates.TryDequeue(out var square))
@@ -136,7 +127,6 @@ namespace WebAppCellMapper.Services
                             }
                         }
                         {
-                            //запрос с моего ip добавить в конец  await Task.Delay(TimeSpan.FromSeconds(5), ct); что бы не палится что парс идет. Не знаю какой интервал между запросами но поставил 5 секунд. 
                             if (coordinates.TryDequeue(out var square))
                             {
                                 var task = RequestStations(square, false, ct: cancellationToken.Token);
@@ -148,7 +138,7 @@ namespace WebAppCellMapper.Services
 
                         //очищаем не эффективные прокси
                         handlerPoolService.RemoveUnusedProxy();
-                    }   //обновляем прогрес
+                    }   
                     if (!ct.IsCancellationRequested)
                     {
                         progress.Coordinates = coordinates.ToList();
@@ -162,7 +152,6 @@ namespace WebAppCellMapper.Services
                         yield return res;
                     }
 
-                    //Сохраняем результаты в бд
                     await BulkSyncStationsAsync(ct);
 
                  
@@ -173,13 +162,9 @@ namespace WebAppCellMapper.Services
                     }
                     await progressService.SaveProgress(progress,ct);
 
-                    //не большая пауза перед новым сбором
-                    //{
-                    //    QueryResult res = new QueryResult(progress.Code, progress.Standard, scannedStations, scannedSector, progress.Coordinates.Count, "ожидаю минуту для повторных запросов");
-                    //    yield return res;
-                    //}
+                 
                     logger.LogInformation($"секторов осталось {coordinates.Count}");
-                    await Task.Delay(TimeSpan.FromSeconds(10), ct);//накинем доп время Что бы не палиться
+                    await Task.Delay(TimeSpan.FromSeconds(10), ct);
                 }
 
             }
@@ -188,18 +173,7 @@ namespace WebAppCellMapper.Services
         }
 
 
-        //using var handler = new HttpClientHandler()
-        //{
-        //    Proxy=new WebProxy(proxy.url),
-        //    UseProxy= true
-        //};
 
-        /// <summary>
-        /// Http Запрос 
-        /// </summary>
-        /// <remarks>
-        /// Этот метод делает запросы, записывает результаты запроса в коллекции и если запрос не удачный возвращает сектор обратно в очередь
-        /// </remarks>
         private async Task<bool> RequestStations(  SquareSearch sector,bool useProxy=true, CancellationToken ct=default)//OperatorDTO op, NetworkStandard ns,
         {
             await Task.Delay(TimeSpan.FromSeconds(Random.Shared.Next(requestSettings.RandomStartRequestSeconds)), ct);
@@ -211,7 +185,6 @@ namespace WebAppCellMapper.Services
 
                 if (handler == null|| handler.IsBan)//&&handler.LastUpdateRequestId+TimeSpan.FromHours(6)>DateTime.UtcNow
                 {
-
                     if (handler!=null)
                     {
                         handler.UserAgent = handlerPoolService.GetUserAgent();
@@ -221,24 +194,18 @@ namespace WebAppCellMapper.Services
                     return false;
                 }
                 //стартовый ID
-                if (string.IsNullOrEmpty(handler.LastRequestId)|| handler.LastUpdateRequestId+TimeSpan.FromMinutes(25)<DateTime.UtcNow)
+                var resId= await requestIdGenerator.InitRequest(handler,ct);
+                if (!resId)
                 {
-                    var resId= await requestIdGenerator.InitRequest(handler,ct);
-                    if (!resId)
-                    {
-                        logger.LogInformation($"failed get request id: {handler.LastRequestId}");
-                        if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
-                        return false;
-                    }
-                    logger.LogInformation($"Success get request id: {handler.LastRequestId}");
+                    logger.LogInformation($"failed get request id: {handler.LastRequestId}");
+                    if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
+                    return false;
                 }
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
                 using HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
-              //  HttpClient client = httpClient; // попробую по правилам посмотрим что выйдет
                 client.BaseAddress =new Uri("https://4cells.ru:4444");
 
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(handler.UserAgent);
-                // Добавляем заголовки для эмуляции AJAX/CORS запроса
                 client.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/plain, */*");
                 client.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
                 client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br, zstd");
@@ -253,7 +220,6 @@ namespace WebAppCellMapper.Services
                 var id=requestIdGenerator.GenerateRequestId($"/api/map/enb/{progress.Standard.ToString().ToLower()}/{progress.Code}?{paramsUrl}", handler.LastRequestId,handler.UserAgent);
 
 
-                //logger.LogInformation($"new {id}");
                 client.DefaultRequestHeaders.Add("x-request-id", id);
                 client.DefaultRequestHeaders.Add("Origin", "https://4cells.ru");
                 client.DefaultRequestHeaders.Add("Referer", "https://4cells.ru/");
@@ -261,9 +227,6 @@ namespace WebAppCellMapper.Services
 
 
 
-                //Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
-                // https://4cells.ru:4444/api/map/enb/lte/250011?
-                //https://4cells.ru:4444/
                 if (res.IsSuccessStatusCode)
                 {
 
@@ -282,13 +245,10 @@ namespace WebAppCellMapper.Services
                     foreach (var item in stations)
                     {
 
-                        if (idsStations.Add(item.Id))
-                        {
-                            item.OperatorId = progress.OperatorId;
-                            item.Standard = progress.Standard;
-                            stationsList.Add(item);
-                            Interlocked.Increment(ref scannedStations);
-                        }
+                        item.OperatorId = progress.OperatorId;
+                        item.Standard = progress.Standard;
+                        stationsList.Add(item);
+                        Interlocked.Increment(ref scannedStations);
 
                     }
                     Interlocked.Increment(ref scannedSector);
@@ -352,25 +312,7 @@ namespace WebAppCellMapper.Services
         }
 
 
-        //string DecompressGzip(byte[] gzipData)
-        //{
-        //    using (var compressedStream = new MemoryStream(gzipData))
-        //    using (var gzipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
-        //    using (var resultStream = new MemoryStream())
-        //    {
-        //        gzipStream.CopyTo(resultStream);
-        //        byte[] decompressedBytes = resultStream.ToArray();
-        //        return Encoding.UTF8.GetString(decompressedBytes);
-        //    }
-        //}
 
-
-        /// <summary>
-        /// Сохраняем результат в бд 
-        /// </summary>
-        /// <remarks>
-        /// Этот метод сохроняет результаты в бд. наверное итак понятно
-        /// </remarks>
         private async Task BulkSyncStationsAsync( CancellationToken ct=default)//Task<HttpResponseMessage> res,
         {
             try
@@ -392,36 +334,8 @@ namespace WebAppCellMapper.Services
         }
 
 
-        /// <summary>
-        /// Поиск всех станций, по всем операторам и сетям
-        /// </summary>
-        /// <remarks>
-        /// Этот метод для эндпоинта SSE формата
-        /// метод выполняется очень долго, поэтому я решил что лучше будет использовать SSE 
-        /// что бы отслеживать прогресс загрузки станций в бд
-        /// для тестирования в консоль бразуера вставить вот это js код
-        /// var eventSource = new EventSource('https://localhost:7040/api/Stations');
-        /// eventSource.onmessage = (event) => {
-        /// console.log( event.data);
-        /// if (event.data.includes('[DONE]')) {
-        /// eventSource.close()
-        /// }
-        /// };
-        /// eventSource.onerror = (error) => {
-        ///     console.error('EventSource error:', error);
-        ///     eventSource.close()
-        /// };
-        /// можно и fetch использовать
-        /// </remarks>
         public async IAsyncEnumerable<QueryResult> SyncStationsAllAsync([EnumeratorCancellation] CancellationToken ct = default)
         {
-
-            //responseStream = httpStream;
-            // await WriteResponse("получаем операторов из бд");
-            //var operators = await context.operators.
-            //    AsNoTracking().
-            //    Select(o => new OperatorDTO(o.Id, o.InternalCode)).
-            //    ToListAsync();
             var operators= await progressService.LoadProgress(ct);
 
             if (operators.Count==0)
@@ -437,7 +351,6 @@ namespace WebAppCellMapper.Services
                 if (op.Coordinates.Count > 0)
                 {
                     coordinates = new ConcurrentQueue<SquareSearch>(op.Coordinates);
-
                 }
                 else
                 {
@@ -463,7 +376,6 @@ namespace WebAppCellMapper.Services
                 {
                     yield return item;
                 }
-                idsStations.Clear();
                 {
                     op.Status = ProgressStatus.Completed;
                     op.CompletedAt = DateTime.UtcNow;

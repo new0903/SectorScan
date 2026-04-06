@@ -48,6 +48,10 @@ namespace WebAppCellMapper.Helpers
        
         public async Task<bool> InitRequest(ProxyHandler handler, CancellationToken ct=default)
         {
+            if (!string.IsNullOrEmpty(handler.LastRequestId) && handler.LastUpdateRequestId + TimeSpan.FromMinutes(25) > DateTime.UtcNow)
+            {
+                return true;
+            }
             if (handler.CountTry>2)
             {
                 handler.IsBan = true;
