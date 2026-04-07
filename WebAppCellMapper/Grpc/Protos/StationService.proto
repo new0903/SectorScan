@@ -48,6 +48,9 @@ message RequestResponse {
     bool isDone = 8;
 }
 
+message ListRequestResponse {
+    repeated RequestResponse stat=1; 
+}
 message Empty{}
 message ResultResponse{
     bool result=1;
@@ -60,6 +63,7 @@ service StationServiceGrpc {
   rpc Stats(Empty) returns ( RequestResponse);
   rpc StopProccess(Empty) returns (ResultResponse);
   rpc CanceledProccess(Empty) returns (ResultResponse);
+  rpc AllCount(Empty) returns (ListRequestResponse);
 }
 
 

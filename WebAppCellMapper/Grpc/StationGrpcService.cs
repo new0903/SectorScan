@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf;
+using Grpc.Core;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Services;
 
@@ -68,6 +69,23 @@ namespace WebAppCellMapper.Grpc
             {
                 Result = true
             };
+        }
+        public override async Task<ListRequestResponse> AllCount(Empty request, ServerCallContext context)
+        {
+            ListRequestResponse result= new ListRequestResponse();
+            var stations = await scanningManager.GetStats();
+            result.Stat.AddRange(stations.Select(item=> new RequestResponse
+            {
+                CountSectors = item.CountSectors,
+                ScannedSector = item.CountSectorsScaned,
+                CountAdded = item.CountAdded,
+                Message = item.Message,
+                Network = NSEnumerator.ToGrpcEnum(item.Network),
+                OperatorCode = item.OperatorCode,
+                Timestamp = item.Timestamp.ToString(),
+                IsDone = item.isDone,
+            }));
+            return result;
         }
     }
 }
