@@ -1,4 +1,5 @@
-﻿using WebAppCellMapper.Data.Models;
+﻿using Domain.Enums;
+using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Helpers;
 
 namespace WebAppCellMapper.DTO
@@ -22,7 +23,7 @@ namespace WebAppCellMapper.DTO
     //public record OperatorDTO(long Id, string Code);
 
   
-    public class OperatorDTO
+    public class ProgressDTO
     {
         public long Id { get; init; }
         public long OperatorId { get; init; }
@@ -41,12 +42,12 @@ namespace WebAppCellMapper.DTO
         public int AddedStationsCount { get; set; }
 
 
-        public OperatorDTO()
+        public ProgressDTO()
         {
 
         }
         // Конструктор с автоматической установкой UpdateAt
-        public OperatorDTO(
+        public ProgressDTO(
             long id,
             long operatorId,
             string code,

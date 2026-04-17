@@ -1,4 +1,4 @@
-﻿using WebAppCellMapper.Data.Models;
+﻿using Domain.Models;
 
 namespace WebAppCellMapper.Services
 {

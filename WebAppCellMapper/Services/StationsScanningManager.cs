@@ -1,10 +1,9 @@
 ﻿using Azure;
+using Domain.Enums;
 using Grpc.Core.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Writers;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Repositories;
@@ -26,7 +25,7 @@ namespace WebAppCellMapper.Services
         {
             sp = serviceProvider;
             this.logger = logger;
-            result = new QueryResult(string.Empty, Data.Models.NetworkStandard.Gsm, 0, 0, 0, "задачи нет", true);
+            result = new QueryResult(string.Empty, NetworkStandard.Gsm, 0, 0, 0, "задачи нет", true);
         }
 
         public bool IsWorking => task != null;
@@ -168,11 +167,8 @@ namespace WebAppCellMapper.Services
         {
 
             using var scope = sp.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<AppDBContext>();
-           var res=await context.stations.AsNoTracking().GroupBy(s=>new { s.Standard, s.Operator.VisibleCode, s.Operator.Name }).Select(s=>
-                new QueryResult(s.Key.VisibleCode,s.Key.Standard, s.Count(),0,0,$"группировка станций по оператору {s.Key.Name}, типу сети {s.Key.Standard.ToString()}",false)
-            ).ToListAsync();
-            return res;
+            var context = scope.ServiceProvider.GetRequiredService<IStationsRepository>();
+            return await context.GetResult();
         }
 
 

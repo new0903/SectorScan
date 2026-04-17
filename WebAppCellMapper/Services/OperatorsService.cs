@@ -1,6 +1,7 @@
-﻿using EFCore.BulkExtensions;
+﻿using Domain.Models;
+using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using System.Text.Json;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Models;
 
@@ -22,14 +23,12 @@ namespace WebAppCellMapper.Services
         {
             try
             {
-                //проверяю есть ли вообще операторы
                 if (context.operators.Any()) return;
 
-                var filePath = Path.Combine(env.ContentRootPath, "operators.json");//можно http запрос делать
+                var filePath = Path.Combine(env.ContentRootPath, "operators.json");
                 var jsonContent = File.ReadAllText(filePath);
 
-
-                var countryList = JsonConvert.DeserializeObject<List<Country>>(jsonContent);
+                var countryList = JsonSerializer.Deserialize<List<Country>>(jsonContent);
                 //надо будет уточнить насчет других стран
                 if (countryList == null) return;
                 var operators = countryList.FirstOrDefault(c => c.countryId == 1);
@@ -38,11 +37,10 @@ namespace WebAppCellMapper.Services
                 {
                     if (string.IsNullOrWhiteSpace(op.Name))
                     {
-                        op.Name = $"Operator_{op.InternalCode}"; //эти падлы не везде name поставили 
+                        op.Name = $"Operator_{op.InternalCode}"; 
                     }
                     return op;
                 }).ToList();
-                //сохраняем все в бд
                 context.BulkInsertOrUpdate(processedOperators);
             }
             catch (Exception ex)

@@ -49,13 +49,14 @@ namespace WebAppCellMapper.Extensions
             services.AddSingleton<IProxyService, ProxyService>();
             services.AddSingleton<IProxyHandlerPoolService, ProxyHandlerPoolService>();
             services.AddSingleton<IStationsScanningManager, StationsScanningManager>();
-            services.AddSingleton<IRequestIdGenerator, RequestIdGenerator>();
+            services.AddSingleton<IRequestHelper, RequestHelper>();
             services.AddScoped<IStationsService, StationsService>();
             services.AddScoped<IOperatorsService ,OperatorsService>();
             services.AddScoped<IProgressRepository, ProgressRepository>();
             services.AddScoped<IRuntimeRepository, RuntimeRepository>();
+            services.AddScoped<IStationsRepository, StationsRepository>();
             services.AddHostedService<AppBackgroundService>();
-
+            services.AddHostedService<EraserDbBackgroundService>();
             return services;
         }
 

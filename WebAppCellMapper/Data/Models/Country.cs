@@ -1,4 +1,6 @@
-﻿namespace WebAppCellMapper.Data.Models
+﻿using Domain.Models;
+
+namespace WebAppCellMapper.Data.Models
 {
     public class Country
     {

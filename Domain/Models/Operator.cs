@@ -1,16 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿
 
-namespace WebAppCellMapper.Data.Models
+using System.Text.Json.Serialization;
+
+namespace Domain.Models
 {
     public class Operator
     {
         [JsonIgnore]
         public long Id { get; set; }
-        [JsonProperty("internalCode")]
+        [JsonPropertyName("internalCode")]
         public string InternalCode { get; set; }//в url вставлять
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
-        [JsonProperty("visibleCode")]
+        [JsonPropertyName("visibleCode")]
         public string VisibleCode { get; set; }
    
     }

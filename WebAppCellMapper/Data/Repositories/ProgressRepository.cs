@@ -1,10 +1,5 @@
-﻿using EFCore.BulkExtensions;
+﻿using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using NetTopologySuite.Geometries;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
 using WebAppCellMapper.Helpers;
@@ -56,7 +51,7 @@ namespace WebAppCellMapper.Data.Repositories
         }
 
         /*save progress*/
-        public async Task<int> SaveProgress(OperatorDTO entity, CancellationToken ct = default)
+        public async Task<int> SaveProgress(ProgressDTO entity, CancellationToken ct = default)
         {
             try
             {
@@ -85,15 +80,14 @@ namespace WebAppCellMapper.Data.Repositories
 
 
         /*load progress*/
-        public async Task<List<OperatorDTO>> LoadProgress(CancellationToken ct=default)
+        public async Task<List<ProgressDTO>> LoadProgress(CancellationToken ct=default)
         {
-            await DeleteCompletedProgress(ct);
             return await context.progresses
                 .AsNoTracking()
                 .Where(p => p.Status != ProgressStatus.Completed && p.Status!= ProgressStatus.Failed)
                 .OrderBy(p=>p.Id)
                 .Select(q =>
-                    new OperatorDTO(
+                    new ProgressDTO(
                         q.Id,
                         q.Operator.Id,
                         q.Operator.InternalCode,
@@ -123,6 +117,7 @@ namespace WebAppCellMapper.Data.Repositories
             return await context.progresses
                 .Where(p => p.Status != ProgressStatus.Completed && p.Status != ProgressStatus.Failed)
                 .ExecuteUpdateAsync(s=>s.SetProperty(p=>p.Status, ProgressStatus.Failed)
+                .SetProperty(p => p.Coordinates, new List<SquareSearch>())
                 .SetProperty(p => p.UpdatedAt, DateTime.UtcNow), ct);
         }
 

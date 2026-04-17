@@ -7,7 +7,7 @@
         "Action": "Start"
       },
       {
-        "Path": "ConsoleAppGRPCTest\\ConsoleAppGRPCTest.csproj",
+        "Path": "..\\ConsoleAppForTestApi\\ConsoleAppForTestApi.csproj",
         "Action": "Start"
       }
     ]

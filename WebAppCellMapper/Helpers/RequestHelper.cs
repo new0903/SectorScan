@@ -1,27 +1,27 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
 using WebAppCellMapper.Services;
 
 namespace WebAppCellMapper.Helpers
 {
-    public class RequestIdGenerator : IRequestIdGenerator
+    public class RequestHelper : IRequestHelper
     {
         
 
 
 
-        private readonly ILogger<RequestIdGenerator> logger;
+        private readonly ILogger<RequestHelper> logger;
 
 
 
 
-        public RequestIdGenerator(ILogger<RequestIdGenerator> logger)
+        public RequestHelper(ILogger<RequestHelper> logger)
         {
             this.logger = logger;
         }
@@ -45,6 +45,25 @@ namespace WebAppCellMapper.Helpers
                 .ToLowerInvariant();
         }
        
+
+        public HttpClient GetHttpClient(ProxyHandler handler)
+        {
+            HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
+            client.BaseAddress = new Uri("https://4cells.ru:4444");
+
+
+            client.DefaultRequestHeaders.UserAgent.ParseAdd(handler.UserAgent);
+            client.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/plain, */*");//
+            client.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
+            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br, zstd");
+            client.DefaultRequestHeaders.Add("Priority", "u=1, i");
+            client.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
+            client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
+            client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-site");
+            client.DefaultRequestHeaders.Add("Referer", "https://4cells.ru/");
+            client.DefaultRequestHeaders.Add("Origin", "https://4cells.ru");
+            return client;
+        }
         public async Task<bool> InitRequest(ProxyHandler handler, CancellationToken ct=default)
         {
             if (!string.IsNullOrEmpty(handler.LastRequestId) && handler.LastUpdateRequestId + TimeSpan.FromMinutes(25) > DateTime.UtcNow)
@@ -60,30 +79,36 @@ namespace WebAppCellMapper.Helpers
             try
             {
                 var id = GenerateRequestId("/api/Handbooks/countries?loadOperators=true",userAgent:handler.UserAgent);
+
+
                 logger.LogInformation(id);
-                using HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
-                //  HttpClient client = httpClient; // попробую по правилам посмотрим что выйдет
-                client.BaseAddress = new Uri("https://4cells.ru:4444");
 
-
-                client.DefaultRequestHeaders.UserAgent.ParseAdd(handler.UserAgent);
-                // Добавляем заголовки для эмуляции AJAX/CORS запроса
-                client.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/plain, */*");//
-                client.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
-                client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br, zstd");
-                client.DefaultRequestHeaders.Add("Priority", "u=1, i");
-                client.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
-                client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
-                client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-site");
+                using HttpClient client= GetHttpClient(handler);
                 client.DefaultRequestHeaders.Add("x-request-id", id);
-                client.DefaultRequestHeaders.Add("Referer", "https://4cells.ru/");
+
+                //using HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
+                ////  HttpClient client = httpClient; // попробую по правилам посмотрим что выйдет
+                //client.BaseAddress = new Uri("https://4cells.ru:4444");
+
+
+                //client.DefaultRequestHeaders.UserAgent.ParseAdd(handler.UserAgent);
+                //// Добавляем заголовки для эмуляции AJAX/CORS запроса
+                //client.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/plain, */*");//
+                //client.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
+                //client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br, zstd");
+                //client.DefaultRequestHeaders.Add("Priority", "u=1, i");
+                //client.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
+                //client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
+                //client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-site");
+                //client.DefaultRequestHeaders.Add("x-request-id", id);
+                //client.DefaultRequestHeaders.Add("Referer", "https://4cells.ru/");
 
 
                 var res = await client.GetAsync($"/api/Handbooks/countries?loadOperators=true", ct);
                 if (res.IsSuccessStatusCode) {
 
                     var content =await res.Content.ReadAsStringAsync();
-                    var countryList = JsonConvert.DeserializeObject<List<Country>>(content);
+                    var countryList = JsonSerializer.Deserialize<List<Country>>(content);
                     //429 когда пустой массив
                     if (countryList!=null&&countryList.Count>0)
                     {

@@ -5,13 +5,11 @@ namespace WebAppCellMapper.BackgroundServices
 {
     public class AppBackgroundService : BackgroundService
     {
-        private readonly IServiceProvider serviceProvider;
         private readonly IStationsScanningManager scanningManager;
         private readonly ILogger<AppBackgroundService> logger;
 
-        public AppBackgroundService(IServiceProvider serviceProvider, IStationsScanningManager scanningManager,ILogger<AppBackgroundService> logger)
+        public AppBackgroundService( IStationsScanningManager scanningManager,ILogger<AppBackgroundService> logger)
         {
-            this.serviceProvider = serviceProvider;
             this.scanningManager = scanningManager;
             this.logger = logger;
         }
@@ -25,7 +23,7 @@ namespace WebAppCellMapper.BackgroundServices
                     scanningManager.StartFullScan(true);
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(30));
+                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
             }
         }
     }

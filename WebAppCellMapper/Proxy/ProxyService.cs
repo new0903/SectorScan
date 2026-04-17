@@ -1,9 +1,8 @@
 ﻿
 using HtmlAgilityPack;
 using Microsoft.Extensions.Options;
-using NetTopologySuite.Index.HPRtree;
-using Newtonsoft.Json;
 using System.Collections.Concurrent;
+using System.Text.Json;
 using WebAppCellMapper.Options;
 //using HtmlAgilityPack;
 
@@ -174,6 +173,11 @@ namespace WebAppCellMapper.Proxy
                     {
                         break;
                     }
+                    if (i>20)
+                    {
+
+                        break;
+                    }
                 }
             }
 
@@ -297,7 +301,7 @@ namespace WebAppCellMapper.Proxy
             if (res.IsSuccessStatusCode)
             {
                 var json = await res.Content.ReadAsStringAsync();
-                var list = JsonConvert.DeserializeObject<List<Proxifly>>(json);
+                var list = JsonSerializer.Deserialize<List<Proxifly>>(json);
                 if (list != null && list.Count > 0)
                 {
                     ProxysList.Clear();//тут очень много прокси поэтому удаляю старые прокси

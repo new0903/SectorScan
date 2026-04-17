@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using WebAppCellMapper.Services;
-using Newtonsoft.Json;
 
 namespace WebAppCellMapper.Controllers
 {
@@ -45,7 +44,7 @@ namespace WebAppCellMapper.Controllers
             try
             {
                 var res= scanningManager.GetCurrentProcess;
-                return Ok(JsonConvert.SerializeObject(res));
+                return Ok(res);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Enums;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
@@ -10,7 +11,6 @@ using WebAppCellMapper.Controllers;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
 using WebAppCellMapper.Services;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TestProjectWebCell
 {

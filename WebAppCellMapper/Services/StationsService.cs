@@ -1,12 +1,13 @@
 ﻿
+using Domain.Enums;
+using Domain.Models;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Runtime.CompilerServices;
-using System.Threading;
+using System.Text.Json;
 using WebAppCellMapper.Data;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Data.Repositories;
@@ -21,8 +22,9 @@ namespace WebAppCellMapper.Services
     public class StationsService : IStationsService
     {
         private readonly IProgressRepository progressService;
-        private readonly IRequestIdGenerator requestIdGenerator;
-        private readonly AppDBContext context;
+        private readonly IStationsRepository stationsRepository;
+        private readonly IRequestHelper requestHelper;
+       // private readonly AppDBContext context;
         private readonly IGeoBoundsService boundsService;
         private readonly IProxyHandlerPoolService handlerPoolService;
 
@@ -38,13 +40,14 @@ namespace WebAppCellMapper.Services
         private int scannedStations=0;
         private int scannedSector = 0;
 
-        private OperatorDTO? progress { get; set; } = null;
-        private List<Station> stationsList;
+        private ProgressDTO? progress { get; set; } = null;
+        //private List<Station> stationsList;
         private ConcurrentQueue<SquareSearch>? coordinates;
 
         public StationsService(
-            IRequestIdGenerator requestIdGenerator,
-            AppDBContext context,
+            IStationsRepository stationsRepository,
+            IRequestHelper requestIdGenerator,
+         //   AppDBContext context,
             IProgressRepository progressService,
             IGeoBoundsService boundsService,
             IProxyHandlerPoolService handlerPoolService, 
@@ -55,17 +58,18 @@ namespace WebAppCellMapper.Services
             this.boundsService = boundsService;
             this.handlerPoolService = handlerPoolService;
             this.logger = logger;
-            this.requestIdGenerator = requestIdGenerator;
-            this.context = context;
+            this.stationsRepository = stationsRepository;
+            this.requestHelper = requestIdGenerator;
+         //   this.context = context;
             requestSettings = options.Value;
-            stationsList = new List<Station>();
+          //  stationsList = new List<Station>();
             var handler = new HttpClientHandler();
             handler.AutomaticDecompression = DecompressionMethods.All;
             Myhandler = new ProxyHandler(handler, handlerPoolService.GetUserAgent());
 
         }
 
-        private async IAsyncEnumerable<QueryResult> RunSearch( [EnumeratorCancellation] CancellationToken ct =default)//OperatorDTO op, NetworkStandard ns,
+        private async IAsyncEnumerable<QueryResult> RunSearch( [EnumeratorCancellation] CancellationToken ct =default)
         {
 
 
@@ -152,10 +156,11 @@ namespace WebAppCellMapper.Services
                         yield return res;
                     }
 
-                    await BulkSyncStationsAsync(ct);
+                    await stationsRepository.BulkSyncStationsAsync(ct);
+                  //  await BulkSyncStationsAsync(ct);
 
-                 
- 
+
+
                     {
                         QueryResult res = new QueryResult(progress.Code, progress.Standard, progress.AddedStationsCount, progress.ScannedCount, progress.Coordinates.Count, "сохроняю в бд прогресс");
                         yield return res;
@@ -163,7 +168,6 @@ namespace WebAppCellMapper.Services
                     await progressService.SaveProgress(progress,ct);
 
                  
-                    logger.LogInformation($"секторов осталось {coordinates.Count}");
                     await Task.Delay(TimeSpan.FromSeconds(10), ct);
                 }
 
@@ -179,22 +183,20 @@ namespace WebAppCellMapper.Services
             await Task.Delay(TimeSpan.FromSeconds(Random.Shared.Next(requestSettings.RandomStartRequestSeconds)), ct);
 
             var handler = useProxy ? handlerPoolService.GetClientHandler() : Myhandler;
-           
             try
             {
-
-                if (handler == null|| handler.IsBan)//&&handler.LastUpdateRequestId+TimeSpan.FromHours(6)>DateTime.UtcNow
+                if (handler == null|| handler.IsBan)
                 {
-                    if (handler!=null)
-                    {
-                        handler.UserAgent = handlerPoolService.GetUserAgent();
-                    }
+                    //if (handler!=null)
+                    //{
+                    //    handler.UserAgent = handlerPoolService.GetUserAgent();
+                    //}
                     logger.LogError("429 ban ip");
                     if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                     return false;
                 }
                 //стартовый ID
-                var resId= await requestIdGenerator.InitRequest(handler,ct);
+                var resId= await requestHelper.InitRequest(handler,ct);
                 if (!resId)
                 {
                     logger.LogInformation($"failed get request id: {handler.LastRequestId}");
@@ -202,27 +204,17 @@ namespace WebAppCellMapper.Services
                     return false;
                 }
                 await Task.Delay(TimeSpan.FromMilliseconds(500));
-                using HttpClient client = new HttpClient(handler.ClientHandler, disposeHandler: false);
-                client.BaseAddress =new Uri("https://4cells.ru:4444");
-
-                client.DefaultRequestHeaders.UserAgent.ParseAdd(handler.UserAgent);
-                client.DefaultRequestHeaders.Accept.ParseAdd("application/json, text/plain, */*");
-                client.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
-                client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br, zstd");
-                client.DefaultRequestHeaders.Add("Priority", "u=1, i");
-                client.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
-                client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
-                client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-site");
 
 
-                string paramsUrl = $"latStart={sector.LatStart.ToString().Replace(",",".")}&latEnd={sector.LatEnd.ToString().Replace(",", ".")}&lonStart={sector.LonStart.ToString().Replace(",", ".")}&lonEnd={sector.LonEnd.ToString().Replace(",", ".")}";
 
-                var id=requestIdGenerator.GenerateRequestId($"/api/map/enb/{progress.Standard.ToString().ToLower()}/{progress.Code}?{paramsUrl}", handler.LastRequestId,handler.UserAgent);
+                using HttpClient client = requestHelper.GetHttpClient(handler);
 
+                string paramsUrl = $"latStart={sector.LatStart.ToString().Replace(",", ".")}&latEnd={sector.LatEnd.ToString().Replace(",", ".")}&lonStart={sector.LonStart.ToString().Replace(",", ".")}&lonEnd={sector.LonEnd.ToString().Replace(",", ".")}";
+
+                var id = requestHelper.GenerateRequestId($"/api/map/enb/{progress.Standard.ToString().ToLower()}/{progress.Code}?{paramsUrl}", handler.LastRequestId, handler.UserAgent);
 
                 client.DefaultRequestHeaders.Add("x-request-id", id);
-                client.DefaultRequestHeaders.Add("Origin", "https://4cells.ru");
-                client.DefaultRequestHeaders.Add("Referer", "https://4cells.ru/");
+
                 var res = await client.GetAsync($"/api/map/enb/{progress.Standard.ToString().ToLower()}/{progress.Code}?{paramsUrl}", ct);
 
 
@@ -236,10 +228,9 @@ namespace WebAppCellMapper.Services
                         handlerPoolService.ReleaseHandler(handler);
                     }
                     sector.IsScanned = true;
-                    logger.LogInformation($"success request {res.StatusCode}");
 
                     string content = await res.Content.ReadAsStringAsync(ct);
-                    var stations = JsonConvert.DeserializeObject<List<Station>>(content);
+                    var stations = JsonSerializer.Deserialize<List<Station>>(content);
                     if (stations == null) return false;
                     logger.LogInformation($"success request {res.StatusCode} {stations.Count}, coordinates: LatStart={sector.LatStart}, LatEnd={sector.LatEnd}, LonStart={sector.LonStart}, LonEnd={sector.LonEnd}");
                     foreach (var item in stations)
@@ -247,12 +238,11 @@ namespace WebAppCellMapper.Services
 
                         item.OperatorId = progress.OperatorId;
                         item.Standard = progress.Standard;
-                        stationsList.Add(item);
+                        stationsRepository.StationsList.Add(item);
                         Interlocked.Increment(ref scannedStations);
 
                     }
                     Interlocked.Increment(ref scannedSector);
-                 //   scannedSector++;
                     /*детальное сканирование сектора если там выдало много станций
                      например сканируем город, там может быть очень много станций*/
                     if (stations.Count>=300&& coordinates!=null)
@@ -265,74 +255,31 @@ namespace WebAppCellMapper.Services
                             coordinates.Enqueue(item);
                         }   
                     }
-
                     return true;
                 }
                 else
                 {
-                    if (handler != null)
-                    {
-
-                        handler.LastRequestId = string.Empty;
-                    }
-
-                    //   proxyService.DeleteProxy(proxyAddress);    if (coordinates!=null && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                     logger.LogError($"failed request {res.StatusCode}");
                 }
 
             }
             catch (OperationCanceledException)
             {
-                if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                logger.LogError("OperationCanceledException"); 
-                if (handler != null)
-                {
-
-                    handler.LastRequestId = string.Empty;
-                }
             }
             catch (Exception ex)
             {
-                if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
                 logger.LogError($"Exception\nmessage error: {ex.Message}");
-                if (handler != null)
-                {
-
-                    handler.LastRequestId = string.Empty;
-                }
-
             }
-            if (handler!=null)
+            finally
             {
-
-                handler.LastRequestId = string.Empty;
+                if (coordinates != null && !sector.IsScanned && !coordinates.Contains(sector)) coordinates.Enqueue(sector);
+                if (handler != null) handler.LastRequestId = string.Empty;
             }
+
 
             return false;
         }
-
-
-
-        private async Task BulkSyncStationsAsync( CancellationToken ct=default)//Task<HttpResponseMessage> res,
-        {
-            try
-            {
-
-                if (stationsList != null && stationsList.Count > 0)
-                {
-
-                    await context.BulkInsertOrUpdateAsync(stationsList, cancellationToken: ct);
-                    logger.LogInformation($"добавлено станций {stationsList.Count}");
-                    stationsList.Clear();
-
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                logger.LogInformation("Bulk sync was canceled");
-            }
-        }
-
 
         public async IAsyncEnumerable<QueryResult> SyncStationsAllAsync([EnumeratorCancellation] CancellationToken ct = default)
         {
@@ -343,11 +290,8 @@ namespace WebAppCellMapper.Services
                 await progressService.InitProgress();
                 operators = await progressService.LoadProgress(ct);
             }
-            foreach (var op in operators)//операторы
+            foreach (var op in operators)
             {
-                
-              
-
                 if (op.Coordinates.Count > 0)
                 {
                     coordinates = new ConcurrentQueue<SquareSearch>(op.Coordinates);

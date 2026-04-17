@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf;
 using Grpc.Core;
+using WebAppCellMapper.Data.Enums;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Services;
 
@@ -47,7 +48,7 @@ namespace WebAppCellMapper.Grpc
                 ScannedSector = item.CountSectorsScaned,
                 CountAdded = item.CountAdded,
                 Message = item.Message,
-                Network = NSEnumerator.ToGrpcEnum(item.Network),
+                Network = NetworkConverter.ToGrpcEnum(item.Network),
                 OperatorCode = item.OperatorCode,
                 Timestamp = item.Timestamp.ToString(),
                 IsDone = item.isDone,
@@ -80,7 +81,7 @@ namespace WebAppCellMapper.Grpc
                 ScannedSector = item.CountSectorsScaned,
                 CountAdded = item.CountAdded,
                 Message = item.Message,
-                Network = NSEnumerator.ToGrpcEnum(item.Network),
+                Network = NetworkConverter.ToGrpcEnum(item.Network),
                 OperatorCode = item.OperatorCode,
                 Timestamp = item.Timestamp.ToString(),
                 IsDone = item.isDone,
