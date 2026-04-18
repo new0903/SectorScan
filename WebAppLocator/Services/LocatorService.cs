@@ -53,7 +53,7 @@ namespace WebAppCellMapper.Services
 
             foreach (var item in stations)
             {
-                double testweight = 1 / item.DistanceSignal; //(item.DistanceSignal);
+                double testweight = 1 / (item.DistanceSignal); //(item.DistanceSignal);
                 cy += item.Lat * testweight;
                 cx += item.Lon * testweight;
                 sw += testweight;
@@ -65,7 +65,7 @@ namespace WebAppCellMapper.Services
             foreach (var item in stations)
             {
 
-                double acc = 1.0 / item.DistanceSignal;
+                double acc = 1 / (item.DistanceSignal);
                 // Евклидово расстояние между станцией и центроидом
                 double diffLat = item.Lat - centroidLat;
                 double diffLon = item.Lon - centroidLon;
@@ -129,10 +129,10 @@ namespace WebAppCellMapper.Services
 
                     try
                     {
-                        var g = group?.First(c => c.Key == item.Id).OrderByDescending(c => c?.WeightSignal);//.First();
+                        var g = group?.First(c => c.Key == item.Id).OrderByDescending(c => c?.SignalStrength);//.First();
                         var tg = g.First();
                         if (tg == null) continue;
-                        item.WeightSignal = tg.WeightSignal;
+                        //item.WeightSignal = tg.WeightSignal;
                         item.SignalStrength = tg.SignalStrength;
                         item.DistanceSignal = tg.DistanceSignal;
                     }
@@ -152,6 +152,10 @@ namespace WebAppCellMapper.Services
             else
             {
                 logger.LogInformation($"last location null");
+            }
+            if (ids.Contains(250001660256))
+            {
+                Console.WriteLine();
             }
 
             logger.LogInformation($"count points: {stations.Count}");

@@ -10,5 +10,5 @@ PG_PASSWORD=root
 PG_SERVER=db_postgres17:5432
 
 
-GRAPHHOPPER_USE=false
+GRAPHHOPPER_USE=true
 

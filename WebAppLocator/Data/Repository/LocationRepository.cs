@@ -73,10 +73,10 @@ namespace WebAppLocator.Data.Repository
             if (!difTime.HasValue) difTime = DateTime.UtcNow;
 
             double secondsDiff = (difTime.Value - lastLoc.Timestamp).TotalSeconds;
-            int dbmLastPos = -(70 + (int)(secondsDiff / 2.5));
+            int dbmLastPos = -(60 + (int)(secondsDiff / 2.5));
             var model = new LocationCell(lastLoc.Id, lastLoc.Lat, lastLoc.Lon);
             model.SignalStrength = dbmLastPos;
-            model.WeightSignal = Math.Pow(10, (dbmLastPos / 20));
+            //model.WeightSignal = Math.Pow(10, (dbmLastPos / 20));
             model.DistanceSignal = Math.Pow(10, (A - dbmLastPos) / (10 * N));
             return model;
         }

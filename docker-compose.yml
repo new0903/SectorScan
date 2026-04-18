@@ -46,22 +46,22 @@ services:
       - pgadmin4:/var/lib/pgadmin 
 
  # не много улучшает точность
-  # graphhopper:
-  #   image: israelhikingmap/graphhopper:latest 
-  #   container_name: graphhopper
-  #   ports:
-  #     - "8989:8989"
-  #     - "8990:8990"
-  #   volumes:
-  #     - ./data:/graphhopper/data
-  #     - ./config.yml:/graphhopper/config/config.yml
-  #   environment:
-  #     - JAVA_OPTS=-Xms2g -Xmx2g
-  #   command:
-  #     - --config
-  #     - /graphhopper/config/config.yml
-  #     - --host
-  #     - 0.0.0.0
+  graphhopper:
+    image: israelhikingmap/graphhopper:latest 
+    container_name: graphhopper
+    ports:
+      - "8989:8989"
+      - "8990:8990"
+    volumes:
+      - ./data:/graphhopper/data
+      - ./config.yml:/graphhopper/config/config.yml
+    environment:
+      - JAVA_OPTS=-Xms2g -Xmx2g
+    command:
+      - --config
+      - /graphhopper/config/config.yml
+      - --host
+      - 0.0.0.0
  
 volumes:
   db_postgres17:
