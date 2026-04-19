@@ -28,7 +28,7 @@ namespace WebAppCellMapper.Helpers
     public class GeoBoundsService :IGeoBoundsService
     {
         //широта север юг
-        public const double MIN_LAT = 38.289338424253174;
+        public const double MIN_LAT = 38.289338424253174;//не округлять!!!!!!
         public const double MAX_LAT = 82.94691939841713;
 
         //долгота запад-восток

@@ -11,12 +11,12 @@ namespace WebAppLocator.DTO
         [JsonPropertyName("cell")]
         public CellRequest[]? Cell { get; set; }
 
-        //[JsonPropertyName("wifi")]
-        //public WifiRequest[]? Wifi { get; set; }
 
         [JsonPropertyName("timestamp")]
-        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+        public DateTime Timestamp { get; set; } = DateTime.UtcNow; 
     }
+    //[JsonPropertyName("wifi")]
+    //public WifiRequest[]? Wifi { get; set; }
     public class CellRequest
     {
         [JsonPropertyName("lte")]

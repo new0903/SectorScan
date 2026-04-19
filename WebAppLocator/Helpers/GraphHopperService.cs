@@ -53,7 +53,7 @@ namespace WebAppLocator.Helpers
 
 
                 var content = new StringContent(jsonContentPath, Encoding.UTF8, "application/json");
-                var url = $"http://graphhopper:8989/route?key=";
+                var url = $"route?key=";
                 var client = clientFactory.CreateClient("Graph");
                 var response = await client.PostAsync(url, content, cancellationToken);
                 if (response.IsSuccessStatusCode)

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebAppLocator.Data.Models;
-using WebAppLocator.Data.Statics;
 using WebAppLocator.DTO;
 using WebAppLocator.DTO.Cells;
+using WebAppLocator.Helpers;
 using WebAppLocator.Service;
 
 namespace WebAppLocator.Data.Repository
@@ -68,16 +68,17 @@ namespace WebAppLocator.Data.Repository
         private LocationCell MapToCell(TracePoints lastLoc, DateTime? difTime=null)
         {
 
-            var N = GeoHelper.N; // Коэффициент затухания (город) 2.0
-            double A = GeoHelper.A;// RSSI на 1 метре 35
+            var N = GeoHelper.N;
+            double A = GeoHelper.A;
+            double LPS = GeoHelper.LPS;
             if (!difTime.HasValue) difTime = DateTime.UtcNow;
 
             double secondsDiff = (difTime.Value - lastLoc.Timestamp).TotalSeconds;
-            int dbmLastPos = -(60 + (int)(secondsDiff / 2.5));
+            int dbmLastPos = -(int)(LPS + (secondsDiff / 2.5));
             var model = new LocationCell(lastLoc.Id, lastLoc.Lat, lastLoc.Lon);
             model.SignalStrength = dbmLastPos;
-            //model.WeightSignal = Math.Pow(10, (dbmLastPos / 20));
             model.DistanceSignal = Math.Pow(10, (A - dbmLastPos) / (10 * N));
+            model.Timestamp = lastLoc.Timestamp;
             return model;
         }
 
@@ -93,8 +94,8 @@ namespace WebAppLocator.Data.Repository
         public async Task<int> EraseOldLocation(CancellationToken ct)
         {
            await context.traces.Where(t => t.Timestamp + TimeSpan.FromHours(2) < DateTime.UtcNow && t.DeleteAt == null)
-                .ExecuteUpdateAsync(s=>s.SetProperty(t=>t.DeleteAt,DateTime.UtcNow),ct);
-           return await context.traces.Where(t => t.DeleteAt != null&&t.DeleteAt + TimeSpan.FromDays(1) < DateTime.UtcNow).ExecuteDeleteAsync(ct);
+                .ExecuteUpdateAsync(s=>s.SetProperty(t=>t.DeleteAt,DateTime.UtcNow),ct);//каждые 2 часа помечаем на удаление старые записи
+           return await context.traces.Where(t => t.DeleteAt != null&&t.DeleteAt + TimeSpan.FromDays(1) < DateTime.UtcNow).ExecuteDeleteAsync(ct); // через 24 часа удаляем
         }
     }
 }

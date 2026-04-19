@@ -7,6 +7,16 @@ namespace WebAppLocator.DTO.Cells
 {
     public class GSMDataCell : DataCell
     {
+        public GSMDataCell() { }
+
+        public GSMDataCell(long mcc, long mnc, int signalStrength) : base(mcc, mnc, signalStrength)
+        {
+        }
+        public GSMDataCell(long mcc, long mnc, int signalStrength, long lac, long cid) : base(mcc, mnc, signalStrength)
+        {
+            Lac = lac;
+            Cid = cid;
+        }
         [JsonPropertyName("lac")]
         public long Lac { get; set; }
 

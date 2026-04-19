@@ -6,6 +6,15 @@ namespace WebAppLocator.DTO.Cells
 {
     public class LteDataCell : DataCell
     {
+        public LteDataCell() { }
+        public LteDataCell(long mcc, long mnc, int signalStrength) : base(mcc, mnc, signalStrength)
+        {
+        }
+        public LteDataCell(long mcc, long mnc, int signalStrength, long tac, long ci) : base(mcc, mnc, signalStrength)
+        {
+            Tac=tac;
+            Ci=ci;
+        }
 
         [JsonPropertyName("tac")]
         public long Tac { get; set; }

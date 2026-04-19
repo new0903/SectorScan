@@ -9,6 +9,7 @@
         public double WeightSignal { get; set; }
         public double DistanceSignal { get; set; }
         public int SignalStrength { get; set; }
+        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 
 
         public LocationCell(long id, double lat, double lon)

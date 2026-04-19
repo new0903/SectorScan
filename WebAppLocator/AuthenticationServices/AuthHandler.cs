@@ -24,20 +24,10 @@ namespace WebAppLocator.AuthenticationServices
 
 
         /// <summary>
-        /// Аутентификация типа middleware 
+        /// Аутентификация
         /// </summary>
         /// <returns>
-        /// 
         /// Надо уточнить надо ли это вообще делать и если надо то как
-        /// Скорее всего у них супер сервис отвечающий за АВТОРИЗАЦИЮ 
-        /// типа jwt и прочего бреда
-        /// Скорее всего надо будет делать http запрос на сторонний сервис если дадут добро на создание этой хни
-        /// 
-        /// Может вообще не придется делать. Такую штуку врятли мне доверят и наверное должен быть ID этого сервиса.
-        /// А если придется то вот моя заготовочка
-        /// 
-        /// 100% http запрос делать буду
-        /// 
         /// </returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
@@ -47,7 +37,7 @@ namespace WebAppLocator.AuthenticationServices
             if (Request.Headers.TryGetValue(ApiKeyHeader, out var headerValue))
             {
                 var queryKey = headerValue.FirstOrDefault(); 
-                if (queryKey != null && queryKey.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+                if (queryKey != null && queryKey.StartsWith("Token ", StringComparison.OrdinalIgnoreCase))
                 {
                     //apiKey = queryKey.Substring("Bearer ".Length); и т.д. что там у них может быть
                 }
@@ -63,6 +53,8 @@ namespace WebAppLocator.AuthenticationServices
             {
                 var content=await res.Content.ReadAsStringAsync();
 
+
+                //какая то проверка и т.д.
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, "device"), // или что там может быть

@@ -1,9 +1,9 @@
 ﻿using Domain.Enums;
 using System.Text.Json.Serialization;
-using WebAppLocator.Data.Statics;
+using WebAppLocator.Helpers;
 namespace WebAppLocator.DTO.Cells
 {
-    public class DataCell
+    public abstract class DataCell
     {
         [JsonPropertyName("mcc")]
         public long Mcc { get; set; }
@@ -45,5 +45,17 @@ namespace WebAppLocator.DTO.Cells
 
         [JsonIgnore]
         public virtual long Id { get; }
+
+        public DataCell(long mcc, long mnc, int signalStrength)
+        {
+            Mcc = mcc;
+            Mnc = mnc;
+            SignalStrength = signalStrength;
+        }
+
+        public DataCell()
+        {
+
+        }
     }
 }

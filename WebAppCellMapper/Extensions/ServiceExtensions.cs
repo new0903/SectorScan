@@ -50,13 +50,16 @@ namespace WebAppCellMapper.Extensions
             services.AddSingleton<IProxyHandlerPoolService, ProxyHandlerPoolService>();
             services.AddSingleton<IStationsScanningManager, StationsScanningManager>();
             services.AddSingleton<IRequestHelper, RequestHelper>();
+
             services.AddScoped<IStationsService, StationsService>();
             services.AddScoped<IOperatorsService ,OperatorsService>();
+
             services.AddScoped<IProgressRepository, ProgressRepository>();
             services.AddScoped<IRuntimeRepository, RuntimeRepository>();
             services.AddScoped<IStationsRepository, StationsRepository>();
-            services.AddHostedService<AppBackgroundService>();
-            services.AddHostedService<EraserDbBackgroundService>();
+
+            services.AddHostedService<AppBackgroundService>();//запускает задачу если сервис был перезапущен и задача была преравана
+            services.AddHostedService<EraserDbBackgroundService>(); // стирает станные данные о прогрессе.
             return services;
         }
 

@@ -51,11 +51,12 @@ namespace WebAppLocator.Extensions
 
             services.AddHttpClient("Graph", client =>
             {
-                // client.BaseAddress =new Uri("");
+                client.BaseAddress =new Uri("http://graphhopper:8989/");//лучше из конфига наверное, но может быть вообще не пригодится и вырежу полностью graphhopper
                 //надо будет до настроить
             });
 
             services.AddSingleton<WorkflowService>();
+            services.AddSingleton<GeoHelper>();
             services.AddScoped<ILocatorService, LocatorService>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IGraphHopperService,GraphHopperService>();
@@ -67,7 +68,7 @@ namespace WebAppLocator.Extensions
 
 
 
-        public static IServiceCollection AddAuth(this IServiceCollection services)
+        public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(opt =>
             {
@@ -77,7 +78,7 @@ namespace WebAppLocator.Extensions
                 var hasApiKey = context.Request.Headers.ContainsKey("x-api-key") &&
                                 context.Request.Headers["x-api-key"].ToString().StartsWith("Token ");
                 var hasBearer = context.Request.Headers.ContainsKey("Authorization") &&
-                                context.Request.Headers["Authorization"].ToString().StartsWith("Bearer ");
+                                context.Request.Headers["Authorization"].ToString().StartsWith("Token ");
 
                 if (hasApiKey)
                     return TestAuthOptions.DefaultScheme;
@@ -88,13 +89,13 @@ namespace WebAppLocator.Extensions
                 return AuthOptions.DefaultScheme; 
             })
             .AddScheme<AuthOptions, AuthHandler>(AuthOptions.DefaultScheme, config => { })
-            .AddScheme<TestAuthOptions, TestAuthHandler>(TestAuthOptions.DefaultScheme, config => { });
+            .AddScheme<TestAuthOptions, TestAuthHandler>(TestAuthOptions.DefaultScheme, configuration.GetSection("TestApiKey").Bind); //это надо исключительно для тестирования
             services.AddAuthorization();
             return services;
         }
 
 
-        public static IServiceCollection AddOptionsSetups(this IServiceCollection services)//, IConfiguration configuration
+        public static IServiceCollection AddOptionsSetups(this IServiceCollection services)
         {
 
             string host= Environment.GetEnvironmentVariable("PG_HOST");

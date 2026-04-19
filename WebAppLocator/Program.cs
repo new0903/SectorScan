@@ -25,11 +25,11 @@ namespace WebAppLocator
                     listenOptions.Protocols = HttpProtocols.Http2;
                 });
             });
-
+           var key= builder.Configuration.GetValue<string>("ApiKey");
             builder.Services.AddOptionsSetups()
                 .InitDBContext()
                 .IncludeServices()
-                .AddAuth();
+                .AddAuth(builder.Configuration);
 
             builder.Services.AddGrpc();
 

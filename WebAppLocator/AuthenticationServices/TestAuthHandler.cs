@@ -14,13 +14,11 @@ namespace WebAppLocator.AuthenticationServices
     public class TestAuthHandler : AuthenticationHandler<TestAuthOptions>
     {
         const string ApiKeyHeader = "x-api-key";
-        private readonly IOptionsMonitor<TestAuthOptions> options;
         private readonly IHttpClientFactory clientFactory;
 
         
         public TestAuthHandler(IOptionsMonitor<TestAuthOptions> options, ILoggerFactory logger, UrlEncoder encoder, IHttpClientFactory clientFactory) : base(options, logger, encoder)
         {
-            this.options = options;
             this.clientFactory = clientFactory;
 
         }
@@ -29,19 +27,9 @@ namespace WebAppLocator.AuthenticationServices
 
 
         /// <summary>
-        /// Аутентификация типа middleware 
+        /// Аутентификация 
         /// </summary>
         /// <returns>
-        /// 
-        /// Надо уточнить надо ли это вообще делать и если надо то как
-        /// Скорее всего у них супер сервис отвечающий за АВТОРИЗАЦИЮ 
-        /// типа jwt и прочего бреда
-        /// Скорее всего надо будет делать http запрос на сторонний сервис если дадут добро на создание этой хни
-        /// 
-        /// Может вообще не придется делать. Такую штуку врятли мне доверят и наверное должен быть ID этого сервиса.
-        /// А если придется то вот моя заготовочка
-        /// 
-        /// 100% http запрос делать буду
         /// 
         /// </returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -52,8 +40,8 @@ namespace WebAppLocator.AuthenticationServices
             {
                 var queryKey = Request.Headers[ApiKeyHeader].FirstOrDefault();
                 apiKey = queryKey.Substring("Token ".Length);
-
-                if (options.CurrentValue.ApiKey==apiKey)
+                
+                if (Options.ApiKey == apiKey)
                 {
                     var claims = new[]
                     {
