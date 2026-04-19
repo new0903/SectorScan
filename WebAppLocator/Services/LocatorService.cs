@@ -136,7 +136,7 @@ namespace WebAppCellMapper.Services
 
 
 
-                var difLoc= geoHelper.OffsetByMeters(centroid.lat, centroid.lon, distance- maxDistance, destination);
+                var difLoc= geoHelper.OffsetByMeters(centroid.lat, centroid.lon, distance-maxDistance, destination);
                 return new LocationResponse(difLoc,0,$"центроид + dif локации на {distance-maxDistance} метров");
             }
             return null;
@@ -197,24 +197,27 @@ namespace WebAppCellMapper.Services
             }
             logger.LogInformation($"count points: {stations.Count}");
             var centroid = FindLocationDefault(stations);
-            res.Add(centroid);
+          //  res.Add(centroid);
 
             if (lastLoc!=null)
             {
                 var difPos = CheckDistance(centroid.point, lastLoc, request.Timestamp);
                 if (difPos != null)
                 {
-                    res.Add(difPos);
+                 //   res.Add(difPos);
                     centroid=difPos;
                 }
                 var LG = await FindLocationDefaultWithGraph(centroid, deviceId);
                 if (LG != null)
                 {
-                    res.Add(LG);
+                  //  res.Add(LG);
                     centroid = LG;
                 }
 
             }
+            res.Add(centroid);
+
+
             await repository.SaveLocation(deviceId, centroid, request.Timestamp);
 
 

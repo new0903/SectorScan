@@ -40,6 +40,7 @@ namespace WebAppLocator.Data.Repository
         public async Task<LocationCell?> GetLastLocation(string deviceId,DateTime? difTime = null, CancellationToken ct=default)
         {
 
+            if (!difTime.HasValue) difTime = DateTime.UtcNow;
             var lastLoc = await context.traces
             .AsNoTracking()
             .Where(t => t.DeleteAt == null&&t.DeviceId == deviceId)
@@ -47,7 +48,9 @@ namespace WebAppLocator.Data.Repository
             .FirstOrDefaultAsync();
             if (lastLoc == null) return null;
 
-            var model = MapToCell(lastLoc, difTime);
+            if ((lastLoc.Timestamp- difTime.Value).TotalMinutes > 30) return null;//если точке более 30 минут тогда игнорируем её и делаем расчеты только на бс
+            LocationCell model = MapToCell(lastLoc, difTime.Value);
+            if (model.SignalStrength>600) return null;//если с связью проблемы, сигнал меньше 600 и меньше 30 позиции минут можно вычислить азимут откуда мы едем и получить приблизительную позицию в поле
             return model;
         }
 
@@ -65,15 +68,15 @@ namespace WebAppLocator.Data.Repository
             return list;//list.Select(t => MapToCell(t)).ToList();
         }
 
-        private LocationCell MapToCell(TracePoints lastLoc, DateTime? difTime=null)
+        private LocationCell MapToCell(TracePoints lastLoc, DateTime difTime)
         {
 
             var N = GeoHelper.N;
             double A = GeoHelper.A;
             double LPS = GeoHelper.LPS;
-            if (!difTime.HasValue) difTime = DateTime.UtcNow;
+           // if (!difTime.HasValue) difTime = DateTime.UtcNow;
 
-            double secondsDiff = (difTime.Value - lastLoc.Timestamp).TotalSeconds;
+            double secondsDiff = (difTime - lastLoc.Timestamp).TotalSeconds;
             int dbmLastPos = -(int)(LPS + (secondsDiff / 2.5));
             var model = new LocationCell(lastLoc.Id, lastLoc.Lat, lastLoc.Lon);
             model.SignalStrength = dbmLastPos;
@@ -93,7 +96,7 @@ namespace WebAppLocator.Data.Repository
 
         public async Task<int> EraseOldLocation(CancellationToken ct)
         {
-           await context.traces.Where(t => t.Timestamp + TimeSpan.FromHours(2) < DateTime.UtcNow && t.DeleteAt == null)
+           await context.traces.Where(t => t.Timestamp + TimeSpan.FromMinutes(40) < DateTime.UtcNow && t.DeleteAt == null)
                 .ExecuteUpdateAsync(s=>s.SetProperty(t=>t.DeleteAt,DateTime.UtcNow),ct);//каждые 2 часа помечаем на удаление старые записи
            return await context.traces.Where(t => t.DeleteAt != null&&t.DeleteAt + TimeSpan.FromDays(1) < DateTime.UtcNow).ExecuteDeleteAsync(ct); // через 24 часа удаляем
         }
