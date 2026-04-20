@@ -67,7 +67,7 @@ volumes:
   db_postgres17:
   pgadmin4:  
   webappcellmapper:
-  graphhopper:
+  #graphhopper:
 
   
 
