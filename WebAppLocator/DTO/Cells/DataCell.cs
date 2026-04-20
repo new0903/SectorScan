@@ -17,13 +17,13 @@ namespace WebAppLocator.DTO.Cells
         public int SignalStrength { get; set; }
 
 
-        [JsonIgnore]
-        public virtual double WeightSignal { get {
-               // var s = Standard==NetworkStandard.Lte?0:35;
+        //[JsonIgnore]
+        //public virtual double WeightSignal { get {
+        //       // var s = Standard==NetworkStandard.Lte?0:35;
 
-                return Math.Pow( 10 , (SignalStrength) / 20);//-s
-            }
-        }
+        //        return Math.Pow( 10 , (SignalStrength) / 20);//-s
+        //    }
+        //}
 
         [JsonIgnore]
         public virtual double DistanceSignal //virtual наверное не надо но вдруг там значения другие надо ставить для lte wcdma и gsm

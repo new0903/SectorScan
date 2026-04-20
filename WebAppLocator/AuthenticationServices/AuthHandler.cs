@@ -39,7 +39,7 @@ namespace WebAppLocator.AuthenticationServices
                 var queryKey = headerValue.FirstOrDefault(); 
                 if (queryKey != null && queryKey.StartsWith("Token ", StringComparison.OrdinalIgnoreCase))
                 {
-                    //apiKey = queryKey.Substring("Bearer ".Length); и т.д. что там у них может быть
+                    //apiKey = queryKey.Substring("Bearer ".Length); 
                 }
             }
 

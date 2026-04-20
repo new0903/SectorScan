@@ -89,7 +89,7 @@ namespace WebAppLocator.Extensions
                 return AuthOptions.DefaultScheme; 
             })
             .AddScheme<AuthOptions, AuthHandler>(AuthOptions.DefaultScheme, config => { })
-            .AddScheme<TestAuthOptions, TestAuthHandler>(TestAuthOptions.DefaultScheme, configuration.GetSection("TestApiKey").Bind); //это надо исключительно для тестирования
+            .AddScheme<TestAuthOptions, TestAuthHandler>(TestAuthOptions.DefaultScheme, configuration.GetSection("Authentication").Bind); //это надо исключительно для тестирования
             services.AddAuthorization();
             return services;
         }

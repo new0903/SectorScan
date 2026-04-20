@@ -45,7 +45,7 @@ namespace WebAppLocator.AuthenticationServices
                 {
                     var claims = new[]
                     {
-                        new Claim(ClaimTypes.NameIdentifier, "testKeyIdentifier"), // или что там может быть
+                        new Claim(ClaimTypes.NameIdentifier, "testKeyIdentifier"), 
                         new Claim(ClaimTypes.Name, "testKey"),
                         new Claim("Token", apiKey)
                     };
