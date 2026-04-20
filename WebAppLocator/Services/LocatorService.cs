@@ -122,22 +122,23 @@ namespace WebAppCellMapper.Services
         /// <param name="lastLocation">последняя позиция</param>
         /// <param name="difTime">текущее время</param>
         /// <returns></returns>
-        public LocationResponse? CheckDistance(LocationPoint centroid, LocationCell lastLocation, DateTime difTime)
+        public LocationResponse? CheckDistance(LocationResponse centroid, LocationCell lastLocation, DateTime difTime)
         {
-            var distance= geoHelper.DistancePerMeters(centroid.lat, centroid.lon,lastLocation.Lat,lastLocation.Lon);
+            var point = centroid.point;
+            var distance= geoHelper.DistancePerMeters(point.lat, point.lon,lastLocation.Lat,lastLocation.Lon);
             var secondDif = (difTime - lastLocation.Timestamp).TotalSeconds;
 
             var kmPerH = (distance / secondDif)* 3.6;
             //очевидно что нельзя с такой скорост перемещаться поэтому предпологаем что это ложь и указываем нормальную дистанцию
             if (kmPerH > 120) 
             {
-                var destination = geoHelper.GetBearingDegrees(centroid.lat, centroid.lon, lastLocation.Lat, lastLocation.Lon);
+                var destination = geoHelper.GetBearingDegrees(point.lat, point.lon, lastLocation.Lat, lastLocation.Lon);
                 var maxDistance = 33 * secondDif;//37 м/с 23333 Метров/минута 140 Км/ч
 
 
 
-                var difLoc= geoHelper.OffsetByMeters(centroid.lat, centroid.lon, distance-maxDistance, destination);
-                return new LocationResponse(difLoc,0,$"центроид + dif локации на {distance-maxDistance} метров");
+                var difLoc= geoHelper.OffsetByMeters(point.lat, point.lon, distance-maxDistance, destination);
+                return new LocationResponse(difLoc, centroid.accuracy, $"центроид + dif локации на {distance-maxDistance} метров");
             }
             return null;
         }
@@ -201,7 +202,7 @@ namespace WebAppCellMapper.Services
 
             if (lastLoc!=null)
             {
-                var difPos = CheckDistance(centroid.point, lastLoc, request.Timestamp);
+                var difPos = CheckDistance(centroid, lastLoc, request.Timestamp);
                 if (difPos != null)
                 {
                  //   res.Add(difPos);
