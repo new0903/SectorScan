@@ -1,11 +1,11 @@
 ﻿using Azure;
-using Domain.Enums;
 using Grpc.Core.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using WebAppCellMapper.Data;
+using WebAppCellMapper.Data.Enums;
 using WebAppCellMapper.Data.Repositories;
 using WebAppCellMapper.DTO;
 

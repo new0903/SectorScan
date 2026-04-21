@@ -166,6 +166,38 @@ namespace WebAppCellMapper.Migrations
                     b.ToTable("stations");
                 });
 
+            modelBuilder.Entity("WebAppLocator.Data.Models.TracePoints", b =>
+            {
+                b.Property<long>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("bigint");
+
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                b.Property<double>("Accuracy")
+                    .HasColumnType("double precision");
+
+                b.Property<DateTime?>("DeleteAt")
+                    .HasColumnType("timestamp with time zone");
+
+                b.Property<string>("DeviceId")
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                b.Property<double>("Lat")
+                    .HasColumnType("double precision");
+
+                b.Property<double>("Lon")
+                    .HasColumnType("double precision");
+
+                b.Property<DateTime>("Timestamp")
+                    .HasColumnType("timestamp with time zone");
+
+                b.HasKey("Id");
+
+                b.ToTable("traces");
+            });
+
             modelBuilder.Entity("WebAppCellMapper.Data.Models.OperatorProgress", b =>
                 {
                     b.HasOne("WebAppCellMapper.Data.Models.Operator", "Operator")

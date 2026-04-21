@@ -1,6 +1,4 @@
 ﻿
-using Domain.Enums;
-using Domain.Models;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -9,6 +7,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using WebAppCellMapper.Data;
+using WebAppCellMapper.Data.Enums;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Data.Repositories;
 using WebAppCellMapper.DTO;

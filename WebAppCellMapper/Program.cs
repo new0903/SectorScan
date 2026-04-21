@@ -27,15 +27,12 @@ namespace WebAppCellMapper
                 });
             });
 
-
-
-
-
-            builder.Services.AddOptionsSetups(builder.Configuration);
-
             builder.Services
+                .AddOptionsSetups(builder.Configuration)
                 .InitDBContext()
-                .IncludeServices();
+                .IncludeServices()
+                .IncludeLocatorServices()
+                .AddAuth(builder.Configuration);
 
             // Add services to the container.
             builder.Services.AddGrpc();

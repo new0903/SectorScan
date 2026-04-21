@@ -10,15 +10,15 @@ services:
       - db_postgres17
    # restart: on-failure   Перезапускать при ошибке
 
-  webapplocator:
-    image: ${DOCKER_REGISTRY-}webapplocator
-    build:
-      context: .
-      dockerfile: WebAppLocator/Dockerfile
-    env_file:
-      - ./environment
-    depends_on:
-      - db_postgres17
+  # webapplocator:
+  #   image: ${DOCKER_REGISTRY-}webapplocator
+  #   build:
+  #     context: .
+  #     dockerfile: WebAppLocator/Dockerfile
+  #   env_file:
+  #     - ./environment
+  #   depends_on:
+  #     - db_postgres17
 
   db_postgres17:
     image: postgres:17-alpine

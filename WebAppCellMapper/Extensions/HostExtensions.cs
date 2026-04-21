@@ -13,6 +13,7 @@ namespace WebAppCellMapper.Extensions
         {
 
             // Configure the HTTP request pipeline.
+            app.MapGrpcService<LocatorGrpcService>();
             app.MapGrpcService<StationGRPCService>();
             app.MapGrpcService<OperatorGrpcService>();
         }

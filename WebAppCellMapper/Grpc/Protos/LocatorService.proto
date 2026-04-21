@@ -1,0 +1,60 @@
+﻿
+
+syntax = "proto3";
+
+option csharp_namespace = "WebAppCellMapper";
+
+
+
+// Основной запрос локации
+message LocationRequestGrpc {
+  repeated CellRequestGrpc cell = 1;
+}
+
+
+
+// Запрос соты
+message CellRequestGrpc {
+
+  optional  LteDataCellGrpc lte = 1;
+   optional GsmDataCellGrpc gsm = 2;
+  optional  GsmDataCellGrpc wcdma = 3;
+  optional  LteDataCellGrpc nr = 4;
+  
+}
+
+
+
+message LocationResponseGrpc {
+  LocationCoordinates point = 1;
+  double accuracy = 2;
+  optional string title = 3;  // title может отсутствовать
+}
+
+message LocationCoordinates {
+  double lat = 1;
+  double lon = 2;
+}
+
+// LTE сота
+message LteDataCellGrpc {
+  int64 mcc = 1;
+  int64 mnc = 2;
+  int32 signal_strength = 3;
+  int64 tac = 4;
+  int64 ci = 5;
+}
+
+// GSM/WCDMA сота
+message GsmDataCellGrpc {
+  int64 mcc = 1;
+  int64 mnc = 2;
+  int32 signal_strength = 3;
+  int64 lac = 4;
+  int64 cid = 5;
+}
+
+
+service LocatorServiceGrpc {
+  rpc GetLocate(LocationRequestGrpc) returns (LocationResponseGrpc);
+}

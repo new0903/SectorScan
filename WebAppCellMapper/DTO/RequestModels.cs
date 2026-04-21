@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿
+using WebAppCellMapper.Data.Enums;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Helpers;
 

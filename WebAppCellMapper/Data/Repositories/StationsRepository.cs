@@ -1,7 +1,8 @@
-﻿using Domain.Models;
+﻿
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
 
 namespace WebAppCellMapper.Data.Repositories

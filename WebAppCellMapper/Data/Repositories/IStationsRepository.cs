@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿
+using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
 
 namespace WebAppCellMapper.Data.Repositories

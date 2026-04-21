@@ -1,4 +1,4 @@
-﻿using Domain.Enums;
+﻿
 
 namespace WebAppCellMapper.Data.Enums
 {

@@ -1,6 +1,6 @@
-﻿using Domain.Enums;
-using Domain.Models;
+﻿
 using System.ComponentModel.DataAnnotations.Schema;
+using WebAppCellMapper.Data.Enums;
 using WebAppCellMapper.Helpers;
 
 namespace WebAppCellMapper.Data.Models

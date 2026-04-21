@@ -1,5 +1,6 @@
-﻿using Domain.Enums;
+﻿
 using Microsoft.EntityFrameworkCore;
+using WebAppCellMapper.Data.Enums;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.DTO;
 using WebAppCellMapper.Helpers;
