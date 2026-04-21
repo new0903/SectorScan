@@ -19,30 +19,26 @@ namespace WebAppCellMapper.Data.Repositories
             this.workflow = workflow;
             context = dbContext;
         }
-        public async Task SaveLocation(string deviceId,LocationResponse response, DateTime? difTime = null)
+        public async Task SaveLocation(string deviceId,LocationResponse response, DateTime difTime )
         {
+            if (string.IsNullOrEmpty(deviceId)) return;
             var trace = new TracePoints()
             {
                 DeviceId = deviceId,
                 Lat = response.point.lat,
                 Lon = response.point.lon,
                 Accuracy = response.accuracy,
-              
+              Timestamp=difTime
             };
-            if (difTime.HasValue)
-            {
-                trace.Timestamp = difTime.Value;
 
-
-            }
             await context.traces.AddAsync(trace);
             await context.SaveChangesAsync();
         }
 
-        public async Task<LocationCell?> GetLastLocation(string deviceId,DateTime? difTime = null, CancellationToken ct=default)
+        public async Task<LocationCell?> GetLastLocation(string deviceId,DateTime difTime, CancellationToken ct=default)
         {
+            if (string.IsNullOrEmpty(deviceId)) return null;
 
-            if (!difTime.HasValue) difTime = DateTime.UtcNow;
             var lastLoc = await context.traces
             .AsNoTracking()
             .Where(t => t.DeleteAt == null&&t.DeviceId == deviceId)
@@ -50,8 +46,8 @@ namespace WebAppCellMapper.Data.Repositories
             .FirstOrDefaultAsync();
             if (lastLoc == null) return null;
 
-            if ((lastLoc.Timestamp- difTime.Value).TotalMinutes > 30) return null;//если точке более 30 минут тогда игнорируем её и делаем расчеты только на бс
-            LocationCell model = MapToCell(lastLoc, difTime.Value);
+            if ((lastLoc.Timestamp- difTime).TotalMinutes > 30) return null;//если точке более 30 минут тогда игнорируем её и делаем расчеты только на бс
+            LocationCell model = MapToCell(lastLoc, difTime);
             if (model.SignalStrength>600) return null;//если с связью проблемы, сигнал меньше 600 и меньше 30 позиции минут можно вычислить азимут откуда мы едем и получить приблизительную позицию в поле
             return model;
         }

@@ -6,6 +6,10 @@ namespace WebAppCellMapper.DTO.Locator
 {
 
     //генератор моделей https://thesyntaxdiaries.com/tools/json-to-csharp
+
+    /// <summary>
+    /// Осторожно с Timestamp
+    /// </summary>
     public class LocationRequest
     {
         [JsonPropertyName("cell")]
@@ -13,8 +17,12 @@ namespace WebAppCellMapper.DTO.Locator
 
 
         [JsonPropertyName("timestamp")]
-        public DateTime Timestamp { get; set; } = DateTime.UtcNow; 
+        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+
+        //[JsonPropertyName("deviceId")]
+        //public string DeviceId { get; set; } = string.Empty; // возможно потом пригодится
     }
+
     //[JsonPropertyName("wifi")]
     //public WifiRequest[]? Wifi { get; set; }
     public class CellRequest

@@ -64,7 +64,7 @@ namespace WebAppCellMapper.Extensions
         }
         public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
         {
-            var authority = new AuthorityJWTOptions();
+            var authority = new AuthorityJWTOptions();//уточнить правильно ли сделал авторизацию и куда пихать JWT
             services.AddAuthentication(opt =>
             {
                 opt.DefaultScheme = "SmartScheme"; 
@@ -92,7 +92,6 @@ namespace WebAppCellMapper.Extensions
             .AddScheme<LocatorAuthOptions, LocatorAuthHandler>(LocatorAuthOptions.DefaultScheme, configuration.GetSection("Authentication").Bind); 
             
             //это надо исключительно для тестирования
-
             //.AddScheme<AuthOptions, AuthHandler>(AuthOptions.DefaultScheme, config => { })
             services.AddAuthorization();
             return services;

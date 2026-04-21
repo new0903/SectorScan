@@ -7,8 +7,8 @@ namespace WebAppCellMapper.Data.Repositories
 {
     public interface ILocationRepository
     {
-        Task SaveLocation(string deviceId, LocationResponse response, DateTime? difTime = null);
-        Task<LocationCell?> GetLastLocation(string deviceId, DateTime? difTime = null, CancellationToken ct=default);
+        Task SaveLocation(string deviceId, LocationResponse response, DateTime difTime );
+        Task<LocationCell?> GetLastLocation(string deviceId, DateTime difTime, CancellationToken ct=default);
         Task<List<LocationPoint>> GetListLastLocation(string deviceId, CancellationToken ct = default);
 
         Task<List<LocationCell>> GetStationsLocation(long[] ids, CancellationToken ct = default);

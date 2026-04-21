@@ -20,12 +20,25 @@ namespace WebAppCellMapper.BackgroundServices
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await Task.WhenAll(
-                AppBackgroundAsync(stoppingToken), //авто старт сканирования карты 4cells
-                EraserProgressGrabberAsync(stoppingToken), //очистка прогресса
-                EraserTracePointsAsync(stoppingToken) //очистка старых точек локатора
-            );
-           
+
+            try
+            {
+                await Task.WhenAll(
+                    AppBackgroundAsync(stoppingToken), //авто старт сканирования карты 4cells
+                    EraserProgressGrabberAsync(stoppingToken), //очистка прогресса
+                    EraserTracePointsAsync(stoppingToken) //очистка старых точек локатора
+                );
+
+            }
+            catch (OperationCanceledException)
+            {
+                logger.LogError("AppBackgroundService was canceled");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message,ex);
+            }
+
         }
         private  async Task EraserProgressGrabberAsync(CancellationToken stoppingToken)
         {

@@ -2,6 +2,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NetTopologySuite.Algorithm;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -145,16 +146,16 @@ namespace WebAppCellMapper.Services
         /// <param name="request">тело запроса</param>
         /// <param name="deviceId">Нужно для нахождения старых позиций</param>
         /// <returns></returns>
-        public async Task<List<LocationResponse>> FindLocation(LocationRequest request, string deviceId)
+        public async Task<LocationResponse?> FindLocation(LocationRequest request, string deviceId)
         {
-            
-            var res = new List<LocationResponse>();
-            if (string.IsNullOrEmpty(deviceId)) return res;
-            var cells= request?.Cell?.Select(c => c.Data).Where(c => c != null).ToArray();
+            LocationResponse? centroid = null;
+            //var res = new List<LocationResponse>();
+            //  if (string.IsNullOrEmpty(deviceId)) return res;
+            var cells= request.Cell?.Select(c => c.Data).Where(c => c != null).ToArray();
             var ids = cells?.Select(c => c.Id).Distinct().ToArray();
 
             var stations =await repository.GetStationsLocation(ids);
-            if (stations.Count == 0) return res;
+            if (stations.Count == 0) return centroid;
             {
                 var group = cells?.GroupBy(c => c.Id).ToArray();
 
@@ -178,6 +179,7 @@ namespace WebAppCellMapper.Services
                 }
 
             }
+            
             var lastLoc=await repository.GetLastLocation(deviceId, request.Timestamp);
             if (lastLoc != null)
             {
@@ -188,12 +190,9 @@ namespace WebAppCellMapper.Services
                 logger.LogInformation($"last location null");
             }
 
-            if (ids.Contains(250001660256))
-            {
-                Console.WriteLine();
-            }
-            logger.LogInformation($"count points: {stations.Count}");
-            var centroid = FindLocationDefault(stations);
+           
+           // logger.LogInformation($"count points: {stations.Count}");
+            centroid = FindLocationDefault(stations);
           //  res.Add(centroid);
 
             if (lastLoc!=null)
@@ -212,15 +211,14 @@ namespace WebAppCellMapper.Services
                 }
 
             }
-            res.Add(centroid);
+        //    res.Add(centroid);
+
+            if (!string.IsNullOrEmpty(deviceId)) await repository.SaveLocation(deviceId, centroid, request.Timestamp);
 
 
-            await repository.SaveLocation(deviceId, centroid, request.Timestamp);
 
 
-
-
-            return res;
+            return centroid;
         }
     }
 }

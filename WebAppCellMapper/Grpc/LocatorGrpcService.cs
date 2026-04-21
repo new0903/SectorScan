@@ -1,6 +1,7 @@
 ﻿
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using WebAppCellMapper.DTO.Locator;
 using WebAppCellMapper.DTO.Locator.Cells;
 using WebAppCellMapper.Services;
@@ -33,9 +34,14 @@ namespace WebAppCellMapper.Grpc
                 })
                 .ToArray();
 
-            var res = await locatorService.FindLocation(locationRequest, user.Identity.Name);
-            LocationResponseGrpc model= new LocationResponseGrpc();
-            var result=res.First();
+            var result = await locatorService.FindLocation(locationRequest, user.Identity.Name);
+            if (result==null)
+            {
+                var status = new Status(StatusCode.InvalidArgument, "not found");
+                throw new RpcException(status);
+            }
+
+            LocationResponseGrpc model = new LocationResponseGrpc();
             model.Accuracy = result.accuracy;
             model.Point.Lat=result.point.lat;
             model.Point.Lon = result.point.lon;
