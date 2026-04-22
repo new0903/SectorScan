@@ -42,9 +42,9 @@ namespace WebAppCellMapper.Grpc
             }
 
             LocationResponseGrpc model = new LocationResponseGrpc();
-            model.Accuracy = result.accuracy;
-            model.Point.Lat=result.point.lat;
-            model.Point.Lon = result.point.lon;
+            model.Accuracy = result.location.accuracy;
+            model.Point.Lat=result.location.point.lat;
+            model.Point.Lon = result.location.point.lon;
 
             return model;
         }

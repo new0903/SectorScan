@@ -6,6 +6,6 @@ namespace WebAppCellMapper.Services
 {
     public interface ILocatorService
     {
-        Task<LocationResponse?> FindLocation(LocationRequest request, string deviceId);
+        Task<LocationAnswer?> FindLocation(LocationRequest request, string deviceId);
     }
 }

@@ -149,11 +149,11 @@ namespace WebAppCellMapper.Services
         /// <param name="request">тело запроса</param>
         /// <param name="deviceId">Нужно для нахождения старых позиций</param>
         /// <returns></returns>
-        public async Task<LocationResponse?> FindLocation(LocationRequest request, string deviceId)
+        public async Task<LocationAnswer?> FindLocation(LocationRequest request, string deviceId)
         {
 
 
-            LocationResponse? centroid = null;
+            LocationAnswer? centroid = null;
 
             try
             {
@@ -200,28 +200,30 @@ namespace WebAppCellMapper.Services
 
 
                 // logger.LogInformation($"count points: {stations.Count}");
-                centroid = FindLocationDefault(stations);
+                centroid = new LocationAnswer();
+
+                centroid.location= FindLocationDefault(stations);
                 //  res.Add(centroid);
 
                 if (lastLoc != null)
                 {
-                    var difPos = CheckDistance(centroid, lastLoc, request.Timestamp);
+                    var difPos = CheckDistance(centroid.location, lastLoc, request.Timestamp);
                     if (difPos != null)
                     {
                         //   res.Add(difPos);
-                        centroid = difPos;
+                        centroid.location = difPos;
                     }
-                    var LG = await FindLocationDefaultWithGraph(centroid, deviceId);
+                    var LG = await FindLocationDefaultWithGraph(centroid.location, deviceId);
                     if (LG != null)
                     {
                         //  res.Add(LG);
-                        centroid = LG;
+                        centroid.location = LG;
                     }
 
                 }
                 //    res.Add(centroid);
 
-                if (!string.IsNullOrEmpty(deviceId)) await repository.SaveLocation(deviceId, centroid, request.Timestamp);
+                if (!string.IsNullOrEmpty(deviceId)) await repository.SaveLocation(deviceId, centroid.location, request.Timestamp);
 
 
             }
