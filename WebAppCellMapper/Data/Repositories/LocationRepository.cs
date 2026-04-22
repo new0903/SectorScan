@@ -46,7 +46,7 @@ namespace WebAppCellMapper.Data.Repositories
             .FirstOrDefaultAsync();
             if (lastLoc == null) return null;
 
-            if ((lastLoc.Timestamp- difTime).TotalMinutes > 30) return null;//если точке более 30 минут тогда игнорируем её и делаем расчеты только на бс
+            if ((difTime-lastLoc.Timestamp).TotalMinutes > 30) return null;//если точке более 30 минут тогда игнорируем её и делаем расчеты только на бс
             LocationCell model = MapToCell(lastLoc, difTime);
             if (model.SignalStrength>600) return null;//если с связью проблемы, сигнал меньше 600 и меньше 30 позиции минут можно вычислить азимут откуда мы едем и получить приблизительную позицию в поле
             return model;

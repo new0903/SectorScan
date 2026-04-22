@@ -35,9 +35,9 @@ namespace WebAppCellMapper.AuthenticationServices
 
             if (Request.Headers[ApiKeyHeader].Any())
             {
-                var queryKey = Request.Headers[ApiKeyHeader].FirstOrDefault();
-                apiKey = queryKey.Substring("Token ".Length);
-                
+                //  var queryKey = Request.Headers[ApiKeyHeader].FirstOrDefault();
+                //  apiKey = queryKey.Substring("Token ".Length);
+                apiKey = Request.Headers[ApiKeyHeader].FirstOrDefault();
                 if (Options.ApiKey.Contains(apiKey))
                 {
                     var claims = new[]

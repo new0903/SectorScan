@@ -23,7 +23,7 @@ namespace WebAppCellMapper.Controllers
         public async Task<IActionResult> GetLocate([FromBody]LocationRequest request)
         {
             var res=await locatorService.FindLocation(request,User.Identity.Name);
-            if (res == null) BadRequest("Not found");
+            if (res == null) return BadRequest("Not found");
             return Ok(res);
         }
 

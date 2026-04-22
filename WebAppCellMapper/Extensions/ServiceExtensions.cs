@@ -70,8 +70,7 @@ namespace WebAppCellMapper.Extensions
                 opt.DefaultScheme = "SmartScheme"; 
             }).AddPolicyScheme("SmartScheme", "Authorization Scheme", opt => opt.ForwardDefaultSelector = context =>
             {
-                var hasApiKey = context.Request.Headers.ContainsKey("x-api-key") &&
-                                context.Request.Headers["x-api-key"].ToString().StartsWith("Token ");
+                var hasApiKey = context.Request.Headers.ContainsKey("x-api-key");
                 var hasBearer = context.Request.Headers.ContainsKey("Authorization") &&
                                 context.Request.Headers["Authorization"].ToString().StartsWith("Bearer ");
 

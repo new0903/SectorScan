@@ -98,7 +98,7 @@ namespace WebAppCellMapper.Services
                 list.Add(tracks.First());
             }
             list.Add(centroid.point);
-            if (list == null||list.Count<2) return null;
+            if (list.Count<2) return null;
             List<LocationPoint> result =await hopperService.MatchRoadAsync(list);
             if (result!=null&& result.Count>0)
             {
@@ -124,8 +124,9 @@ namespace WebAppCellMapper.Services
             var point = centroid.point;
             var distance= geoHelper.DistancePerMeters(point.lat, point.lon,lastLocation.Lat,lastLocation.Lon);
             var secondDif = (difTime - lastLocation.Timestamp).TotalSeconds;
-
-            var kmPerH = (distance / secondDif)* 3.6;
+            double kmPerH = 0;
+            if (distance!=0) kmPerH = (distance / secondDif) * 3.6;
+            
             //очевидно что нельзя с такой скорост перемещаться поэтому предпологаем что это ложь и указываем нормальную дистанцию
             if (kmPerH > 120) 
             {
@@ -133,9 +134,11 @@ namespace WebAppCellMapper.Services
                 var maxDistance = 33 * secondDif;//37 м/с 23333 Метров/минута 140 Км/ч
 
 
-
-                var difLoc= geoHelper.OffsetByMeters(point.lat, point.lon, distance-maxDistance, destination);
-                return new LocationResponse(difLoc, centroid.accuracy, $"центроид + dif локации на {distance-maxDistance} метров");
+                var difDis = distance - maxDistance;
+                if (difDis > 0) {
+                    var difLoc = geoHelper.OffsetByMeters(point.lat, point.lon, difDis, destination);
+                    return new LocationResponse(difLoc, centroid.accuracy, $"центроид + dif локации на {distance - maxDistance} метров"); 
+                }
             }
             return null;
         }
@@ -153,7 +156,7 @@ namespace WebAppCellMapper.Services
             //  if (string.IsNullOrEmpty(deviceId)) return res;
             var cells= request.Cell?.Select(c => c.Data).Where(c => c != null).ToArray();
             var ids = cells?.Select(c => c.Id).Distinct().ToArray();
-
+            if (ids == null || ids.Length == 0) return centroid;
             var stations =await repository.GetStationsLocation(ids);
             if (stations.Count == 0) return centroid;
             {
