@@ -36,7 +36,7 @@ namespace WebAppCellMapper.BackgroundServices
             }
             catch (Exception ex)
             {
-                logger.LogError(ex.Message,ex);
+                logger.LogError(ex,$"error ex = {ex.Message}");
             }
 
         }

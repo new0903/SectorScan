@@ -76,7 +76,7 @@ namespace WebAppCellMapper.Services
             }
 
             double accuracy = geoHelper.DistancePerMeters(Math.Sqrt(weightedSumSq / sw));
-            var res = new LocationResponse(new LocationPoint(centroidLat, centroidLon), accuracy, "метод центроида");
+            var res = new LocationResponse(new LocationPoint(centroidLat, centroidLon), accuracy);
             return res;
         }
 
@@ -105,7 +105,7 @@ namespace WebAppCellMapper.Services
                 var point= result.First();
                 double lon = point.lon;
                 double lat = point.lat;
-                var res = new LocationResponse(new LocationPoint(lat, lon), centroid.accuracy, "метод центроида + graph");
+                var res = new LocationResponse(new LocationPoint(lat, lon), centroid.accuracy);
                 return res;
             }
             return null;
@@ -137,7 +137,7 @@ namespace WebAppCellMapper.Services
                 var difDis = distance - maxDistance;
                 if (difDis > 0) {
                     var difLoc = geoHelper.OffsetByMeters(point.lat, point.lon, difDis, destination);
-                    return new LocationResponse(difLoc, centroid.accuracy, $"центроид + dif локации на {distance - maxDistance} метров"); 
+                    return new LocationResponse(difLoc, centroid.accuracy); 
                 }
             }
             return null;
@@ -151,74 +151,86 @@ namespace WebAppCellMapper.Services
         /// <returns></returns>
         public async Task<LocationResponse?> FindLocation(LocationRequest request, string deviceId)
         {
+
+
             LocationResponse? centroid = null;
-            //var res = new List<LocationResponse>();
-            //  if (string.IsNullOrEmpty(deviceId)) return res;
-            var cells= request.Cell?.Select(c => c.Data).Where(c => c != null).ToArray();
-            var ids = cells?.Select(c => c.Id).Distinct().ToArray();
-            if (ids == null || ids.Length == 0) return centroid;
-            var stations =await repository.GetStationsLocation(ids);
-            if (stations.Count == 0) return centroid;
+
+            try
             {
-                var group = cells?.GroupBy(c => c.Id).ToArray();
-
-                foreach (var item in stations)
+                //var res = new List<LocationResponse>();
+                //  if (string.IsNullOrEmpty(deviceId)) return res;
+                var cells = request.Cell?.Select(c => c.Data).Where(c => c != null).ToArray();
+                var ids = cells?.Select(c => c.Id).Distinct().ToArray();
+                if (ids == null || ids.Length == 0) return centroid;
+                var stations = await repository.GetStationsLocation(ids);
+                if (stations.Count == 0) return centroid;
                 {
+                    var group = cells?.GroupBy(c => c.Id).ToArray();
 
-                    try
+                    foreach (var item in stations)
                     {
-                        var g = group?.First(c => c.Key == item.Id).OrderByDescending(c => c?.SignalStrength);//.First();
-                        var tg = g.First();
-                        if (tg == null) continue;
-                        //item.WeightSignal = tg.WeightSignal;
-                        item.SignalStrength = tg.SignalStrength;
-                        item.DistanceSignal = tg.DistanceSignal;
+
+                        try
+                        {
+                            var g = group?.First(c => c.Key == item.Id).OrderByDescending(c => c?.SignalStrength);//.First();
+                            var tg = g.First();
+                            if (tg == null) continue;
+                            //item.WeightSignal = tg.WeightSignal;
+                            item.SignalStrength = tg.SignalStrength;
+                            item.DistanceSignal = tg.DistanceSignal;
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.LogError(ex.Message, ex);
+                        }
+
                     }
-                    catch (Exception ex)
+
+                }
+
+                var lastLoc = await repository.GetLastLocation(deviceId, request.Timestamp);
+                if (lastLoc != null)
+                {
+                    stations.Add(lastLoc);
+                }
+                else
+                {
+                    logger.LogInformation($"last location null");
+                }
+
+
+                // logger.LogInformation($"count points: {stations.Count}");
+                centroid = FindLocationDefault(stations);
+                //  res.Add(centroid);
+
+                if (lastLoc != null)
+                {
+                    var difPos = CheckDistance(centroid, lastLoc, request.Timestamp);
+                    if (difPos != null)
                     {
-                        logger.LogError(ex.Message, ex);
+                        //   res.Add(difPos);
+                        centroid = difPos;
+                    }
+                    var LG = await FindLocationDefaultWithGraph(centroid, deviceId);
+                    if (LG != null)
+                    {
+                        //  res.Add(LG);
+                        centroid = LG;
                     }
 
                 }
+                //    res.Add(centroid);
+
+                if (!string.IsNullOrEmpty(deviceId)) await repository.SaveLocation(deviceId, centroid, request.Timestamp);
+
 
             }
-            
-            var lastLoc=await repository.GetLastLocation(deviceId, request.Timestamp);
-            if (lastLoc != null)
+            catch (Exception ex)
             {
-                stations.Add(lastLoc);
+
+                logger.LogError(ex, $"ex error FindLocation deviceId {deviceId}");
             }
-            else
-            {
-                logger.LogInformation($"last location null");
-            }
-
-           
-           // logger.LogInformation($"count points: {stations.Count}");
-            centroid = FindLocationDefault(stations);
-          //  res.Add(centroid);
-
-            if (lastLoc!=null)
-            {
-                var difPos = CheckDistance(centroid, lastLoc, request.Timestamp);
-                if (difPos != null)
-                {
-                 //   res.Add(difPos);
-                    centroid=difPos;
-                }
-                var LG = await FindLocationDefaultWithGraph(centroid, deviceId);
-                if (LG != null)
-                {
-                  //  res.Add(LG);
-                    centroid = LG;
-                }
-
-            }
-        //    res.Add(centroid);
-
-            if (!string.IsNullOrEmpty(deviceId)) await repository.SaveLocation(deviceId, centroid, request.Timestamp);
-
-
+    
 
 
             return centroid;

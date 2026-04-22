@@ -25,6 +25,7 @@ namespace WebAppCellMapper.Options
     public class RequestSettingsSetup(IConfiguration configuration) : OptionsSetup<RequestSettings>("RequestSettings", configuration);
 
     // опционально жрет дофига. точность может прибавить 5-10 м. За то ставит точку на дороге
-    public class GraphSetup(IConfiguration configuration) : OptionsSetup<GraphOptions>("Graphhopper", configuration); 
+    public class GraphSetup(IConfiguration configuration) : OptionsSetup<GraphOptions>("Graphhopper", configuration);
+    public class LocatorSetup(IConfiguration configuration) : OptionsSetup<LocatorTestOptions>("Authentication", configuration);
 
 }
