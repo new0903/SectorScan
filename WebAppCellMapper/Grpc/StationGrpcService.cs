@@ -1,11 +1,14 @@
 ﻿using Google.Protobuf;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using WebAppCellMapper.Data.Enums;
 using WebAppCellMapper.Data.Models;
 using WebAppCellMapper.Services;
 
 namespace WebAppCellMapper.Grpc
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class StationGRPCService : StationServiceGrpc.StationServiceGrpcBase
     {
         private readonly ILogger<StationGRPCService> logger;
