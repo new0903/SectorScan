@@ -3,7 +3,7 @@ services:
     image: ${DOCKER_REGISTRY-}webappcellmapper
     build:
       context: .
-      dockerfile: Dockerfile # WebAppCellMapper/ для vs2022 Dockerfile
+      dockerfile: WebAppCellMapper/Dockerfile # WebAppCellMapper/ для vs2022 Dockerfile
     env_file:
       - ./environment
     depends_on:
